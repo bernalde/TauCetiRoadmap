@@ -98,7 +98,8 @@ The fourteen numbered items of `README.md` §1 are realized as follows.
    `scd_p_absoluteGaloisGroup_eq_two`, the absolute `artinMap` with `artinMap_restrict`,
    `unramifiedCoordinate_artinMap` and `artinMap_norm`, `cyclotomicCharacter_artinMap`; the
    unit-filtration statements `map_unitFiltration_normResidue`,
-   `closure_map_artinMap_unitFiltration` (on `absoluteUpperRamificationGroup`, defined here) and
+   `closure_map_artinMap_unitFiltration` (on the absolute upper ramification group of
+   RamificationOfCompleteDiscretelyValuedFields §4a.1, taken as an argument) and
    `conductorExponent_eq_sInf_upperRamificationGroup`.
 7. Norm limitation: `ClassFormation.normSubgroup_maximalAbelianLayer`.
 8. Local existence and the local correspondence: Tau Ceti's `localAbelianExistence`,
@@ -1445,76 +1446,37 @@ theorem conductorExponent_eq_sInf_upperRamificationGroup [Algebra K L]
       ⟨(n : ℝ), le_trans (by norm_num : (-1 : ℝ) ≤ 0) (Nat.cast_nonneg n)⟩ = ⊥} :=
   sorry
 
-/-! ### The absolute upper ramification groups
-
-For a nonarchimedean local field `K`, the absolute upper ramification group at depth `n` is the
-subgroup of `G_K` of the elements whose restriction to every finite Galois subextension `M` of the
-algebraic closure lies in `Gal(M/K)^n`. Each such `M` is a nonarchimedean local field through Tau
-Ceti's spectral-norm structure on finite intermediate fields. -/
-
-/-- **The absolute upper ramification group** `G_K^n`, for `n ≥ 0`: the elements of `G_K` whose
-restriction to every finite Galois `M/K` inside the algebraic closure lies in the upper
-ramification group `Gal(M/K)^n` (Serre, *Sur les corps locaux à corps résiduel algébriquement
-clos*, n° 3.1). -/
-noncomputable def absoluteUpperRamificationGroup (n : ℕ) :
-    Subgroup (Field.absoluteGaloisGroup K) :=
-  ⨅ M : FiniteGaloisIntermediateField K (AlgebraicClosure K),
-    letI := TauCeti.finiteIntermediateFieldValuativeRel K (AlgebraicClosure K) M.toIntermediateField
-    letI := TauCeti.finiteIntermediateFieldTopology K (AlgebraicClosure K) M.toIntermediateField
-    haveI := TauCeti.finiteIntermediateField_isNonarchimedeanLocalField K (AlgebraicClosure K)
-      M.toIntermediateField
-    haveI := TauCeti.finiteIntermediateField_valuativeExtension K (AlgebraicClosure K)
-      M.toIntermediateField
-    (TauCeti.LocalFieldsRamification.upperRamificationGroup K M
-      ⟨(n : ℝ), le_trans (by norm_num : (-1 : ℝ) ≤ 0) (Nat.cast_nonneg n)⟩).comap
-        (AlgEquiv.restrictNormalHom M)
-
-/-- `G_K^n` is closed: it is an intersection of preimages of subgroups of finite discrete
-quotients. -/
-theorem isClosed_absoluteUpperRamificationGroup (n : ℕ) :
-    IsClosed (absoluteUpperRamificationGroup K n : Set (Field.absoluteGaloisGroup K)) :=
-  sorry
-
-/-- `G_K^n` is normal in `G_K`: every finite upper ramification group is normal. -/
-theorem absoluteUpperRamificationGroup_normal (n : ℕ) :
-    (absoluteUpperRamificationGroup K n).Normal :=
-  sorry
-
-/-- The absolute upper groups decrease with the depth. -/
-theorem absoluteUpperRamificationGroup_antitone :
-    Antitone (absoluteUpperRamificationGroup K) :=
-  sorry
-
-/-- **Restriction maps `G_K^n` onto `Gal(M/K)^n`** for every finite Galois `M/K`: by Herbrand's
-theorem the restriction maps between finite levels carry upper groups onto upper groups, so
-`G_K^n` is an inverse limit of nonempty finite sets along surjections. -/
-theorem map_restrictNormalHom_absoluteUpperRamificationGroup (n : ℕ)
-    (M : FiniteGaloisIntermediateField K (AlgebraicClosure K)) :
-    letI := TauCeti.finiteIntermediateFieldValuativeRel K (AlgebraicClosure K) M.toIntermediateField
-    letI := TauCeti.finiteIntermediateFieldTopology K (AlgebraicClosure K) M.toIntermediateField
-    haveI := TauCeti.finiteIntermediateField_isNonarchimedeanLocalField K (AlgebraicClosure K)
-      M.toIntermediateField
-    haveI := TauCeti.finiteIntermediateField_valuativeExtension K (AlgebraicClosure K)
-      M.toIntermediateField
-    (absoluteUpperRamificationGroup K n).map (AlgEquiv.restrictNormalHom M) =
-      TauCeti.LocalFieldsRamification.upperRamificationGroup K M
-        ⟨(n : ℝ), le_trans (by norm_num : (-1 : ℝ) ≤ 0) (Nat.cast_nonneg n)⟩ :=
-  sorry
-
-/-- **At depth `0` the absolute upper group is inertia**, Tau Ceti's `inertiaSubgroup`: at every
-finite level `Gal(M/K)^0` is the inertia group of `M/K`. -/
-theorem absoluteUpperRamificationGroup_zero :
-    absoluteUpperRamificationGroup K 0 = TauCeti.inertiaSubgroup K :=
-  sorry
+-- The absolute upper ramification groups `G_K^u` are RamificationOfCompleteDiscretelyValuedFields
+-- §4a.1's, not importable here:
+-- open TauCetiRoadmap.RamificationOfCompleteDiscretelyValuedFields
+--   (absoluteUpperRamificationGroup map_restrictNormalHom_absoluteUpperRamificationGroup
+--    absoluteUpperRamificationGroup_zero)
+-- On a nonarchimedean local field §4a.1 identifies `G_K^n` with the set of `σ` whose restriction
+-- to every finite Galois `M/K` lies in `Gal(M/K)^n`, each `M` carrying Tau Ceti's local-field
+-- structure on finite intermediate fields; it enters the statement below as an argument with that
+-- description.
 
 /-- **Unit-filtration reciprocity, absolute form**: for every `n ≥ 0` the closure of
 `artinMap (U_K^(n))` in `G_K^ab` is the image of the absolute upper group `G_K^n`. Both sides are
 closed subgroups with the same image in every finite abelian quotient
-(`map_unitFiltration_normResidue`, `artinMap_restrict`,
+(`map_unitFiltration_normResidue`, `artinMap_restrict` and §4a.1's
 `map_restrictNormalHom_absoluteUpperRamificationGroup`), the image of `G_K^n` being compact. -/
-theorem closure_map_artinMap_unitFiltration (n : ℕ) :
+theorem closure_map_artinMap_unitFiltration (n : ℕ)
+    (absoluteUpperRamificationGroup : Subgroup (Field.absoluteGaloisGroup K))
+    (_habs : ∀ σ : Field.absoluteGaloisGroup K, σ ∈ absoluteUpperRamificationGroup ↔
+      ∀ M : FiniteGaloisIntermediateField K (AlgebraicClosure K),
+        letI := TauCeti.finiteIntermediateFieldValuativeRel K (AlgebraicClosure K)
+          M.toIntermediateField
+        letI := TauCeti.finiteIntermediateFieldTopology K (AlgebraicClosure K) M.toIntermediateField
+        haveI := TauCeti.finiteIntermediateField_isNonarchimedeanLocalField K (AlgebraicClosure K)
+          M.toIntermediateField
+        haveI := TauCeti.finiteIntermediateField_valuativeExtension K (AlgebraicClosure K)
+          M.toIntermediateField
+        AlgEquiv.restrictNormalHom (F := K) (K₁ := AlgebraicClosure K) M σ ∈
+          TauCeti.LocalFieldsRamification.upperRamificationGroup K M
+            ⟨(n : ℝ), le_trans (by norm_num : (-1 : ℝ) ≤ 0) (Nat.cast_nonneg n)⟩) :
     ((TauCeti.unitFiltration K n).map (artinMap K)).topologicalClosure =
-      (absoluteUpperRamificationGroup K n).map
+      absoluteUpperRamificationGroup.map
         (QuotientGroup.mk' (commutator (Field.absoluteGaloisGroup K)).topologicalClosure) :=
   sorry
 
