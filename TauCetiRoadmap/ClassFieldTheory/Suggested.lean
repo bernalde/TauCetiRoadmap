@@ -114,7 +114,7 @@ name not declared below is Tau Ceti's, in `TauCeti.ClassFieldTheory` unless qual
    `scd_p_absoluteGaloisGroup_eq_two` and the absolute `artinMap`, pinned by Tau Ceti's
    `artinMap_restrict` and `unramifiedCoordinate_artinMap` and here by `artinMap_norm`, with the
    cyclotomic normalization `cyclotomicCharacter_artinMap`; the open targets
-   `map_unitFiltration_normResidue` and `closure_map_artinMap_unitFiltration`, the second on the
+   `map_unitFiltration_normResidue` and `map_artinMap_unitFiltration`, the second on the
    absolute upper ramification groups
    `localAbsoluteUpperRamificationGroup`; the conductor criterion is Tau Ceti's
    `conductorExponent_le_iff_upperRamificationGroup_eq_bot`, with the character form
@@ -528,14 +528,17 @@ noncomputable def localAbsoluteUpperRamificationGroup
     (TauCeti.LocalFieldsRamification.upperRamificationGroup K M u).comap
       (AlgEquiv.restrictNormalHom (F := K) (K₁ := AlgebraicClosure K) M)
 
-/-- **Unit-filtration reciprocity, absolute form**: for every `n ≥ 0` the closure of
-`artinMap (U_K^(n))` in `G_K^ab` is the image of the absolute upper ramification group
-`localAbsoluteUpperRamificationGroup K n` (Serre, *Local Fields*, XV §2, Theorem 2 and Corollary 3
-to Theorem 1). Both sides are closed subgroups with the same image in every finite abelian quotient
-(`map_unitFiltration_normResidue`, `artinMap_restrict` and the finite projections of `G_K^n`), the
-image of `G_K^n` being compact. -/
-theorem closure_map_artinMap_unitFiltration (n : ℕ) :
-    ((TauCeti.unitFiltration K n).map (artinMap K)).topologicalClosure =
+/-- **Unit-filtration reciprocity, absolute form**: for every `n ≥ 0`, `artinMap (U_K^(n))` is the
+image in `G_K^ab` of the absolute upper ramification group `localAbsoluteUpperRamificationGroup K n`
+(Serre, *Local Fields*, XV §2, Theorem 2 and Corollary 3 to Theorem 1); at `n = 0` it is Tau Ceti's
+`map_artinMap_unitFiltration_zero` once the image of `G_K^0` is identified with that of inertia.
+Both sides are closed subgroups: the left one is compact, as the image of the compact `U_K^(n)`
+(Tau Ceti's `isCompact_unitFiltration`) under the continuous `artinMap` (`continuous_artinMap`),
+and the right one is the image of the closed subgroup `G_K^n` of the compact `G_K`. They have the
+same image in every finite abelian quotient (`map_unitFiltration_normResidue`, `artinMap_restrict`
+and the finite projections of `G_K^n`). -/
+theorem map_artinMap_unitFiltration (n : ℕ) :
+    (TauCeti.unitFiltration K n).map (artinMap K) =
       (localAbsoluteUpperRamificationGroup K ⟨n, Nat.cast_mem_ramificationIndexDomain n⟩).map
         (QuotientGroup.mk' (commutator (Field.absoluteGaloisGroup K)).topologicalClosure) :=
   sorry

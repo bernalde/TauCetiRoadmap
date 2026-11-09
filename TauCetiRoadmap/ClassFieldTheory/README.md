@@ -191,35 +191,25 @@ formula is proved cohomologically. This fixes the dependency direction
 
 ## Conventions
 
-Other roadmaps cite these sections and target names of this roadmap; each is found as follows:
+Other roadmaps cite sections and target names of this roadmap by their former labels; each is
+found as follows.
 
-- §2.4 → *Tate's theorem and its Tate–Nakayama generalization*, below;
-- §2.5 → *The direction of reciprocity*, below;
-- §2.6 → *Frobenius convention*, below;
-- §4 → the layers, *Layer 0* to *Layer 14*; "§4 Layer 9" is *Layer 9*;
-- `ClassFieldTheory.muNRepCoeffDictionary` (Layer 5) → Tau Ceti's `kummerCoeffEquivMuNRep`;
-- `ClassFieldTheory.muNRepCoeffDictionary_continuous` (Layer 5) → Tau Ceti's
-  `continuous_kummerCoeffEquivMuNRep`;
-- `ClassFieldTheory.muNRepCoeffDictionary_equivariant` (Layer 5) → Tau Ceti's
-  `kummerCoeffEquivMuNRep_smul`;
-- `ClassFieldTheory.localSymbol_kummerClass_eq_zero_iff` (Layer 5) → Tau Ceti's
-  `forall_localSymbol_kummerClass_eq_zero_iff`, nondegeneracy stated in the second variable, the
-  first variable following by `localSymbol_antisymm`;
-- `ClassFieldTheory.cd_p_absoluteGaloisGroup_eq_two` (Layer 6) → Tau Ceti's
-  `cohomologicalDimensionAt_absoluteGaloisGroup_eq_two`, for local fields of characteristic zero;
-- `ClassFieldTheory.conductorExponent_eq_sInf_upperRamificationGroup` (Layer 7) → the
-  least-element form of Tau Ceti's `conductorExponent_le_iff_upperRamificationGroup_eq_bot`:
-  `conductorExponent K L` is the least `n` with `Gal(L/K)^n = 1`;
-- `ClassFieldTheory.localClassFieldCorrespondence_primeToResidueCharacteristic` (Layer 8) → Tau
-  Ceti's `localClassFieldCorrespondencePrimeToResidueCharacteristic`, on Tau Ceti's carriers
-  `LocalNormSubgroupsPrimeTo` and `AbelianLayerPrimeTo`;
-- `ClassFieldTheory.eq_zero_of_localInv_eq_zero` (Layer 10) → Tau Ceti's `brLocalization_injective`,
-  injectivity of the localization `brLocalization K : Br K → ⨁_v Br K_v`;
-- `ClassFieldTheory.sumLocalInv_eq_zero` (Layer 10) → Tau Ceti's
-  `sumLocalInv_brLocalization_eq_zero`, stated on `brLocalization K x`;
-- `ClassFieldTheory.principalIdele_mem_range_ideleNormMap_iff` (Layer 13) → Tau Ceti's
-  `GlobalNumberFields.unitEmbedding_mem_range_ideleNormMap_iff`, stated on Mathlib's
-  `NumberField.IdeleGroup.unitEmbedding`, which is `principalIdele`.
+| Former label | Where it is now |
+|---|---|
+| §2.4 | *Tate's theorem and its Tate–Nakayama generalization*, under these Conventions |
+| §2.5 | *The direction of reciprocity*, under these Conventions |
+| §2.6 | *Frobenius convention*, under these Conventions |
+| §4 | the layers, *Layer 0* to *Layer 14*; "§4 Layer 9" is *Layer 9* |
+| `ClassFieldTheory.muNRepCoeffDictionary` (Layer 5) | Tau Ceti's `kummerCoeffEquivMuNRep` |
+| `ClassFieldTheory.muNRepCoeffDictionary_continuous` (Layer 5) | Tau Ceti's `continuous_kummerCoeffEquivMuNRep` |
+| `ClassFieldTheory.muNRepCoeffDictionary_equivariant` (Layer 5) | Tau Ceti's `kummerCoeffEquivMuNRep_smul` |
+| `ClassFieldTheory.localSymbol_kummerClass_eq_zero_iff` (Layer 5) | Tau Ceti's `forall_localSymbol_kummerClass_eq_zero_iff`, nondegeneracy stated in the second variable, the first variable following by `localSymbol_antisymm` |
+| `ClassFieldTheory.cd_p_absoluteGaloisGroup_eq_two` (Layer 6) | Tau Ceti's `cohomologicalDimensionAt_absoluteGaloisGroup_eq_two`, for local fields of characteristic zero |
+| `ClassFieldTheory.conductorExponent_eq_sInf_upperRamificationGroup` (Layer 7) | the least-element form of Tau Ceti's `conductorExponent_le_iff_upperRamificationGroup_eq_bot`: `conductorExponent K L` is the least `n` with `Gal(L/K)^n = 1` |
+| `ClassFieldTheory.localClassFieldCorrespondence_primeToResidueCharacteristic` (Layer 8) | Tau Ceti's `localClassFieldCorrespondencePrimeToResidueCharacteristic`, on Tau Ceti's carriers `LocalNormSubgroupsPrimeTo` and `AbelianLayerPrimeTo` |
+| `ClassFieldTheory.eq_zero_of_localInv_eq_zero` (Layer 10) | Tau Ceti's `brLocalization_injective`, injectivity of the localization `brLocalization K : Br K → ⨁_v Br K_v` |
+| `ClassFieldTheory.sumLocalInv_eq_zero` (Layer 10) | Tau Ceti's `sumLocalInv_brLocalization_eq_zero`, stated on `brLocalization K x` |
+| `ClassFieldTheory.principalIdele_mem_range_ideleNormMap_iff` (Layer 13) | Tau Ceti's `GlobalNumberFields.unitEmbedding_mem_range_ideleNormMap_iff`, stated on Mathlib's `NumberField.IdeleGroup.unitEmbedding`, which is `principalIdele` |
 
 ### Formations
 
@@ -583,7 +573,7 @@ exhaustive checklist. It imports `Mathlib` and individual Tau Ceti modules only,
 roadmap's `Suggested.lean`, and it consumes Mathlib's and Tau Ceti's declarations by name. It
 contains, with `sorry`, the targets whose Lean form it fixes and that are open at the Tau Ceti pin:
 Layer 5's `algebraMap_vle_algebraMap_iff_of_finite_padic`, Layer 7's
-`map_unitFiltration_normResidue` and `closure_map_artinMap_unitFiltration`, and Layer 13's
+`map_unitFiltration_normResidue` and `map_artinMap_unitFiltration`, and Layer 13's
 `isPrincipal_map_hilbertClassField` and `relDiscr_eq_finprod_abelianConductor`; the one definition
 these need, Layer 7's `localAbsoluteUpperRamificationGroup`, with a real body; and, under this
 roadmap's names, the Tau Ceti declarations that the Lean files of `LocalGaloisGroups` and
@@ -1072,9 +1062,12 @@ which at `n = 2` over `ℚ_2` is the case Layer 14 needs:
   `L`), the symbol of `a` and `b` vanishes exactly when `a ∈ normGroup K L`; the cup of the two
   Kummer classes is the class of the cyclic algebra, through two-periodicity
   (`Rep.FiniteCyclicGroup.periodicIso`) and inflation into `Br K`, injective by Hilbert 90;
-- nondegeneracy, `forall_localSymbol_kummerClass_eq_zero_iff`: `a` pairs to zero with every `b`
-  exactly when `a ∈ (Kˣ)ⁿ`, by antisymmetry, the norm criterion and the cyclic norm index; both
-  sides of the pairing being the finite group `Kˣ/(Kˣ)ⁿ`, the Hilbert pairing is perfect.
+- nondegeneracy, `forall_localSymbol_kummerClass_eq_zero_iff`: `b` pairs to zero with every `a`
+  exactly when `b ∈ (Kˣ)ⁿ`. By the norm criterion every `a ∈ Kˣ` is then a norm from
+  `K(b^{1/n})`, a cyclic extension, so the cyclic norm index (`index_normGroup_of_isCyclic`)
+  makes its degree `1`. The first-variable form, `a` pairing to zero with every `b` exactly when
+  `a ∈ (Kˣ)ⁿ`, follows by `localSymbol_antisymm`. Both sides of the pairing being the finite group
+  `Kˣ/(Kˣ)ⁿ`, the Hilbert pairing is perfect.
 
 **Checks.**
 
@@ -1515,12 +1508,14 @@ integer `n ≥ 0`, `normResidue` carries the image of `U_K^(n)` in `Kˣ/N_(L/K)(
 `G^n` in `Gal(L/K)^ab = Gal(L/K)`: `U_K^(n) ↔ G^n`. At `n = 0` this says that the units map onto
 the inertia group `G_0`; the map is the arithmetic normalization of Layer 6, under which a
 uniformizer maps to an arithmetic Frobenius on the maximal unramified subextension. The absolute
-form follows (`closure_map_artinMap_unitFiltration`): for every `n ≥ 0`, the closure of
-`artinMap(U_K^(n))` in `G_K^ab` is the image of the absolute upper ramification group `G_K^n`
-defined above under the quotient map
+form follows (`map_artinMap_unitFiltration`): for every `n ≥ 0`, `artinMap(U_K^(n))` is the image
+in `G_K^ab` of the absolute upper ramification group `G_K^n` defined above under the quotient map
 `Field.absoluteGaloisGroup K → Field.absoluteGaloisGroupAbelianization K`, `G_K^n` being
-`localAbsoluteUpperRamificationGroup K n`. (Jean-Pierre
-Serre, [Local Fields](#source-serre-local-fields), XV §2, Theorem 2 and Corollary 3 to Theorem 1.)
+`localAbsoluteUpperRamificationGroup K n`. The Artin image needs no closure: `U_K^(n)` is compact
+(Tau Ceti's `isCompact_unitFiltration`) and `artinMap` is continuous (Tau Ceti's
+`continuous_artinMap`), so `artinMap(U_K^(n))` is compact, hence closed in the Hausdorff group
+`G_K^ab`. (Jean-Pierre Serre, [Local Fields](#source-serre-local-fields), XV §2, Theorem 2 and
+Corollary 3 to Theorem 1.)
 
 *Proof sketch.* The depth is carried by the conductor criterion above. Fix `n ≥ 0` and a
 subgroup `H ≤ G` with fixed field `M = L^H`; `M/K` is abelian, and `M` carries Tau Ceti's
@@ -1548,9 +1543,13 @@ characteristic; filtered norms enter only through Tau Ceti's proof of the criter
 
 For the absolute form, restrict to every finite abelian quotient using `artinMap_restrict`. The
 finite projections of `G_K^n` identify its image in `Gal(L/K)` with `Gal(L/K)^n` at every finite
-abelian level `L`. Its image in `G_K^ab` is compact, `G_K^n` being closed in the compact `G_K`,
-hence closed, so agreement in all finite abelian quotients identifies it with the closure of the
-Artin image.
+abelian level `L`, and by `artinMap_restrict` the image of `artinMap(U_K^(n))` there is
+`normResidue(U_K^(n))`, which is the same group by the finite statement. Both subgroups of
+`G_K^ab` are closed: the image of `G_K^n` is compact, `G_K^n` being closed in the compact `G_K`,
+and `artinMap(U_K^(n))` is compact as the continuous image of the compact `U_K^(n)`. A closed
+subgroup of the profinite group `G_K^ab` is the intersection of its products with the open
+subgroups, and the finite quotients of `G_K^ab` are the groups `Gal(L/K)` of the finite abelian
+`L/K`, so agreement in all of them identifies the two subgroups.
 
 *Needs:* Layer 6 (`normResidue`, `TauCeti.ClassFieldTheory.normResidue_mk` and the norm kernel
 `localArtinMap_eq_zero_iff`, Local/Reciprocity.lean); Tau Ceti's `artinMap_restrict`
@@ -1561,8 +1560,10 @@ Artin image.
 (LocalField/Herbrand/UpperQuotient.lean) and the local-field structure on finite intermediate
 fields; Mathlib's `AlgEquiv.restrictNormalHom`, `IntermediateField.restrictNormalHom_ker` and
 `IntermediateField.fixingSubgroup_fixedField`; for the absolute form, the absolute upper
-ramification groups above, with their closedness and finite projections, and Mathlib compactness
-for the Artin-image comparison.
+ramification groups above, with their closedness and finite projections, Tau Ceti's
+`continuous_artinMap` (Local/ArtinMap.lean) and `isCompact_unitFiltration`
+(LocalField/UnitFiltration/Basic.lean) for the closedness of the Artin image, and Mathlib
+compactness for the comparison of the two closed subgroups.
 
 **Checks.**
 
@@ -1575,13 +1576,13 @@ for the Artin-image comparison.
   neither (`(5, −2)_2 = (5, 2)_2 = −1`), and `G^2` lies in neither subgroup. Hence
   `normResidue(U_K^(2)) = {1, 5}`, which is also the image of `1 + 4ℤ_2` under
   `u ↦ σ_(u⁻¹ mod 8)`, the cyclotomic description of the arithmetically normalized symbol.
-- At depth `0`, the absolute comparison identifies the closure of `artinMap(𝒪[K]ˣ)` with the
-  image of `G_K^0`, whose restriction to every finite level is that level's inertia group; its
-  image in an unramified finite quotient is trivial. Tau Ceti's `map_artinMap_unitFiltration_zero`
-  (Local/Unramified.lean) already gives `artinMap(𝒪[K]ˣ)` as the image of `inertiaSubgroup K`,
-  a compact group, so at depth `0` the closure changes nothing and the images of `G_K^0` and of
-  `inertiaSubgroup K` in `G_K^ab` agree; a model of `G_K^0` as all of `G_K` would make the image
-  of the units the whole of `G_K^ab`, which `unramifiedCoordinate_artinMap` rules out.
+- At depth `0`, the absolute comparison identifies `artinMap(𝒪[K]ˣ)` with the image of `G_K^0`,
+  whose restriction to every finite level is that level's inertia group; its image in an
+  unramified finite quotient is trivial. Tau Ceti's `map_artinMap_unitFiltration_zero`
+  (Local/Unramified.lean) gives `artinMap(𝒪[K]ˣ)` as the image of `inertiaSubgroup K`, so at depth
+  `0` the comparison says that the images of `G_K^0` and of `inertiaSubgroup K` in `G_K^ab` agree;
+  a model of `G_K^0` as all of `G_K` would make the image of the units the whole of `G_K^ab`, which
+  `unramifiedCoordinate_artinMap` rules out.
 - For an unramified `L/K`, `G^0 = G_0 = 1`, so `normResidue` kills `U_K^(0)`, the conductor
   exponent is `0`, and a uniformizer maps to the arithmetic Frobenius.
 - For odd `p`, `K = ℚ_p` and `L = ℚ_p(ζ_p)`, `G^0 = G` and `G^v = 1` for `v > 0`, so
@@ -1601,7 +1602,7 @@ for the Artin-image comparison.
 
 **Exit criterion.** `LocalGaloisGroups` can consume the local-cohomological exports of this roadmap
 by name, `cyclotomicCharacter_artinMap` included, and `map_unitFiltration_normResidue` and
-`closure_map_artinMap_unitFiltration` are proved.
+`map_artinMap_unitFiltration` are proved.
 
 ### Examples
 
