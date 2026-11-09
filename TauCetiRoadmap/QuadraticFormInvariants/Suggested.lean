@@ -32,6 +32,8 @@ import TauCeti.NumberTheory.LocalField.AbsoluteRamificationIndex
 import TauCeti.NumberTheory.LocalField.SquareClass
 import TauCeti.NumberTheory.LocalField.Squares
 import TauCeti.NumberTheory.LocalField.Uniformizer
+import TauCeti.FieldTheory.Trace
+import TauCeti.RingTheory.Norm.Quadratic
 
 /-!
 # Quadratic forms and cohomological invariants: target signatures

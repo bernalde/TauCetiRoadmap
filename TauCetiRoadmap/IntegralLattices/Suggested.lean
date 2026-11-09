@@ -1218,19 +1218,21 @@ and CFT exports at the shapes B1 to B5 use.
 
 section LayerBContract
 
-open GlobalNumberFields
+open TauCetiRoadmap.GlobalNumberFields
 open scoped NumberField nonZeroDivisors
 
 -- ⚠ `K : Type` and not `Type u`: `ClassFieldTheory.ringClassField` is stated at `Type`, and
 -- `binaryRingClassField` below composes with it.
 variable {K : Type} [Field K] [NumberField K]
 
-/-- **B1's nonsplit branch is a genuine supplier order.**  The square root and rank-two
-hypotheses identify the supplied number field with the quadratic field of `Δ`; the explicit
-`¬ IsSquare Δ` hypothesis prevents this declaration from being instantiated by `ℚ × ℚ`. -/
+/-- **B1's nonsplit branch is a genuine supplier order**: Tau Ceti's
+`TauCeti.GlobalNumberFields.NumberFieldOrder`, the carrier on which Class Field Theory states the
+ring class field. The square root and rank-two hypotheses identify the supplied number field with
+the quadratic field of `Δ`; the explicit `¬ IsSquare Δ` hypothesis prevents this declaration from
+being instantiated by `ℚ × ℚ`. -/
 noncomputable def orderOfNonsquareBinaryDiscriminant (Δ : ℤ) (hΔ : ¬ IsSquare Δ)
     (sqrtΔ : K) (hsqrtΔ : sqrtΔ ^ 2 = (Δ : K))
-    (hquadratic : Module.finrank ℚ K = 2) : NumberFieldOrder K := sorry
+    (hquadratic : Module.finrank ℚ K = 2) : TauCeti.GlobalNumberFields.NumberFieldOrder K := sorry
 
 /-- **B1 consumes Global Number Fields Layer 11.** The order attached to a binary lattice is a term of this
 type, and its conductor is this ideal. -/
@@ -1278,7 +1280,7 @@ noncomputable def binaryRingClassField (Δ : ℤ) (hΔ : ¬ IsSquare Δ)
     (sqrtΔ : K) (hsqrtΔ : sqrtΔ ^ 2 = (Δ : K)) (hquadratic : Module.finrank ℚ K = 2) :
     IntermediateField K (SeparableClosure K) :=
   ClassFieldTheory.ringClassField K
-    (orderOfNonsquareBinaryDiscriminant Δ hΔ sqrtΔ hsqrtΔ hquadratic) hquadratic
+    (orderOfNonsquareBinaryDiscriminant Δ hΔ sqrtΔ hsqrtΔ hquadratic)
 
 /-- **B3, the composite this roadmap proves**, at the level of the two consumed theorems: the
 Galois group of the binary ring class field is the supplier's `Pic` of B1's order, which B2
@@ -1289,9 +1291,10 @@ theorem gal_binaryRingClassField_equiv_pic (Δ : ℤ) (hΔ : ¬ IsSquare Δ)
     Nonempty
       ((binaryRingClassField Δ hΔ sqrtΔ hsqrtΔ hquadratic
           ≃ₐ[K] binaryRingClassField Δ hΔ sqrtΔ hsqrtΔ hquadratic)
-        ≃* Pic (orderOfNonsquareBinaryDiscriminant Δ hΔ sqrtΔ hsqrtΔ hquadratic)) :=
-  ClassFieldTheory.gal_ringClassField_equiv_pic K
-    (orderOfNonsquareBinaryDiscriminant Δ hΔ sqrtΔ hsqrtΔ hquadratic) hquadratic
+        ≃* TauCeti.GlobalNumberFields.Pic
+          (orderOfNonsquareBinaryDiscriminant Δ hΔ sqrtΔ hsqrtΔ hquadratic)) :=
+  ⟨ClassFieldTheory.gal_ringClassField_equiv_pic K
+    (orderOfNonsquareBinaryDiscriminant Δ hΔ sqrtΔ hsqrtΔ hquadratic)⟩
 
 end LayerBContract
 
