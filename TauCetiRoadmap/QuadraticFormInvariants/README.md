@@ -289,21 +289,28 @@ Each layer states its results against this list.
   `2` (so that `e = v_K(2)`), ramification and inertia degrees, the Teichmüller section, the
   square-class counts and the unramified norm group. Its `normalizedValuation`, `unitFiltration`,
   `natCastValuation`, `UnitFiltrationGraded`, `ramificationIndex`, `inertiaDegree`,
-  `absoluteRamificationIndex`, `teichmuller`, `normGroup`,
-  `LocalFieldsRamification.square_eq_range_powMonoidHom`,
-  `LocalFieldsRamification.map_norm_unitFiltration_zero` and
-  `LocalFieldsRamification.mem_normGroup_iff_dvd_normalizedValuation` are Tau Ceti's declarations
-  under that roadmap's names. Its `LocalFieldsRamification.card_squareClasses_dyadic` is that
-  roadmap's prototype; Sublayer 6A uses Tau Ceti's own statements of the facts it needs.
+  `absoluteRamificationIndex`, `teichmuller`, `normGroup` and
+  `LocalFieldsRamification.square_eq_range_powMonoidHom` are Tau Ceti's declarations under that
+  roadmap's names. Its `LocalFieldsRamification.map_norm_unitFiltration_zero` and
+  `LocalFieldsRamification.mem_normGroup_iff_dvd_normalizedValuation` are Tau Ceti's
+  `TauCeti.map_normUnits_unitFiltration` at depth `0` and
+  `TauCeti.mem_normGroup_iff_dvd_normalizedValuation`, stated with the hypothesis
+  `ramificationIndex K L = 1` where Tau Ceti assumes the instance `TauCeti.IsUnramified K L`; the
+  two are equivalent by `TauCeti.isUnramified_iff_ramificationIndex_eq_one`. Its
+  `LocalFieldsRamification.card_squareClasses_dyadic` is that roadmap's prototype; Sublayer 6A uses
+  Tau Ceti's own statements of the facts it needs.
 - **From TauCetiRoadmap.ClassFieldTheory** ([Layers 5 and 14](../ClassFieldTheory/README.md)):
   the coefficient object `μ_n`, the Kummer class, the Kummer-cup pairing, the local symbol and
-  local Tate duality (Layer 5), and Hilbert reciprocity (Layer 14). Its `H`, `muNRep` and
-  `kummerClass_eq_kummerCocycleClass`, and its Layer 14 `finiteHilbertInvariantAt`,
-  `infiniteHilbertInvariantAt`, `finiteHilbertSupport` and `hilbertProductFormula`, are pinned
-  declarations under that roadmap's names: Mathlib's `continuousCohomology` for `H`, Tau Ceti's
-  for the others. The Tau Ceti
-  declarations this roadmap states against are `TauCeti.ClassFieldTheory.muNRep`,
-  `TauCeti.ClassFieldTheory.kummerClass`, `TauCeti.ClassFieldTheory.kummerCupPairing`,
+  local Tate duality (Layer 5), and Hilbert reciprocity (Layer 14). Its `H` and `muNRep`, and its
+  Layer 14 `finiteHilbertInvariantAt`, `infiniteHilbertInvariantAt`, `finiteHilbertSupport` and
+  `hilbertProductFormula`, are pinned declarations under that roadmap's names: Mathlib's
+  `continuousCohomology` for `H`, Tau Ceti's for the others. Its
+  `kummerClass_eq_kummerCocycleClass` is Tau Ceti's
+  `TauCeti.ClassFieldTheory.kummerClass_eq_muNRepH1Equiv_kummerCocycleClass`, read through that
+  roadmap's `kummerClass`, which is Tau Ceti's Kummer class where `n` is invertible in the field
+  and `0` otherwise. The Tau Ceti declarations this roadmap states against are
+  `TauCeti.ClassFieldTheory.muNRep`, `TauCeti.ClassFieldTheory.kummerClass`,
+  `TauCeti.ClassFieldTheory.kummerCupPairing`,
   `TauCeti.ClassFieldTheory.localSymbol`, `TauCeti.ClassFieldTheory.finiteHilbertInvariantAt`,
   `TauCeti.ClassFieldTheory.infiniteHilbertInvariantAt`,
   `TauCeti.ClassFieldTheory.finiteHilbertSupport` and
@@ -317,11 +324,12 @@ Each layer states its results against this list.
   low-degree complex and its comparison (Layers 2–3), the finite-quotient description (Layer 4),
   low-degree cups (Layer 8), Hilbert 90 and Kummer theory (Layer 9), corestriction (Layer 10), the
   graded cup product (Layer 12) and the index-two Evens norm with its `D₁₆` pullback formula
-  (Layer 13). Its `AbsoluteGaloisGroup`, `TopRep`, `trivialF2`, `res`, `infl`, `coeffMap`, the
+  (Layer 13). Its `AbsoluteGaloisGroup`, `trivialF2`, `res`, `infl`, `coeffMap`, the
   Kummer block (`KummerCoeff`, `kummerMap`, `kummerIso`, `kummerMapCanonical`), the multiplicative
   block (`UnitsCoeff`, `kummerShortExact`, `hilbert90`, `h2KummerToUnits`), `galoisSubgroup`, the
   explicit complex (`Z2`, `B2`, `H2`, `explicitH2IsoContinuousCohomology`, `explicitCup11`) and the
-  finite-quotient colimit are Tau Ceti's declarations under that roadmap's names. Its
+  finite-quotient colimit are Tau Ceti's declarations under that roadmap's names, and its `TopRep`
+  is Mathlib's `TopRep` with the carrier in the universe of the group. Its
   `ProfiniteCohomology.cup`, `ProfiniteCohomology.f2Pairing`,
   `ProfiniteCohomology.inhomogeneousCochain2`, `ProfiniteCohomology.homClass`,
   `ProfiniteCohomology.cochainClass` and `ProfiniteCohomology.galoisF2Iso` are that roadmap's
