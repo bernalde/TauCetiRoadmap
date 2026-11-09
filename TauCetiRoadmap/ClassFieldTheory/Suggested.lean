@@ -150,60 +150,6 @@ The fourteen numbered items of `README.md`, *Scope and ownership*, are realized 
     `finiteHilbertSupport` (with Tau Ceti's `finiteHilbertInvariantAt_eq_zero_of_notMem`),
     `hilbertProductFormula`. Quadratic reciprocity is Mathlib's
     `legendreSym.quadratic_reciprocity`.
-
-## Tau Ceti declarations named by `README.md`
-
-Besides the names above, `README.md` names these Tau Ceti declarations, which this file consumes or
-leaves to Tau Ceti and does not restate. The formation machinery of Layers 1 and 2
-(`TauCeti.ClassFieldTheory.Formation`, `NormalLayer`, `LayerRestriction`, `LayerRefinement`,
-`ClassFormation`, `cupClass`, `ClassFormation.cupFundamentalClass`,
-`ClassFormation.tateIso_toAddMonoidHom`, `tateTheorem_toAddMonoidHom`,
-`ClassFormation.artinEquiv_eq_tateIso`, `NormalLayer.characterConnectingClass`,
-`NormalLayer.artinCharacterCup`, `ClassFormation.eq_artinMap_of_character`, and the abelian layers
-`OpenNormalSubgroup.IsAbelianClassFieldLayer` and `OpenNormalSubgroup.maximalAbelianLayer` with
-their API); Layer 0's `Rep.isZero_res_of_projective`, `Rep.projective_of_isZero_res`,
-`Rep.isZero_res_of_exact`, `Rep.projective_ker_of_isZero_res`,
-`Submodule.free_of_isPrincipalIdealRing` and
-`TauCeti.TateCohomology.primaryComponent_tateCohomology_eq_bot`; the comparison
-`TauCeti.absoluteGaloisGroupRestrictEquiv`; `TauCeti.ClassFieldTheory.classField`; the coefficient
-objects `muNRep`, `unitsRep`, `tateDual`, `tateDualEquiv`, `tateEvaluationPairing`, `tateDualMap`,
-`tateDual_ρ_eq_self_iff`, `muNRepToTateDual`, `bijective_muNRepToTateDual` and
-`tateDualityPairing_muNRepToTateDual`; the Kummer equivalence `kummerEquiv` with
-`kummerEquiv_ofMul_mk`, `kummerEquivOfCharZero_ofMul_mk` and `kummerClass_mul`; the coordinates
-`h2MuEquivZMod` (pinned by `invMap_h2MuToBr_h2MuEquivZMod_symm`) and `h2EquivZModOfMuNRepIso`;
-`brRes`, `brCor` and `brInfl`; `herbrandQuotient_units_eq_finrank`,
-`herbrandQuotient_unitFiltration_zero`, `index_normGroup_of_isCyclic` and the local `H²` bound
-`natCard_H2_units_dvd_finrank`; the field formation `unitsFormation`, `localClassFormation_inv`,
-`localFormationRestrict`, `localArtinMap_eq_frobenius_pow_valuation` and `subsingleton_h3_unitsRep`;
-the restriction equation `AlgHom.restrictNormalHom_commutes` and `unramifiedCoordinate_mk`; the
-explicit cyclotomic symbols `cyclotomicSymbol`, `realCyclotomicSymbol`, `prod_cyclotomicSymbol` and
-`cyclotomicSymbol_norm_fixes`; `localCyclotomicCharacter_artinMap_padic`,
-`localCyclotomicCharacter_artinMap_padic_uniformizer` and `localCyclotomicCharacter_artinMap_unit`;
-the norm theorems `map_normUnits_unitFiltration_psiNat_eq_of_upperRamificationGroup_eq_bot` and
-`map_normUnits_unitFiltration_psiNat_le`; Herbrand's `upperRamificationGroup_quotient`,
-`upperRamificationGroup_fixedField` and `psiNat`; `LocalFieldsRamification.hasseArf`;
-`conductorExponent`, `conductorIdeal`, `characterConductorExp`; the idele norms
-`TauCeti.GlobalNumberFields.ideleNormMap` and `ideleClassNormMap`; the local norm predicates
-`TauCeti.GlobalNumberFields.IsFiniteLocalNorm`, `IsInfiniteLocalNorm` and `IsLocalNormEverywhere`;
-the ring-class quotient `ringClassIdeleQuotient`, `ringClassArtinEquiv`,
-`ringClassArtinMap_eq_one_iff` and `ker_ringClassIdeleQuotient_maximalNumberFieldOrder`; the global
-norm subgroup `globalNormSubgroup`;
-`ClassFormation.groundInclusion_mem_normSubgroup_of_range_eq_commutator`; `TauCeti.relDiscr`; and
-`TauCeti.card_powerClasses`.
-
-The frozen interface also contains these Tau Ceti declarations, consumed by name:
-`ClassFormation.artinMap_trivialLayer`, `artinMap_congr`, `artinMap_eq_zero_iff`,
-`globalClassField_index`, `globalClassField_le_iff`, `globalClassField_normSubgroup`,
-`globalClassField_orderReversing`, `kummerCupPairing_bil_comm`, `localArtinEquiv_eq_of_iota`,
-`localArtinMap_Q2_zeta5`, `localArtinMap_cyclotomic_uniformizer`,
-`localArtinMap_quadratic_eq_hilbertSymbol`, `localArtinMap_quadratic_eq_nontrivial_iff_not_norm`,
-`muNRepEquivZMod_generator`, `normResidue_uniformizer`, `tateDualityPairing_tateDualMap`,
-`unramifiedCoordinate_mk_eq_gen_iff`, `unramifiedCoordinate_mk_eq_one_iff`,
-`unramifiedCoordinate_weilDegree`, `herbrandQuotient_ideleClassRep_eq_finrank`,
-`degree_le_natCard_normQuotient_of_isCyclic`, `natCard_H2_globalFormation_dvd_degree`,
-`range_globalInv`, `kummerLayer`, `globalNormSubgroup_kummerLayer_sUnits`,
-`inertiaSubgroup_le_localWeilGroup`, `isAdmissibleModulus_ringClassField`,
-`ncard_primesOver_ringClassField_eq_finrank_iff` and `maximalNumberFieldOrder`.
 -/
 
 namespace TauCetiRoadmap.ClassFieldTheory
@@ -258,35 +204,9 @@ end TateCohomology
 Layers 1 and 2 are implemented in Tau Ceti, in `TauCeti/NumberTheory/ClassFieldTheory/Formation/`,
 and are consumed here under Tau Ceti's names; none of them is restated.
 
-* The formation `Formation G` is Tau Ceti's `SmoothDiscreteTopRep ℤ G` on a profinite `G`, with its
-  levels `Formation.level` (submodules of the ambient module).
-* A finite normal layer `NormalLayer G` has its Galois group `Gal`, `degree`, coefficient module
-  `rep`, cohomology carriers `H`, `TateH` and `TrivialTateH`, norm `norm`, `normSubgroup`,
-  `NormQuotient` and `normQuotientMk`; the layers `ofOpenNormal` of open normal subgroups; the
-  finite quotient system `subgroupLayer`, `subgroupGalEquiv`, `subgroupRestriction`,
-  `degree_subgroupLayer` and `relativeDegree_subgroupRestriction`; the low Tate degrees `tateHIsoH`,
-  `tateHMinusTwoEquivAbelianization`, `tateHZeroEquivNormQuotient` and `zeroTateClass`; and
-  conjugation `conjugate`, `conjugateCohomologyIso`, `conjugateTateIso`,
-  `conjugateGroundLevelEquiv` and `conjugateGalEquiv`.
-* A restriction `LayerRestriction` has its `relativeDegree`, `cohomologyRes`, `cohomologyCor`,
-  `tateRes`, `tateCor`, `trivialTateRes`, `trivialTateCor`, `groundInclusion`, `groundNorm`,
-  `transferHom` and `inclusionHom`, the normalization `cohomologyCor_cohomologyRes` and
-  `tateCor_tateRes`, and the tower laws `trans`, `relativeDegree_trans`, `cohomologyRes_trans`,
-  `cohomologyCor_trans`, `tateRes_trans` and `tateCor_trans`.
-* A refinement `LayerRefinement` has its `relativeDegree`, `cohomologyInfl`, `tateInfl`,
-  `groundEquiv` and `quotientHom`, the tower laws `trans`, `relativeDegree_trans` and
-  `cohomologyInfl_trans`, and `exists_commonRefinement`.
-* The abelian layers are `AbelianLayer`, with `isMulCommutative_gal_ofOpenNormal` and
-  `abelianizationGalEquiv`.
-* A class formation `ClassFormation F` carries its invariant map as data (`subsingleton_h1`, `inv`,
-  `inv_injective`, `range_inv`, `inv_restrict`, `inv_infl`, `inv_conj`), and derives
-  `fundamentalClass` with `inv_fundamentalClass`, `fundamentalClass_generates`,
-  `fundamentalClass_restrict`, `fundamentalClass_infl`, `fundamentalClass_conj`, `inv_cor`,
-  `fundamentalClass_cor`, `tateFundamentalClass`, the three hypotheses of Tate's theorem
-  `h1_subgroupLayer`, `card_H2_subgroupLayer` and `fundamentalClass_restrict_generates`, and the
-  cyclic norm index `natCard_normQuotient`.
-* The cup product with a class of `H²` is `cupClass`, and with the fundamental class
-  `ClassFormation.cupFundamentalClass`.
+Their contents (formations and their levels, finite normal layers with their finite quotient
+system, restriction, refinement and conjugation of layers, abelian layers, class formations with
+the invariant as data, and fundamental classes) are described in `README.md`, Layers 1 and 2.
 
 Tate's theorem and the Artin constructions of Layers 3 and 4 are also Tau Ceti's; the aliases
 below retain their public roadmap names. -/
@@ -294,7 +214,9 @@ below retain their public roadmap names. -/
 /-- **Tau Ceti's class formation**, `TauCeti.ClassFieldTheory.ClassFormation`, re-exported so that
 the targets of Layers 3 and 4 (Tate's theorem for the class formation, the Nakayama map, the Artin
 equivalence and the Artin map) are its methods, Tau Ceti's `cf.tateIso` and `cf.artinMap`. It is an
-abbreviation: every field and theorem of Tau Ceti's structure applies to it by name. -/
+abbreviation: every field and theorem of Tau Ceti's structure applies to it by name, for instance
+`ClassFormation.fundamentalClass_generates`, that the fundamental class of a layer generates its
+`H²`. -/
 abbrev ClassFormation {G : Type} [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
     [CompactSpace G] [TotallyDisconnectedSpace G] (F : Formation G) :=
   TauCeti.ClassFieldTheory.ClassFormation F
@@ -578,13 +500,14 @@ instance instFactIsSmoothDiscreteTrivialFp (p : ℕ) (F : Type) [Field F] :
   ⟨TauCeti.isSmoothDiscrete_trivialFp p _⟩
 
 /-- **A finite extension of `ℚ_p` carries the `p`-adic valuation.** For a nonarchimedean local
-field `F` that is a finite extension of `ℚ_p`, the valuation of `F` restricts to the `p`-adic
-valuation of `ℚ_p`. Both the valuation of `F` and the unique extension of the `p`-adic valuation
-to `F` are henselian of rank one, and a field that is not separably closed is henselian for at
-most one rank-one valuation up to equivalence (F. K. Schmidt; Engler–Prestel, *Valued Fields*,
-§4.4); `F` is not separably closed, having finite degree over `ℚ_p`. This is the compatibility
-`ValuativeExtension ℚ_[p] F` that Tau Ceti's local duality, Euler characteristic and cyclotomic
-normalization assume, and it is what lets the exported forms below omit it. -/
+field `F` with a `ℚ_p`-algebra structure of finite degree, no continuity being assumed, the
+valuation of `F` restricts to the `p`-adic valuation of `ℚ_p`, as valuative relations. Route: by
+Hensel's lemma every element of `1 + pℤ_p` is an `n`-th power for every `n` prime to `p`, so its
+image has trivial value in the infinite cyclic value group of `F`; hence so has every unit of
+`ℤ_p`, while `p = 1 + (p - 1)` gets value `≤ 1`, and value `1` would make the valuation trivial on
+`ℚ_p`, hence on the algebraic extension `F`. This is the compatibility `ValuativeExtension ℚ_[p] F`
+that Tau Ceti's local duality, Euler characteristic and cyclotomic normalization assume, and it is
+what lets the exported forms below omit it. -/
 theorem algebraMap_vle_algebraMap_iff_of_finite_padic (p : ℕ) [Fact p.Prime] (F : Type)
     [Field F] [ValuativeRel F] [TopologicalSpace F] [IsNonarchimedeanLocalField F]
     [Algebra ℚ_[p] F] [Module.Finite ℚ_[p] F] (a b : ℚ_[p]) :
