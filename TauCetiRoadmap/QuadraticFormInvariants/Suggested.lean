@@ -2,18 +2,14 @@ import Mathlib
 import TauCeti.Algebra.Quaternion.BrauerClass
 import TauCeti.Algebra.Quaternion.SplittingCriterion
 import TauCeti.FieldTheory.GaloisCohomology.MuTwo.CupNorm
-import TauCeti.FieldTheory.GaloisCohomology.MuTwo.LocalSymbol
 import TauCeti.FieldTheory.QuadraticForm.StiefelWhitney.Evens.Kummer.Value
 import TauCeti.FieldTheory.QuadraticForm.StiefelWhitney.QuadraticExtension
 import TauCeti.LinearAlgebra.QuadraticForm.RegularFormClass.Discriminant
 import TauCeti.LinearAlgebra.QuadraticForm.RegularFormClass.Hasse.Basic
-import TauCeti.LinearAlgebra.QuadraticForm.Witt.Ring
 import TauCeti.NumberTheory.HilbertSymbol.Basic
 import TauCeti.NumberTheory.LocalField.QuadraticForm.Bimultiplicativity
 import TauCeti.NumberTheory.LocalField.QuadraticForm.Brauer
 import TauCeti.NumberTheory.LocalField.QuadraticForm.Classification
-import TauCeti.NumberTheory.LocalField.QuadraticForm.Realization
-import TauCeti.NumberTheory.LocalField.QuadraticForm.UnramifiedClass
 import TauCeti.NumberTheory.QuadraticForm.Global.ProductFormula
 
 /-!
@@ -21,11 +17,11 @@ import TauCeti.NumberTheory.QuadraticForm.Global.ProductFormula
 
 **This file is not the roadmap.** The roadmap is `README.md`. This file states the roadmap's
 headline theorems against the pinned Mathlib and Tau Ceti, so that the finished roadmap has an
-acceptance test, together with the names that other roadmaps import from this namespace.
+acceptance test, together with the few names that other roadmaps use in their Lean files.
 
 Every object of this roadmap is Tau Ceti's at the pinned commit, and the README's supplier
-contracts name the native declaration and file for each layer. This file therefore restates
-nothing that Tau Ceti already has, and nothing in it is admitted.
+contracts name the native declaration and file for each layer. The headline theorems are therefore
+stated as examples discharged by the pinned declarations, and nothing in the file is admitted.
 
 * **The headline theorems**, each stated as an `example` and discharged by the pinned Tau Ceti
   declaration named here:
@@ -42,14 +38,13 @@ nothing that Tau Ceti already has, and nothing in it is admitted.
 
   Every headline theorem of the README is statable at the pins; none is omitted for a missing
   carrier.
-* **The names other roadmaps consume.** `GlobalQuadraticForms`, `IntegralLattices` and
-  `OrthogonalSpinGroups` import or cite this namespace for `RegularFormClass`, `formClass`,
-  `discr`, `wittRing`, `toWittRing`, `hilbertSymbol`, `hilbertSymbol_neg_self`,
-  `hilbertSymbol_comm`, `hilbertSymbol_mul`, `hilbertSymbol_unramified`,
-  `exists_hilbertSymbol_eq_neg_one`, `localHasse`, `hilbertSign`, `hilbertSymbol_productFormula`,
-  `hilbertSymbol_eq_cohomological`, `exists_of_realization` and `hasseInvariant_eq_localHasse`.
-  Each is an alias of a Tau Ceti declaration or is proved from one. `localHasse` and
-  `hilbertSymbol` keep the bodies that their consumers unfold.
+* **The names other roadmaps use in Lean.** `GlobalQuadraticForms` and `OrthogonalSpinGroups`
+  import this module, and their Lean files use `formClass`, `discr`, `hilbertSymbol`,
+  `localHasse`, `hilbertSymbol_neg_self`, `hilbertSymbol_mul`, `exists_hilbertSymbol_eq_neg_one`
+  and `hasseInvariant_eq_localHasse`; these eight are kept for that reason. Each is an alias of a
+  Tau Ceti declaration or is proved from one, and `localHasse` and `hilbertSymbol` keep the bodies
+  that their consumers unfold. Every other name a roadmap cites from this namespace is a Tau Ceti
+  declaration, and the README's Downstream consumers gives its Tau Ceti name.
 -/
 
 namespace TauCetiRoadmap.QuadraticFormInvariants
@@ -59,13 +54,11 @@ open scoped Quaternion
 
 universe u v
 
-/-! ## Layer 0: the carrier, under the names consumers use
+/-! `formClass` is Tau Ceti's class of a regular form in `TauCeti.RegularFormClass K` (Layer 0,
+`TauCeti/LinearAlgebra/QuadraticForm/RegularFormClass/Basic.lean`), under the name consumers use; the
+`export` makes the name of this namespace denote the same constant. -/
 
-`RegularFormClass` and `formClass` are Tau Ceti's carrier for isometry classes of regular forms
-and the class of a regular form (`TauCeti/LinearAlgebra/QuadraticForm/RegularFormClass/Basic.lean`).
-The `export` makes the two names of this namespace denote the same constants. -/
-
-export TauCeti (RegularFormClass formClass)
+export TauCeti (formClass)
 
 /-! ## Layer 2: quaternion algebras and the four-fold splitting criterion -/
 
@@ -85,22 +78,11 @@ example {K : Type u} [Field K] [Invertible (2 : K)] (a b : Kˣ) :
 
 /-- **The discriminant in `Kˣ ⧸ (Kˣ)²`**: Tau Ceti's additive `TauCeti.RegularFormClass.discr`, read
 through Tau Ceti's `TauCeti.multiplicativeSquareClassEquiv`. -/
-noncomputable def discr {K : Type u} [Field K] [Invertible (2 : K)] (x : RegularFormClass K) :
+noncomputable def discr {K : Type u} [Field K] [Invertible (2 : K)]
+    (x : TauCeti.RegularFormClass K) :
     Kˣ ⧸ Subgroup.square Kˣ :=
   TauCeti.multiplicativeSquareClassEquiv.symm
     (Multiplicative.ofAdd (TauCeti.RegularFormClass.discr x))
-
-/-! ## Layer 4: the Witt ring, under the names consumers use -/
-
-/-- **The Witt ring** `W(K)`, Tau Ceti's `TauCeti.WittRing K`: the Witt–Grothendieck ring modulo
-the hyperbolic ideal. -/
-abbrev wittRing (K : Type u) [Field K] [Invertible (2 : K)] : Type u :=
-  TauCeti.WittRing K
-
-/-- **The quotient map** `Ŵ(K) → W(K)`, Tau Ceti's `TauCeti.WittRing.mk`. -/
-noncomputable abbrev toWittRing {K : Type u} [Field K] [Invertible (2 : K)] :
-    TauCeti.WittGrothendieckRing K →+* wittRing K :=
-  TauCeti.WittRing.mk
 
 /-! ## Layer 6C: the Hilbert symbol, the local Hasse invariant and Hilbert reciprocity -/
 
@@ -135,22 +117,6 @@ private theorem localHasse_eq_prod_prod_Ioi {n : ℕ} (w : Fin n → Kˣ) :
   ext j
   simp
 
-/-- **Symmetry**, Tau Ceti's `TauCeti.hilbertSymbol_comm`, which holds over every field in which
-`2` is invertible. -/
-theorem hilbertSymbol_comm [Invertible (2 : K)] (a b : Kˣ) :
-    hilbertSymbol a b = hilbertSymbol b a :=
-  TauCeti.hilbertSymbol_comm a b
-
-/-- **Evaluation against the unramified class**, Tau Ceti's `TauCeti.hilbertSymbol_unramified`:
-over a nonarchimedean local field, if the norms from `K(√Δ)` are exactly the elements of even
-valuation, then `(Δ, b)_K = (−1)^(v_K(b))`. -/
-theorem hilbertSymbol_unramified [ValuativeRel K] [TopologicalSpace K]
-    [IsNonarchimedeanLocalField K] (Δ : Kˣ)
-    (hΔ : ∀ b : Kˣ, (∃ x y : K, (b : K) = x ^ 2 - Δ * y ^ 2) ↔
-      Even (TauCeti.normalizedValuation K b).toAdd) (b : Kˣ) :
-    hilbertSymbol Δ b = if Even (TauCeti.normalizedValuation K b).toAdd then 1 else -1 :=
-  TauCeti.hilbertSymbol_unramified hΔ b
-
 /-- **Bimultiplicativity** over a nonarchimedean local field, Tau Ceti's
 `TauCeti.hilbertSymbol_mul_right`. -/
 theorem hilbertSymbol_mul [ValuativeRel K] [TopologicalSpace K] [IsNonarchimedeanLocalField K]
@@ -167,12 +133,6 @@ theorem exists_hilbertSymbol_eq_neg_one [ValuativeRel K] [TopologicalSpace K]
 
 end HilbertSymbol
 
-/-! `hilbertSign` is Tau Ceti's dictionary `TauCeti.hilbertSign : ZMod 2 → ℤˣ`, `0 ↦ +1`,
-`1 ↦ −1` (`TauCeti/Data/ZMod/IntUnitsPower.lean`); the `export` makes the name of this namespace
-denote that constant. -/
-
-export TauCeti (hilbertSign)
-
 open IsDedekindDomain NumberField in
 open scoped Classical in
 /-- **Layer 6C, Hilbert's product formula for the norm-equation symbol** (Serre *CiA* III.2.2
@@ -185,35 +145,6 @@ example (F : Type) [Field F] [NumberField F] (a b : Fˣ) :
       ∏ w : {w : InfinitePlace F // w.IsReal},
         hilbertSymbol (TauCeti.unitAtRealPlace w a) (TauCeti.unitAtRealPlace w b) = 1 :=
   TauCeti.hilbertSymbol_productFormula a b
-
-open IsDedekindDomain NumberField in
-/-- **Hilbert reciprocity in sign form**: over a number field the signs of Tau Ceti's
-cohomological Hilbert invariants `TauCeti.ClassFieldTheory.finiteHilbertInvariantAt` (over the
-finite support `TauCeti.ClassFieldTheory.finiteHilbertSupport`, the places where it is nonzero)
-and `TauCeti.ClassFieldTheory.infiniteHilbertInvariantAt` multiply to `1`. It is the image of
-`TauCeti.ClassFieldTheory.hilbertProductFormula` under the additive-to-multiplicative dictionary
-`hilbertSign`. -/
-theorem hilbertSymbol_productFormula (F : Type) [Field F] [NumberField F] (a b : Fˣ) :
-    (∏ v ∈ TauCeti.ClassFieldTheory.finiteHilbertSupport F a b,
-        hilbertSign (TauCeti.ClassFieldTheory.finiteHilbertInvariantAt F v a b)) *
-      ∏ w : InfinitePlace F,
-        hilbertSign (TauCeti.ClassFieldTheory.infiniteHilbertInvariantAt F w a b) = 1 := by
-  rw [← TauCeti.hilbertSign_sum, ← TauCeti.hilbertSign_sum, ← TauCeti.hilbertSign_add,
-    TauCeti.ClassFieldTheory.hilbertProductFormula a b, TauCeti.hilbertSign_zero]
-
-/-- **The norm-equation symbol is the cohomological symbol** (Layers 6C and 7C), Tau Ceti's
-`TauCeti.hilbertSymbol_eq_cohomological`: over every field in which `2` is invertible, the Hilbert
-symbol is the sign of Class Field Theory's Kummer-cup local symbol, read through
-`TauCeti.hilbertSign`. -/
-theorem hilbertSymbol_eq_cohomological {F : Type u} [Field F] [Invertible (2 : F)] {ζ : F}
-    (hζ : IsPrimitiveRoot ζ 2)
-    (tr : continuousCohomology 2 (TauCeti.ClassFieldTheory.muNRep 2 F) ≃+ ZMod 2) (a b : Fˣ) :
-    hilbertSymbol a b =
-      TauCeti.hilbertSign (TauCeti.ClassFieldTheory.localSymbol
-        (TauCeti.ClassFieldTheory.kummerCupPairing ζ hζ) tr
-        (TauCeti.ClassFieldTheory.kummerClass F (isUnit_of_invertible (2 : F)) a)
-        (TauCeti.ClassFieldTheory.kummerClass F (isUnit_of_invertible (2 : F)) b)) :=
-  TauCeti.hilbertSymbol_eq_cohomological hζ tr a b
 
 /-! ## Layer 6D: the classification and its corollaries -/
 
@@ -233,18 +164,6 @@ example {K : Type u} [Field K] [ValuativeRel K] [TopologicalSpace K]
       TauCeti.RegularFormClass.localHasse (formClass Q hQ) =
         TauCeti.RegularFormClass.localHasse (formClass R hR) :=
   QuadraticForm.equivalent_iff_finrank_eq_and_discr_eq_and_localHasse_eq Q hQ hR
-
-/-- **Realization of local invariants** (O'Meara 63:23, Serre *CiA* IV Prop 6), Tau Ceti's
-`TauCeti.RegularFormClass.exists_of_realization`: over a nonarchimedean local field every triple
-`(n, d, s)` with `n ≥ 1` is the rank, discriminant and local Hasse invariant of a regular form,
-except `n = 1` with `s = −1`, and `n = 2` with `d = [−1]` and `s = −1`. -/
-theorem exists_of_realization {K : Type u} [Field K] [ValuativeRel K] [TopologicalSpace K]
-    [IsNonarchimedeanLocalField K] [Invertible (2 : K)] {n : ℕ} (hn : 1 ≤ n)
-    (d : TauCeti.SquareClassGroup K) (s : ℤˣ)
-    (h₁ : n = 1 → s = 1) (h₂ : n = 2 → d = TauCeti.squareClass (-1 : Kˣ) → s = 1) :
-    ∃ x : RegularFormClass K, x.rank = n ∧ TauCeti.RegularFormClass.discr x = d ∧
-      TauCeti.RegularFormClass.localHasse x = s :=
-  TauCeti.RegularFormClass.exists_of_realization hn d s h₁ h₂
 
 /-! ## Layer 6E: the two Hasse invariants agree -/
 
@@ -281,8 +200,9 @@ end HasseComparison
 
 /-! ## Layer 7C: the cup-norm theorem -/
 
-/-- **Layer 7C, the cup-norm theorem** (Serre, *Galois Cohomology* II.§1 and Gille–Szamuely 4.7),
-Tau Ceti's `TauCeti.cup_kummerClass_eq_zero_iff`: over every field in which `2` is invertible,
+/-- **Layer 7C, the cup-norm theorem** (Serre, *L'invariant de Witt de la forme Tr(x²)*, §1.1;
+Serre, *Local Fields* XIV §2; Gille–Szamuely 4.7), Tau Ceti's `TauCeti.cup_kummerClass_eq_zero_iff`:
+over every field in which `2` is invertible,
 `(a) ∪ (b) = 0` in `H²(G_K, 𝔽₂)` exactly when `b = x² − a y²` is solvable. -/
 example {K : Type u} [Field K] [Invertible (2 : K)] (a b : Kˣ) :
     (TauCeti.trivialF2TopPairing (TauCeti.AbsoluteGaloisGroup K)).cup 1 1
