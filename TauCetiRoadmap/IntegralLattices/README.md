@@ -55,14 +55,13 @@ In scope: the arithmetic of integral lattices over `ℤ` and `ℤ_p`, as listed 
 below. The Jordan theory over a discrete valuation ring and the dyadic Jordan combinatorics that
 3B and 3I record are Tau Ceti's, at that generality; this roadmap consumes them.
 
-The arithmetic dependencies are `GlobalQuadraticForms`, `RestrictedProducts`,
-`OrthogonalSpinGroups` and `RepresentationTheory/RootSystems`. What this roadmap uses of
+The arithmetic dependencies are `GlobalQuadraticForms`, `RestrictedProducts` and
+`OrthogonalSpinGroups`. What this roadmap uses of
 `QuadraticFormInvariants` (the local classification and the Hilbert symbol with its product
 formula), `ClassFieldTheory` (the cohomological product formula and ring class fields) and
 `GlobalNumberFields` (orders, `Pic` and `NarrowPic` with their finiteness) is implemented in Tau
 Ceti and consumed from there (§*From Tau Ceti*). The real-volume construction additionally consumes the
-native ball/radial measure, smooth metric and volume-density APIs, the early finite-dimensional
-matrix Lie-group construction in `RepresentationTheory/LieGroups`, and `DifferentialGeometry`
+native ball/radial measure, induced-metric and Riemannian-volume APIs, and `DifferentialGeometry`
 12.1/12.4 for metric/density comparisons. Field, order, adelic, Spin and ADE carriers remain with
 their owners.
 
@@ -454,7 +453,7 @@ is unimodularity and not nondegeneracy.
 | `scaleIdeal`, `normIdeal`, `isEven_iff_normIdeal_le_span_singleton_two`, `level`, `level_dvd_two_mul_determinant`, `IsEven.level_eq_addOrderOf` | `Ideals.lean`, `Level.lean` | 0D, 1J |
 | `radical`, `sigPos`, `sigNull`, `sigNeg`, `signature`, `signature_sum_eq_finrank`, `IsPosDef`, `IsNegDef`, `IsIndefinite`, `isPosDef_iff_isPosSemidef_and_nondegenerate`, `radicalQuotient`, `signature_radicalQuotient` | `Signature.lean`, `RadicalQuotient.lean` | 0E |
 | `orthogonalSum`, `determinant_orthogonalSum`, `orthogonalSplittingIsometry`, `unitNormSplittingIsometry`, `isCompl_orthogonal_of_restrict_bijective` | `Orthogonal/Sum.lean`, `Orthogonal/Isometry.lean`, `Orthogonal/UnitNorm.lean`, `Orthogonal/Splitting.lean` | 0F |
-| `a1`, `negativeA1`, `hyperbolicPlane`, `affineA1`, `affineA1RadicalQuotientIsometry`, `rankOne`, `coordinatePower`, `typeARootLattice`, `checkerboardLattice`, `typeE₆RootLattice`, `typeE₇RootLattice`, `typeE₈RootLattice`, `checkerboardPlusLattice`, `typeE₈IsometryD8Plus` | `Examples.lean`, `RankOne/Basic.lean`, `CoordinatePower.lean`, `RootLattice/` | 0G, 1K |
+| `a1`, `negativeA1`, `hyperbolicPlane`, `affineA1`, `affineA1RadicalQuotientIsometry`, `rankOne`, `coordinatePower`, `typeARootLattice`, `checkerboardLattice`, `typeE₆RootLattice`, `typeE₇RootLattice`, `typeE₈RootLattice`, `checkerboardPlusLattice`, `typeE₈IsometryD8Plus` (an isometry from `E₈` onto `D₈⁺`), `mem_checkerboardPlusCarrier_iff` (`x ∈ Dₙ⁺` exactly when `x ∈ Dₙ` or `x − h ∈ Dₙ`, for even `n`) | `Examples.lean`, `RankOne/Basic.lean`, `CoordinatePower.lean`, `RootLattice/` (`TypeD/Plus.lean`, `D8Plus/Isometry.lean`) | 0G, 1K, 6F |
 | `RootfulNiemeierType` with `lattice`, `rootLattice`, `rootLattice_carrier_le_lattice_carrier`, `components_multiset_injective` and `span_vectorsOfNorm_two_lattice_of_ne`; `leechLattice` with `vectorsOfNorm_two_leechLattice`; `Isometry.map_span_vectorsOfNorm` | `Rank24/RootSystems.lean`, `Rank24/Niemeier.lean`, `Rank24/Leech/Basic.lean`, `Rank24/Leech/Minimum.lean`, `PosDef/RepresentationNumber.lean` | 6E |
 | `rationalizationIsometry`, `ofIntegralForm`, `carrierIsometry` | `Rationalization.lean` | 1A |
 | `dualCarrier`, `dualPairingEquiv`, `isLattice_dualCarrier_iff_nondegenerate`, `dualCarrier_orthogonalSum` | `Dual/Basic.lean`, `Dual/Finiteness.lean`, `Discriminant/Operations.lean` | 1B |
@@ -467,12 +466,13 @@ is unimodularity and not nondegeneracy.
 | `LinearMap.BilinForm.IsModular` (`π^i` times a perfect pairing), `LinearMap.BilinForm.IsJordanSplitting`, `IsSymm.exists_isJordanSplitting` (a nondegenerate symmetric form on a finite module over a discrete valuation ring has a Jordan splitting), `IsJordanSplitting.finrank_eq` and `IsJordanSplitting.finrank_eq_of_equivalent` (the constituent ranks are invariants, over any local domain), `IsScaleEven`, `IsJordanSplitting.isScaleEven_iff` and `IsJordanSplitting.isScaleEven_iff_of_equivalent` (the parity of a constituent relative to its own scale is an invariant); `TauCeti.IntegralLattice.exists_isJordanSplitting_localIntegralForm`, `finrank_eq_of_isJordanSplitting_localIntegralForm` | `Modular.lean`, `Ideals.lean`, `JordanSplitting/Basic.lean`, `JordanSplitting/Parity.lean` in `TauCeti/LinearAlgebra/BilinearForm/`; `TauCeti/NumberTheory/IntegralLattice/JordanSplitting.lean` | 3B |
 | `IsSymm.equivalent_iff_isSquare_det_mul_det` (over a Henselian local ring with finite residue field and `2` invertible, unimodular forms are classified by rank and determinant square class), `TauCeti.existsUnique_equivalent_diagonal_snoc` (two classes in each positive rank, one in rank 0), `IsJordanSplitting.equivalent_iff_forall_equivalent_restrict` (there, forms are isometric exactly when their Jordan constituents are); `TauCeti.IntegralLattice.localIntegralForm_equivalent_iff_forall_equivalent_restrict` (the same for localized lattices at odd `p`) | `Henselian.lean`, `UnimodularClasses.lean` in `TauCeti/LinearAlgebra/BilinearForm/`; `TauCeti/NumberTheory/IntegralLattice/JordanSplitting.lean` | 3C |
 | `TauCeti.IntegralLattice.localIntegralForm_two_equivalent_iff` and `localIntegralForm_two_equivalent_iff_of_isCharacteristicVector` (lattices whose determinants are units at `2` have isometric dyadic localizations exactly when rank, type, determinant square class and oddity agree), `localIntegralForm_two_equivalent_iff_of_isEven`; `IsSymm.equivalent_iff_isSquare_det_mul_det_of_even`, `IsJordanSplitting.equivalent_iff_forall_equivalent_restrict_of_even` (even unimodular forms over a Henselian ring with residue field `𝔽₂`); `IsJordanSplitting.equivalent_iff_equivalent_restrict_biSup_Iic_and_Ici` (two forms are isometric exactly when the two sides of a break between consecutive type II constituents are) | `TauCeti/NumberTheory/IntegralLattice/Dyadic/Unimodular.lean`; `Even/Henselian.lean`, `JordanSplitting/AdicComplete.lean` in `TauCeti/LinearAlgebra/BilinearForm/` | 3D |
+| The binary moves over `ℤ₂`, for units `a, b`: `TauCeti.equivalent_toBilin'_diagonal_two_pow_mul_iff` (`⟨a, 2ᵏb⟩ ≅ ⟨a', 2ᵏb'⟩` for `k ≥ 1` exactly when `aba'b'` is a square and `a' ≡ a` or `a + 2ᵏb (mod 8)`; at `k = 1`, oddity fusion and adjacent sign walking), `TauCeti.equivalent_toBilin'_diagonal_four_mul_five_mul` (`⟨a, 4b⟩ ≅ ⟨5a, 20b⟩`, sign walking across a gap of 4), `TauCeti.equivalent_toBilin'_diagonal_two_pow_mul_iff_of_three_le` (no interaction at gap `≥ 8`), the mixed-type sign walks `TauCeti.equivalent_toBilin'_unary_two_hyperbolic`, `TauCeti.equivalent_toBilin'_unary_two_anisotropic`, `TauCeti.equivalent_toBilin'_two_unary_hyperbolic`, `TauCeti.equivalent_toBilin'_two_unary_anisotropic` (`⟨2ᵏa⟩ ⊕ 2ᵏ⁺¹U ≅ ⟨2ᵏ·5a⟩ ⊕ 2ᵏ⁺¹V` and the three variants); `TauCeti.not_exists_orthogonal_basis_hyperbolic_padicInt_two` (`U` over `ℤ₂` has no orthogonal basis); `LinearMap.BilinForm.IsSymm.equivalent_iff_two_dvd_iff_and_isSquare_det_mul_det_and_eight_dvd` (unimodular forms over `ℤ₂` are classified by type, determinant square class and oddity) | `BinaryDiagonal.lean`, `MixedSignWalking/Basic.lean`, `MixedSignWalking/EvenLower.lean`, `Basic.lean`, `Unimodular.lean` in `TauCeti/NumberTheory/Padics/BilinearForm/` | 3D, 3E |
 | `TauCeti.DyadicJordanProfile` with `IsBound`, `IsFree`, `typeICount`, `adjacentTypeICount`, `typeIIRank`, `nM`, `nQ`, `densityExponent`, `densityExponent_eq` (Cho's displayed `N = t + ∑_{i<j} i·n_i·n_j + ∑ d_i − b + c`), `nQ_eq_nM_add_densityExponent` (Cho's Lemma 5.1); `IsJordanSplitting.dyadicJordanProfile`, `IsJordanSplitting.dyadicJordanProfile_eq_of_equivalent` (the profile of a splitting over any local domain is an isometry invariant); `TauCeti.IntegralLattice.dyadicJordanProfile`, `dyadicJordanProfile_eq_of_equivalent`, `SameGenus.dyadicJordanProfile_eq`; `nM_add`, `nQ_add`, `densityExponent_add` (sums whose scales do not interleave), `dyadicJordanProfile_orthogonalSum`; `shift`, `densityExponent_shift`, `dyadicJordanProfile_two_smul` (the twist `L(2)`); `IsEven.densityExponent_dyadicJordanProfile` (`N = n` for an even lattice of odd determinant), `densityExponent_dyadicJordanProfile_rankOne_two_pow_mul` (`N(⟨2^i u⟩) = i + 1`), `densityExponent_dyadicJordanProfile_rankOne_one_orthogonalSum_two` (`N(⟨1⟩ ⊕ ⟨2⟩) = 2`) | `Basic.lean`, `JordanSplitting.lean`, `Sum.lean`, `OrthogonalSum.lean`, `Scaling.lean`, `FormTwist.lean` in `TauCeti/NumberTheory/IntegralLattice/Dyadic/DensityExponent/` | 3I |
 | `exists_basis_iIsOrtho_localIntegralForm`, `exists_basis_iIsOrtho_localIntegralForm_eq_unit_mul_pow` (an orthogonal basis of `L_p` at odd `p`, with entries `u·p^k`) | `TauCeti/NumberTheory/IntegralLattice/Diagonalization.lean` | 3C |
 | `integralOrthogonalSubgroup`, `mem_integralOrthogonalSubgroup_iff_mem_span`, `isCompact_integralOrthogonalSubgroup`, `isOpen_integralOrthogonalSubgroup`, `integralOrthogonalSubgroup_eq_of_span_eq`, `eventually_mem_integralOrthogonalSubgroup`, `eventually_integralOrthogonalSubgroup_baseChange_eq`, `integralSpinSubgroup`, `OrthogonalCompactOpens` with `OrthogonalCompactOpens.integral` and `OrthogonalCompactOpens.specialOrthogonal`, `finiteAdelicOrthogonal`, `finiteAdelicSpecialOrthogonal`, `finiteAdelicSpin` | `TauCeti/NumberTheory/QuadraticForm/OrthogonalGroup/Integral/Basic.lean`, `Integral/Spin.lean`, `Integral/CompactOpen.lean`, `CompactOpen.lean`, `FiniteAdelic.lean` | N0, 4B |
 | `TauCeti.IntegralLattice.localStabilizer` (`K_p(L)`, the isometries of `V_p` carrying the image of `L_p` onto itself), `localStabilizer_eq_integralOrthogonalSubgroup` (in any `ℤ`-basis of `L` it is the integral orthogonal subgroup), `isCompact_localStabilizer`, `isOpen_localStabilizer`, `forall_orthogonalGroupBaseChange_mem_localStabilizer_iff` (a rational isometry lies in every `K_p(L)` exactly when it preserves `L`), `TauCeti.IntegralLattice.orthogonalCompactOpens` (the compact-open family of a nondegenerate `L`, with `orthogonalCompactOpens_orthogonal`); `OrthogonalCompactOpens.finiteAdelicOrthogonalDiagonal`, `finiteAdelicSpecialOrthogonalDiagonal`, `finiteAdelicOrthogonalDoubleCoset` (`O(V)(ℚ) \ O(V)(𝔸_f) / ∏_p U_p`), `finiteAdelicSpecialOrthogonalDoubleCoset` | `TauCeti/NumberTheory/IntegralLattice/Localization/Stabilizer.lean`; `Diagonal/Finite.lean`, `DoubleCoset/Basic.lean` in `TauCeti/NumberTheory/QuadraticForm/OrthogonalGroup/` | N0, 4B |
 | `TauCeti.IntegralLattice.IsNeighbor` with `IsNeighbor.symm`, `IsNeighbor.determinant_eq`, `isNeighbor_one_iff`; `neighbor` (the lattice spanned by `{x ∈ L : p ∣ β(x, v)}` and `v/p`, for `p² ∣ β(v, v)`), `isNeighbor_neighbor`, `isEven_neighbor` (for `2p² ∣ β(v, v)`), `exists_isNeighbor_of_not_dvd_discriminant`; `IsNeighbor.sameGenus` (for `p` prime to `2·det L`) | `Neighbor/Basic.lean`, `Neighbor/Isotropic.lean` in `TauCeti/LinearAlgebra/IntegralLattice/`; `TauCeti/NumberTheory/IntegralLattice/Neighbor.lean` | 4G |
-| `OrthogonalCompactOpens.localSpinorNormImage`, `isOpen_localSpinorNormImage`, `localSpinorNormImage_eq_bot_of_finrank_le_one`, `exists_localSpinorNormImage_ne_unitSquareClasses`, `eventually_localSpinorNormImage_integral_eq_unitSquareClasses`, `integralOrthogonalSubgroup_eq_closure_reflectionOrthogonal`, `map_spinorNorm_comap_integralOrthogonalSubgroup_eq_unitSquareClasses`, `adelicSpinorNorm`, `finiteAdelicSquareClasses` | `SpinorNormImage.lean`, `LowRank.lean`, `Integral/CompactOpen.lean`, `Integral/SpinorNorm.lean`, `AdelicSpinorNorm/Basic.lean` in `TauCeti/NumberTheory/QuadraticForm/OrthogonalGroup/` | N1, 4C |
+| `OrthogonalCompactOpens.localSpinorNormImage`, `isOpen_localSpinorNormImage`, `localSpinorNormImage_eq_bot_of_finrank_le_one`, `exists_localSpinorNormImage_ne_unitSquareClasses`, `eventually_localSpinorNormImage_integral_eq_unitSquareClasses`, `integralOrthogonalSubgroup_eq_closure_reflectionOrthogonal`, `reflectionOrthogonal_mem_integralOrthogonalSubgroup` (the reflection in an integral vector `v` with `Q(v)` a unit is integral), `map_spinorNorm_comap_integralOrthogonalSubgroup_eq_unitSquareClasses`, `adelicSpinorNorm`, `finiteAdelicSquareClasses` | `SpinorNormImage.lean`, `LowRank.lean`, `Integral/CompactOpen.lean`, `Integral/SpinorNorm.lean`, `AdelicSpinorNorm/Basic.lean` in `TauCeti/NumberTheory/QuadraticForm/OrthogonalGroup/` | N0, N1, 4C |
 | `orthogonalGroup`, `spinorNorm`, `spinorNorm_reflectionPairSpecialOrthogonal`, `orthogonalGroupBaseChange`, `transvection`, `CliffordAlgebra.transvectionLiftHom` (the Spin lifts `w ↦ L_{u,w}` of the Eichler transvections, from `u^⊥/ℚu`) | `TauCeti/LinearAlgebra/QuadraticForm/OrthogonalGroup/Basic.lean`, `TauCeti/LinearAlgebra/CliffordAlgebra/Spin/SpinorNorm/Basic.lean`, `TauCeti/LinearAlgebra/QuadraticForm/BaseChange.lean`, `TauCeti/LinearAlgebra/QuadraticForm/Transvection/Basic.lean`, `TauCeti/LinearAlgebra/CliffordAlgebra/Spin/Transvection.lean` | 4B, 4C, 4F, N1 |
 | `RestrictedProductGroup`, `RestrictedProductGroupWithFactor`, `CompactOpenSubgroups`, `integralSubgroup`, `isCompact_integralSubgroup`, `rationalDiagonal` | `TauCeti/Topology/Algebra/RestrictedProduct/Basic.lean`, `Diagonal.lean` | 4B, B7 |
 | `NumberFieldOrder`, `NumberFieldOrder.conductor`, `NumberFieldOrder.IsProperFractionalIdeal`, `NumberFieldOrder.properFractionalIdeals`, `NumberFieldOrder.invertibleProperFractionalIdeals`, `NumberFieldOrder.invertible_isProper`, `NumberFieldOrder.isProperFractionalIdeal_iff_isUnit_of_finrank_eq_two`, `IdealClassMonoid`, `NumberFieldOrder.mkIdealClassMonoid`, `Pic` (`ClassGroup` of the order), `NumberFieldOrder.mkPic`, `NumberFieldOrder.mkPic_surjective`, `NarrowPic`, `NumberFieldOrder.narrowPrincipal`, `NumberFieldOrder.narrowToPic`, `NumberFieldOrder.narrowToPic_surjective`, `finite_pic`, `NumberFieldOrder.finite_narrowPic` (the narrow Picard group of an order is finite), `IdealClassMonoid.picEquivUnits` (`Pic O ≃* (IdealClassMonoid O)ˣ`), `card_narrowPic` | `TauCeti/NumberTheory/NumberField/Global/Orders/` (`Basic.lean`, `Conductor.lean`, `ProperIdeal.lean`, `Quadratic.lean`, `IdealClassMonoid.lean`, `Picard.lean`, `NarrowPic.lean`, `NarrowPic/Kernel.lean`, `NarrowPic/RayClass.lean`, `RayClass.lean`) | B1–B5, 4E |
@@ -482,6 +482,7 @@ is unimodularity and not nondegeneracy.
 | `TauCeti.BinaryQuadraticForm.PosDefProperClass`, `picClass`, `narrowPicClass`, `posDefProperClassEquivPic`, `properClassEquivNarrowPic`, `posDefProperClassToPic_mk_mul_of_united`, `posDefProperClassToPic_eq_one_iff`, `posDefProperClassToPic_mk_eq_inv_of_eq_reflected`, `properClassToNarrowPic_mk_mul_of_united`, `properClassToNarrowPic_principalForm`, `properClassToNarrowPic_mk_eq_inv_of_eq_reflected`, `exists_eq_smul_reflected_iff_picClass_sq_eq_one`, `exists_eq_smul_reflected_iff_narrowPicClass_sq_eq_one`, `discrimTwelvePositiveLeading`, `discrimTwelveNegativeLeading`, `narrowPicClass_discrimTwelvePositiveLeading_ne_negative`, `properClass_discrimTwelvePositiveLeading_ne_negative`, `posDefProperClassEquivGal`, `posDefProperClassEquivGal_mk_mul_of_united`, `posDefProperClassEquivGal_eq_one_iff`, `finrank_ringClassField_neg_twenty_three_eq_three` | `TauCeti/NumberTheory/BinaryQuadraticForm/Content.lean` (`PosDefProperClass`); `Class.lean`, `Narrow/Class.lean`, `PicEquivalence.lean`, `Narrow/Equivalence.lean`, `Composition.lean`, `Narrow/Composition.lean`, `Reflection.lean`, `DiscriminantTwelve.lean`, `RingClassField.lean` in `TauCeti/NumberTheory/BinaryQuadraticForm/Ideal/` | B2, B3, B4 |
 | `splitTriangularForm`, `exists_smul_splitTriangularForm_eq_iff`, `exists_smul_eq_splitTriangularForm_of_discrim_eq_sq`, `SplitProperClass`, `splitProperClassEquivUnits`; `TauCeti.primitiveReducedForms`, `posDefProperClass_mk_primitiveReducedForms_bijective`, `picClass_primitiveReducedForms_bijective`, `nat_card_pic`, `lagrangeReducedForms`, `exists_finset_forall_exists_smul_mem` | `Split/Classes.lean`, `Split/Composition.lean`, `PrimitiveReduced.lean`, `Ideal/ClassNumber.lean`, `LagrangeReduction.lean`, `FiniteClasses.lean` in `TauCeti/NumberTheory/BinaryQuadraticForm/` | B2, B3, B5 |
 | `TauCeti.ClassFieldTheory.ringClassField`, `TauCeti.ClassFieldTheory.ringClassArtinMap`, `TauCeti.ClassFieldTheory.ringClassArtinEquiv` (`Pic O ≃* Gal(H_O/K)`). Each takes a `NumberFieldOrder K` of a number field `K`, so `[Field K]` and `[NumberField K]`, and no degree hypothesis; B1's nonsquare constructor supplies the quadratic `K`, and the split algebra `ℚ × ℚ`, which is not a field, is the `K` of no `NumberFieldOrder K` | `TauCeti/NumberTheory/ClassFieldTheory/ClassFields/RingClass/Field.lean` | B3 |
+| `TauCeti.Multiquadratic.isSquare_iff_forall_genusCharFunNarrowClassGroupHom_eq_one` (the principal genus theorem for `ℚ(√d)`, `d` squarefree, either sign: a narrow ideal class is a square exactly when every genus character is trivial on it), `TauCeti.Multiquadratic.mem_range_genusCharFunElementaryTwoQuotientFamilyLinearMap_iff` (the realized sign vectors are exactly those of product one), `TauCeti.Multiquadratic.exists_genusCharFunElementaryTwoQuotientFamilyLinearMap_eq` (their existence, through Dirichlet's theorem), `TauCeti.Multiquadratic.natCard_narrowClassGroup_sq_eq_one_eq_two_pow` (`2^{t−1}` narrow classes of order at most 2, `t` the number of ramified primes); `TauCeti.GlobalNumberFields.maximalOrderNarrowPicEquiv` (`NarrowPic` of the maximal order is `NarrowClassGroup`). All are on the maximal order only; B3 extends them to non-maximal orders and to the lattice genus | `PrincipalGenus.lean`, `Independence.lean` in `TauCeti/NumberTheory/Multiquadratic/Quadratic/GenusCharacter/`; `TauCeti/NumberTheory/Multiquadratic/Quadratic/AmbiguousClassNumber.lean`; `TauCeti/NumberTheory/NumberField/Global/Orders/Maximal.lean` | B3 |
 | `TauCeti.IntegralLattice.vanDerBlij` (van der Blij's congruence `t₊ − t₋ ≡ β(w, w) (mod 8)` for a nondegenerate unimodular lattice and a characteristic `w`), `IsUnimodular.exists_isCharacteristicVector`, `IsUnimodular.characteristicVector_integralNorm_modEq` | `TauCeti/LinearAlgebra/IntegralLattice/Characteristic/VanDerBlij.lean`, `Characteristic/Unimodular.lean` | 1L |
 | `TauCeti.IntegralLattice.gaussSign_discriminantQuadraticModule_eq_sigPos_sub_sigNeg` (Milgram's theorem, `sign q_L = t₊ − t₋` in `ℤ/8`, for an even nondegenerate lattice of any signature) | `TauCeti/LinearAlgebra/IntegralLattice/Milgram.lean` | 1I |
 | `TauCeti.FiniteQuadraticModule.nonempty_isometry_iff_bilinear_isometry_and_gaussSign_eq` (Nikulin's Theorem 1.11.3: for nondegenerate `A`, `A ≅ B` exactly when the bilinear modules are isometric and the Gauss-sum invariants agree), `gaussSign_oddCyclic` (Nikulin's Proposition 1.11.2 at odd `p`: `sign q_θ^{(p)}(p^k) = k²(1 − p) + 2k(1 − (θ|p))` in `ℤ/8`, for `p ∤ θ`), `gaussSign_oddCyclic_pow_add_two` (the odd cyclic invariant depends on `k` modulo 2) | `TauCeti/LinearAlgebra/FiniteBilinearModule/Comparison.lean`, `OddCyclic/GaussSum.lean` | 1H |
@@ -501,13 +502,14 @@ is unimodularity and not nondegeneracy.
 | `Matrix.localDensityCount` (the number of `X ∈ Mₙ(ℤ/pʳ)` with `XᵀAX = A`, for `A` over `ℤ_p`), `Matrix.localDensity` (the limit of the normalized counts), `localDensity_transpose_mul_mul` (basis independence), `localDensityCount_div_pow_of_det_ne_zero` (stabilization from `r > 2·v_p(2 det A)` on, at every prime), `tendsto_localDensityCount_div_of_det_ne_zero`, `tendsto_localDensityCount_div_of_card_eq_two_mul_add_one` and `…_two_mul_add_two` (the values at odd `p` with `det A` a unit, in both parities, with `ε = χ_p((−1)^{m+1} det A)` for `n = 2m + 2`), `tendsto_localDensityCount_div_hyperbolicPlane_three` (`α_3(U) = 4/3`) | `TauCeti/NumberTheory/IntegralLattice/LocalDensity/Basic.lean` | 7C |
 | `localDensity_fromBlocks`, `localDensity_fromBlocks_smul` (at odd `p` the density is multiplicative across a unimodular Jordan constituent), `localDensity_diagonal_unit_mul_pow`, `localDensity_toMatrix_of_iIsOrtho` (the density at odd `p` of every nondegenerate lattice from its diagonal Jordan form); `localDensity_one_fin_one_two` (`α_2(⟨1⟩) = 4`), `localDensity_smul_one_fin_one_two` (`α_2(⟨a⟩) = 4·2^{v_2(a)}`), `localDensity_hyperbolicPlane_two` (`α_2(U) = 4`); `hasProd_inv_half_localDensity_of_card_eq_one`, `hasProd_inv_half_localDensity_of_card_eq_two_mul_add_one`, `hasProd_inv_half_localDensity_of_card_eq_two_mul_add_two` and the two `tprod_inv_half_localDensity_ne_zero_…` (the unconditional, nonzero products of `(α_p(L)/2)⁻¹` over `p ∤ 2 det L`, equal to `1` in rank 1, `∏_{i ≤ m} ζ^{(S)}(2i)` in rank `2m + 1` and `∏_{i ≤ m} ζ^{(S)}(2i)·L(m + 1, χ_L)` in rank `2m + 2 ≥ 4`) | `FromBlocks.lean`, `Diagonal.lean`, `Dyadic.lean`, `EulerProduct.lean` in `TauCeti/NumberTheory/IntegralLattice/LocalDensity/` | 3I, 7C |
 | `TauCeti.orthogonalGroupMeasure` (the Euclidean Haar measure of `O(n)`, built along the fibration over `S^{n−1}`), `orthogonalGroupVolume`, `specialOrthogonalGroupVolume`, `orthogonalGroupVolume_eq_two_mul_specialOrthogonalGroupVolume` (`n ≥ 1`), `orthogonalGroupVolume_eq_prod`, `specialOrthogonalGroupVolume_eq_prod` (`∏_{j=2}^{n} 2π^{j/2}/Γ(j/2)`), `two_mul_pi_rpow_mul_prod_Gamma_eq_two_pow_div_orthogonalGroupVolume` (the Gamma identity of the mass formula), `roundSphereVolume_eq_two_mul_pi_rpow_div_Gamma` (`|S^{j−1}| = 2π^{j/2}/Γ(j/2)`) | `TauCeti/Geometry/Euclidean/Volume/OrthogonalGroup.lean`, `Volume/Sphere.lean` | 7E |
+| `TauCeti.inducedRiemannianMetric` (the metric induced on `M` by a `C^(n+1)` map into an inner product space whose differential is injective at every point), `TauCeti.riemannianVolume` (the Riemannian measure of a manifold with a continuous Riemannian metric, chart volume weighted by the square root of the Gram determinant), `TauCeti.eq_riemannianVolume_iff` (its characterization chart by chart) | `TauCeti/Geometry/Manifold/Riemannian/Induced.lean`, `TauCeti/Geometry/Manifold/Riemannian/VolumeDensity/Volume.lean` | 7E |
 | `TauCeti.hilbertSymbol_productFormula` (Hilbert's product formula for the classical symbols of a number field), `TauCeti.ClassFieldTheory.hilbertProductFormula` (the cohomological form) | `TauCeti/NumberTheory/QuadraticForm/Global/ProductFormula.lean`, `TauCeti/NumberTheory/ClassFieldTheory/Global/Hilbert/Reciprocity.lean` | 3G, 5B, 6A |
 | `hasseInvariant`, `hilbertSymbol`, `localHasse`, `exists_of_realization`, `hilbertSymbol_eq_cohomological`, `equivalent_iff_finrank_eq_and_discr_eq_and_localHasse_eq`, `atFinitePlace`, `atRealPlace`, `locallyEquivalent_iff_finrank_eq_and_discr_eq_and_finiteHasse_eq_and_realPositiveIndex_eq` | `TauCeti/LinearAlgebra/QuadraticForm/RegularFormClass/Hasse/Basic.lean`, `TauCeti/NumberTheory/HilbertSymbol/Basic.lean`, `TauCeti/NumberTheory/LocalField/QuadraticForm/Hasse.lean`, `Realization.lean`, `Classification.lean`, `TauCeti/FieldTheory/GaloisCohomology/MuTwo/LocalSymbol.lean`, `TauCeti/NumberTheory/QuadraticForm/Global/Localization.lean`, `Classification.lean` | 0C, 3G, 3H, 5B, 6A |
 
 The labels 0A–0G, 1A–1F, 1J, 1K and 2A–2E name the native declarations in the rows above:
 the archived foundation roadmap and Tau Ceti own them, they are not targets here, and a later
 prerequisite row that cites one of these labels cites Tau Ceti. The milestones 1H, 1I, 1L,
-2F, 2G, 3A, 3B, 3C, 3F, 4A, 4E, 4F, 4G, 6B, 6C, 6D, 6G, 6H, 7A, 7G in ranks 0 and 1 and 9B are
+2F, 2G, 3A, 3B, 3C, 3F, 4A, 4E, 4F, 4G, 6B, 6C, 6D, 6F, 6G, 6H, 7A, 7G in ranks 0 and 1 and 9B are
 likewise native in the rows above, as are the relations and the odd-prime quadratic
 classification of 1G, the unimodular case of 3D, all of 3I but its dictionary to the 2-adic
 symbol, the stabilizer comparison of N0, the definition, stabilization, odd-prime values and
@@ -530,10 +532,10 @@ structure or carrier for it.
 
 | Consumer milestones | Supplier | Exact declaration or milestone | Contract |
 | --- | --- | --- | --- |
-| 3H, 4B, 5B, 6A | Global Quadratic Forms | `hasseMinkowski_equivalent`, `equivalent_of_locallyEquivalent` | global equivalence of rational quadratic spaces from local equivalence; the localizations and the local classification at the places are native |
-| B7 | Restricted Products | Layers 1–3 | the generic restricted products, compact open reference families and rational diagonals are native (§*From Tau Ceti*); Restricted Products is cited for its change-of-family and away-`S` statements. ⚠ Quotient measures and Tamagawa normalization are **not** exported by Restricted Products and are not cited here; the generic quotient integration and Tamagawa normalization are AdelicAlgebraicGroups Layer 2 (AA.2.3 rational quotients, AA.2.4 gauge forms and Tamagawa normalization), their orthogonal gauge is OTM §1.2, and they reach the lattice mass only through `OrthogonalTamagawaAndLatticeMass` |
+| 3H, 4B, 5B, 6A | Global Quadratic Forms | `hasseMinkowski_equivalent`, `equivalent_of_locallyEquivalent`; `exists_globalForm_of_isAdmissible` (5B) | global equivalence of rational quadratic spaces from local equivalence; the realization by a nondegenerate rational form of an admissible invariant record (rank, discriminant, finite Hasse invariants and real positive indices, subject to the Hasse product compatibility and the rank-one and rank-two constraints; Global Quadratic Forms 7.3); the localizations and the local classification at the places are native |
+| N0 | Restricted Products | Layers 1–3 | the generic restricted products, compact open reference families and rational diagonals are native (§*From Tau Ceti*), and B7 consumes them from there; Restricted Products is cited for its change-of-family and away-`S` statements. ⚠ Quotient measures and Tamagawa normalization are **not** exported by Restricted Products and are not cited here; the generic quotient integration and Tamagawa normalization are AdelicAlgebraicGroups Layer 2 (AA.2.3 rational quotients, AA.2.4 gauge forms and Tamagawa normalization), their orthogonal gauge is OTM §1.2, and they reach the lattice mass only through `OrthogonalTamagawaAndLatticeMass` |
+| 7E | Differential Geometry | 12.1, 12.4 | pullback metrics, and the bridge from the native `TauCeti.riemannianVolume` to Riemannian densities and their integrals (`integral_riemannianVolume_eq_integralDensity` there); no second Riemannian measure is defined |
 | 4B, 4C, 4F, B7 | Orthogonal and Spin Groups | 0C, 2C, 2F; `orthogonalBaseChangeReal`, `spinorNorm_reflection` | the bilinear/quadratic dictionary, the real base change and the spinor norm of a single reflection; the groups, the spinor norm of a pair of reflections, the `p`-adic base change, the transvection homomorphism and its Spin lift, the compact-open families and the finite adelic groups are native (§*From Tau Ceti*). ⚠ `strongApproximation_finiteAdelicSpin` and the orthogonal volume theorem are **not** exports of Orthogonal and Spin Groups and are not cited; its README states that only `OrthogonalTamagawaAndLatticeMass` may export them |
-| 6C, 6G | Root Systems | Layer 3 §3.1, the classification of irreducible root systems by Dynkin type, and `Nat.card P.weylGroup` | the rank-eight root system with the `E8` Cartan matrix is of type `E8` |
 
 `ThetaSeries` and `LFunctions` are **not** dependencies of this roadmap, and neither has a row
 above. Theta Series is a consumer: its `Suggested.lean` imports the native Tau Ceti carrier,
@@ -586,7 +588,7 @@ that OTM's Eichler theorem consumes, over the native class sets, stabilizers and
 and separates the rank-24 lattices, over the native definite classification in rank at most 9
 and the native rank-16 pair. Layer 7 records the native masses, local densities, Euler
 products and Euclidean volumes from which OTM assembles the mass formula, and proves the
-stabilizer-index and Conway–Sloane dictionaries of 7C, the rank-2 mass and the Riemannian
+Conway–Sloane dictionary of 7C, the rank-2 mass and the Riemannian
 comparison for the real factor. Layer 8 records what Theta Series takes, and Layer 9 records the native
 completeness of a list of classes from the mass.
 
@@ -935,10 +937,20 @@ determinant class alone for even lattices in `localIntegralForm_two_equivalent_i
 O'Meara 93:16). So is the reduction of the general case to a single train: two forms are
 isometric exactly when, on each side of a pair of consecutive constituents of type II, the sums
 of their constituents are (`IsJordanSplitting.equivalent_iff_equivalent_restrict_biSup_Iic_and_Ici`).
-The target is the general dyadic classification by O'Meara's fundamental invariants: for each
+So are the binary moves between two constituents over `ℤ₂`, on diagonal and plane Gram
+matrices: for units `a, b` and `k ≥ 1`, `⟨a, 2ᵏb⟩ ≅ ⟨a', 2ᵏb'⟩` exactly when `aba'b'` is a square
+and `a' ≡ a` or `a + 2ᵏb (mod 8)` (`equivalent_toBilin'_diagonal_two_pow_mul_iff`, which at
+`k = 1` moves oddity between adjacent constituents), `⟨a, 4b⟩ ≅ ⟨5a, 20b⟩`
+(`equivalent_toBilin'_diagonal_four_mul_five_mul`, sign walking across a gap of 4), constituents
+`2ᵏ` apart with `k ≥ 3` do not interact
+(`equivalent_toBilin'_diagonal_two_pow_mul_iff_of_three_le`), and a rank-one constituent next to
+an even plane may exchange `U` and `V` while multiplying its unit by 5, in both scale orders
+(`equivalent_toBilin'_unary_two_hyperbolic`, `equivalent_toBilin'_unary_two_anisotropic`,
+`equivalent_toBilin'_two_unary_hyperbolic`, `equivalent_toBilin'_two_unary_anisotropic`). The
+target is the general dyadic classification by O'Meara's fundamental invariants: for each
 constituent its scale, rank and type, together with the norm groups and weights (O'Meara §93,
-93:28 and 93:29). *Needs:* 3B; T the native unimodular classification and single-train
-reduction; the scale and norm ideals of 0D.
+93:28 and 93:29). *Needs:* 3B; T the native unimodular classification, single-train reduction
+and binary moves named above; the scale and norm ideals of 0D.
 
 **Checks.**
 
@@ -955,11 +967,32 @@ reduction; the scale and norm ideals of 0D.
 
 **3E. Conway–Sloane 2-adic symbols.** The symbol of a dyadic lattice, with the scale, rank,
 sign, type and oddity of each constituent, and with compartments and trains (Conway–Sloane,
-SPLAG Chapter 15, §7). The theorem is that two symbols describe isometric lattices exactly when
-sign walking and oddity fusion relate them, and the canonical form is the corrected one of
-Allcock–Gal–Mark (Theorems 6.2 and 6.3, p. 20, and Corollary 6.4, p. 21, there, which prove the
-canonical symbol a complete invariant, with Theorem 5.1, p. 16, for the unimodular constituents,
-which are determined by dimension, type, sign and oddity). *Needs:* 3D; 0D.
+SPLAG Chapter 15, §7). The moves themselves are not targets. Oddity fusion and the sign walks of
+2-adic symbols (Allcock–Gal–Mark, Lemma 5.2, pp. 17–18, and Lemma 6.1, p. 19) are assembled
+there from isometries of fine decompositions (their Lemmas 4.2 and 4.3, pp. 12–15), the Jordan
+constituents refined into rank-one terms and even planes, and each of those isometries changes
+terms of at most two scales: it is the orthogonal sum of an identity with one of the native
+binary moves of 3D, or with an isometry of terms of one scale, which the native unimodular
+classification over `ℤ₂` gives
+(`LinearMap.BilinForm.IsSymm.equivalent_iff_two_dvd_iff_and_isSquare_det_mul_det_and_eight_dvd`;
+Allcock–Gal–Mark, Theorem 5.1, p. 16: a unimodular lattice is determined by dimension, type,
+sign and oddity). So symbols related by the moves describe isometric lattices. The targets are
+the two remaining statements:
+
+- the converse: two lattices with Jordan decompositions are isometric only if their 2-adic
+  symbols are related by a sequence of sign walks, oddity fusion being built into the symbol
+  (Allcock–Gal–Mark, Theorem 6.2, p. 20, the "only if" half, through their Theorem 4.4 on fine
+  symbols, p. 15, proved in their §7);
+- the canonical form, the corrected one of Allcock–Gal–Mark: symbols with the same scales,
+  dimensions, types and signs describe isometric lattices exactly when they have the same
+  compartment oddities (Theorem 6.3, p. 20), so two lattices are isometric exactly when their
+  canonical symbols, with every minus sign walked to the smallest scale of its signway, are equal
+  (Corollary 6.4, p. 21).
+
+*Needs:* 3D, with T `equivalent_toBilin'_diagonal_two_pow_mul_iff`,
+`equivalent_toBilin'_diagonal_four_mul_five_mul`, the four mixed-type moves of 3D and
+`LinearMap.BilinForm.IsSymm.equivalent_iff_two_dvd_iff_and_isSquare_det_mul_det_and_eight_dvd`;
+0D.
 
 **Checks.**
 
@@ -1318,6 +1351,11 @@ Number Theory*, §5.2, states the correspondence for both signs (uncertified).
   sends both forms to `ℤ[√3]` and is not injective, the oriented one separates them.
 - `Δ = 1` (`U`, primitive part `xy`): the split branch, with the single proper class principal
   and no `NumberFieldOrder` involved.
+- `Δ = −4`, the sign transport: `⟨−1⟩ ⊕ ⟨−1⟩` has norm form `−x² − y²`, and `L ↦ L(−1)` sends it
+  to `⟨1⟩ ⊕ ⟨1⟩` with `x² + y²`, with the same determinant `1`, discriminant `−4`, content `1`
+  and automorphism group of order 8. There is one negative and one positive definite proper
+  class, matched by the transport; without the twist, `−x² − y²` is not in `PosDefProperClass`
+  and has no image under `posDefProperClassEquivPic`.
 
 **B3. Compatibility, the genus, and the ring class field.** In the nonsquare branch, the
 bijection of B2 — the oriented map, with its sign clause, for `Δ > 0` — carries Gauss
@@ -1335,13 +1373,61 @@ theorem for the order `𝒪_Δ`, proved here along the classical route. Write `C
 primitive part of its norm form, since the content is a genus invariant; two primitive forms of
 discriminant `Δ` are equivalent over `ℤ_p` for every `p ∤ 2Δ` (3C), and over the remaining
 `ℤ_p` exactly when the assigned characters of `p` (the Legendre symbol of a represented value
-prime to `p`, and at `2` the characters `δ` and `ε` where `Δ` calls for them) agree. These
-characters are multiplicative under composition, so they define a homomorphism from `C` to an
-elementary abelian `2`-group whose fibres are the genera and whose kernel, the principal genus,
-contains `C²`. The kernel is exactly `C²` because the number of genera, the size of the image,
-which quadratic reciprocity computes, equals `[C : C²] = #C[2]`, the number of ambiguous classes,
-which are counted through the ambiguous forms of B4. *Needs:* 3C, 3F; the native dictionary,
-composition laws and ambiguous-class criterion above.
+prime to `p`, and at `2` the characters `δ(m) = (−1)^{(m−1)/2}` and `ε(m) = (−1)^{(m²−1)/8}`
+where `Δ` calls for them) agree. These characters are multiplicative under composition, so they
+define a homomorphism `Φ : C → {±1}^μ`, `μ` being the number of assigned characters of `Δ`,
+whose fibres are the genera and whose kernel, the principal genus, contains `C²`. That the kernel
+is exactly `C²` is proved in three steps.
+
+1. *At most `2^{μ−1}` genera.* Write `Δ = Δ₀ f_Δ²` with `Δ₀` a fundamental discriminant. On
+   integers `m` prime to `2Δ` the Kronecker character `m ↦ (Δ | m)` equals `(Δ₀ | m)`, and by
+   quadratic reciprocity for the Jacobi symbol it is the product of the characters of the prime
+   discriminants dividing `Δ₀`, each of which is an assigned character of `Δ` or, at `2`, a
+   product of assigned ones: all of them when `Δ` is fundamental, a proper subset in general. It
+   is nontrivial because `Δ` is not a square, and it is `1` at every value prime to `2Δ` of a
+   form of discriminant `Δ`. So the image of `Φ` lies in a subgroup of index 2.
+2. *Every tuple of that subgroup occurs.* The assigned characters are independent characters of
+   `(ℤ/4|Δ|ℤ)ˣ`, so a tuple `t` of the subgroup is their value at some class `a` prime to `4Δ`,
+   and Dirichlet's theorem on primes in arithmetic progressions gives a prime `q ≡ a (mod 4|Δ|)`.
+   Then `(Δ | q) = 1`, so some `b` has `b² ≡ Δ (mod 4q)`, and the form
+   `(q, b, (b² − Δ)/4q)`, primitive because `q ∤ b`, has discriminant `Δ`, represents `q`, and
+   has character tuple `t`. So there are exactly `2^{μ−1}` genera.
+3. *`[C : C²] = 2^{μ−1}`.* In the finite abelian group `C`, `[C : C²] = #C[2]`, and `#C[2]` is the
+   number of ambiguous classes (B4); Gauss's count of the ambiguous forms of discriminant `Δ`,
+   proved as a step of this milestone, gives `2^{μ−1}`. With step 2,
+   `[C : ker Φ] = 2^{μ−1} = [C : C²]`, and `C² ⊆ ker Φ` gives `ker Φ = C²`.
+
+For `Δ < 0` this is Cox, *Primes of the form x² + ny²*, §3.B, Theorem 3.15 (uncertified). For a
+fundamental `Δ`, where `𝒪_Δ` is the maximal order of `ℚ(√Δ)`
+(`TauCeti.QuadraticOrder.numberFieldOrder_eq_maximal_iff`), the ideal-theoretic statement is
+native in both signs on Tau Ceti's `NarrowClassGroup`: the principal genus theorem
+`isSquare_iff_forall_genusCharFunNarrowClassGroupHom_eq_one`, steps 1 and 2 as
+`mem_range_genusCharFunElementaryTwoQuotientFamilyLinearMap_iff` (whose existence half,
+`exists_genusCharFunElementaryTwoQuotientFamilyLinearMap_eq`, is the Dirichlet input), and step 3
+as `natCard_narrowClassGroup_sq_eq_one_eq_two_pow` (`#C[2] = 2^{t−1}`, `t` the number of
+ramified primes, which is `μ` for a fundamental discriminant). For such `Δ` the milestone is the
+comparison, through `maximalOrderNarrowPicEquiv`, of the genus of 3F and of B2's `NarrowPic` of
+the maximal order with these genus characters; it extends them to the non-maximal orders and to
+the genus of 3F, which the native statements do not see. *Needs:* 3C, 3F, B4; the native
+dictionary, composition laws and ambiguous-class criterion above; Mathlib
+`jacobiSym.quadratic_reciprocity` (step 1) and `Nat.forall_exists_prime_gt_and_eq_mod` (step 2);
+for fundamental `Δ`, T `isSquare_iff_forall_genusCharFunNarrowClassGroupHom_eq_one`,
+`mem_range_genusCharFunElementaryTwoQuotientFamilyLinearMap_iff`,
+`natCard_narrowClassGroup_sq_eq_one_eq_two_pow` and `maximalOrderNarrowPicEquiv`.
+
+**Checks (nonsquare branch).**
+
+- `Δ = −20`: the reduced forms are `(1, 0, 5)` and `(2, 2, 3)`, so `C ≅ ℤ/2` and `C² = 1`. The
+  assigned characters are `χ₅` and `δ` (`μ = 2`); `(1, 0, 5)` represents `1`, of tuple `(+, +)`,
+  and `(2, 2, 3)` represents `3`, of tuple `(−, −)`, since `(3 | 5) = −1` and `3 ≡ 3 (mod 4)`. So
+  there are two genera of one class each and the principal genus is `C²`. Step 1 alone bounds the
+  genera by 2; the second genus is exhibited only by an actual form, or by a prime
+  `q ≡ 3, 7 (mod 20)` as in step 2.
+- `Δ = −36` (`Δ₀ = −4`, `f_Δ = 3`): the reduced forms are `(1, 0, 9)` and `(2, 2, 5)`, the
+  assigned characters are `χ₃` and `δ`, and `(2, 2, 5)` represents `5`, of tuple `(−, +)`. The
+  image of `Φ` is `{δ = +}`, the kernel of the Kronecker character `(−36 | ·) = δ`, and not the
+  subgroup of tuples of product one, which would contain `(−, −)` instead; a step 1 stated with
+  the product of all assigned characters fails here, while `ker Φ = 1 = C²` holds.
 
 In the square branch the same comparison is a separate theorem about the split classes of B2,
 stated with the conductor. Let `Δ = m²` with `m > 0`, so that `𝒪_Δ` is the split order
@@ -1432,8 +1518,11 @@ Ceti proves (Cox, Theorem 3.9, p. 50, uncertified, for the form side;
 
 the class being taken in the consumed `Pic 𝒪_Δ` for `Δ < 0` and in the consumed `NarrowPic 𝒪_Δ`
 for `Δ > 0`.
-A nonsquare class satisfying this is called ambiguous, and an improper automorphism is then obtained
-by composing the reflection `σ(x, y) = (x, −y)`, which carries `f` to `f⁻`, with any proper
+A proper class whose form is properly equivalent to its opposite `f⁻`, equivalently with
+`[O(L) : SO(L)] = 2`, is called ambiguous, in both branches; in the nonsquare-discriminant branch
+the ambiguous classes are exactly the classes of order at most 2 in the consumed group, the
+principal class among them. An improper automorphism of an ambiguous class is obtained by
+composing the reflection `σ(x, y) = (x, −y)`, which carries `f` to `f⁻`, with any proper
 equivalence from `f⁻` back to `f`.
 
 The witness for the other case is `!![4, 1; 1, 6]`, of determinant 23, whose norm form is
@@ -1475,12 +1564,51 @@ unique reduced form, `|b| ≤ a ≤ c` with `b ≥ 0` when `|b| = a` or `a = c` 
 p. 27, and Theorem 2.13, p. 29; `posDefProperClass_mk_primitiveReducedForms_bijective` on Tau
 Ceti's `primitiveReducedForms`), and the ideals of the primitive reduced forms enumerate
 `Pic 𝒪_Δ` (`picClass_primitiveReducedForms_bijective`, `nat_card_pic`). For every nonzero `Δ`,
-finitely many forms meet every proper class (`exists_finset_forall_exists_smul_mem`: Lagrange
-reduced forms `lagrangeReducedForms` for nonsquare `Δ`, triangular forms for square `Δ`). The
-target of this milestone is the `Δ > 0` structure: the reduced forms fall into finitely many
-cycles under the continued-fraction step (Cohen, §5.6), which gives an explicit finite list of
-classes for each `Δ > 0`, and B2 transports the count to `NarrowPic 𝒪_Δ`. *Needs:* the native
-Lagrange reduction and B2's native narrow dictionary. For square `Δ = m²` the class count is
+finitely many forms meet every proper class (`exists_finset_forall_exists_smul_mem`: the
+Lagrange reduced forms `lagrangeReducedForms`, those with `|b| ≤ |a| ≤ |c|`, for nonsquare `Δ`,
+triangular forms for square `Δ`). For `Δ > 0` a proper class can contain several Lagrange reduced
+forms, so this set meets the classes without counting them.
+
+The target of this milestone is the count for nonsquare `Δ > 0`, through Gauss's cycles of
+reduced indefinite forms. Call a form `(a, b, c)` of discriminant `Δ` **reduced** when
+`0 < b < √Δ` and `√Δ − b < 2|a| < √Δ + b`. Then `ac < 0` (since `b² < Δ = b² − 4ac`), and from
+`4|a||c| = Δ − b²` also `√Δ − b < 2|c| < √Δ + b`, so `|a|, |c| < √Δ` and the reduced forms of
+discriminant `Δ` are finitely many. The **reduction step** is
+`ρ(a, b, c) = (c, r, (r² − Δ)/4c)`, where `r ≡ −b (mod 2|c|)` is taken in the open interval
+`(√Δ − 2|c|, √Δ)` when `|c| < √Δ` and in `(−|c|, |c|]` when `|c| > √Δ`; `c ≠ 0` and `|c| ≠ √Δ`
+because `Δ` is not a square, and each interval has length `2|c|` with irrational or half-open
+ends, so `r` is unique. With `r = 2cs − b`, `ρ(f)` is `f` after the substitution `x = −Y`,
+`y = X + sY` of determinant 1, so it is properly equivalent to `f`, of discriminant `Δ` and of the
+same content. Prove, for nonsquare `Δ > 0`:
+
+- `ρ` carries reduced forms to reduced forms and permutes the finite set of primitive reduced
+  forms of discriminant `Δ`;
+- from every primitive form of discriminant `Δ` finitely many steps of `ρ` reach a reduced form,
+  so every proper class contains one;
+- two primitive reduced forms are properly equivalent exactly when they lie in one `ρ`-cycle
+  (Cohen, §5.6, uncertified).
+
+Hence the `ρ`-cycles of primitive reduced forms of discriminant `Δ` are in bijection with the
+proper classes of primitive forms of discriminant `Δ`, and through B2's native
+`properClassEquivNarrowPic` with `NarrowPic 𝒪_Δ`. A statement that the reduced forms fall into
+finitely many cycles, without the third item, says nothing: every permutation of a finite set has
+finitely many cycles. *Needs:* the native `exists_finset_forall_exists_smul_mem`, for finiteness
+only; T `properClassEquivNarrowPic` for the transport. The reduction step and the three
+statements above are proved here.
+
+**Checks (indefinite reduction).**
+
+- `Δ = 12`: the primitive reduced forms are `(1, 2, −2)`, `(−2, 2, 1)`, `(−1, 2, 2)` and
+  `(2, 2, −1)`, and `ρ` exchanges the first two and the last two (for `(1, 2, −2)`, `c = −2`,
+  `r ≡ 2 (mod 4)` in `(√12 − 4, √12)` gives `r = 2` and `ρ = (−2, 2, 1)`). Two cycles, the classes
+  of `x² − 3y²` and `−x² + 3y²`, matching `#NarrowPic ℤ[√3] = 2` of B2. The Lagrange reduced forms
+  `(1, 0, −3)` and `(−1, 0, 3)` are not reduced (`b = 0`), and `ρ(1, 0, −3) = (−3, 0, 1)` is not
+  Lagrange reduced: a cycle statement made on the Lagrange reduced forms is false, the two sets
+  being disjoint.
+- `Δ = 8`: the primitive reduced forms are `(1, 2, −1)` and `(−1, 2, 1)`, and `ρ` exchanges them:
+  one cycle, matching `NarrowPic ℤ[√2] = 1`, since the fundamental unit `1 + √2` has norm `−1`.
+
+For square `Δ = m²` the class count is
 native and uses neither supplier finiteness theorem: it is `φ(m)`, with the representatives
 `(0, m, c)` of B3's split branch (`splitProperClassEquivUnits`). This is the count of all proper
 classes of discriminant `m²`; the count in one genus is B3's `#((ℤ/mℤ)ˣ)²`.
@@ -1565,6 +1693,10 @@ branch, and the two branches are different theorems:
   `T_L(ℝ)⁰ ≅ ℝ_{>0}` is the split real direction. The anisotropic covolume statement is never
   applied to this branch, and `U`, with `Δ = 1`, is its mandatory test.
 
+*Needs:* B3 for the base of the fibration, B4, B5, B6; T `RestrictedProductGroup`,
+`CompactOpenSubgroups`, `integralSubgroup`, `isCompact_integralSubgroup`, `rationalDiagonal`;
+M `MeasureTheory.Measure.haar`.
+
 **Checks.**
 
 - `x² + y²` (`Δ = −4`): `vol(T_L(ℝ)) = 2π` in `|dθ|`, `T_L(ℤ)` has order `w = 4`, and `C_L` is
@@ -1627,11 +1759,11 @@ two documents cannot drift apart on the rank-2 constant.
 | --- | --- |
 | B1 | native (`binaryNormForm`, `binaryContent`, `binaryDiscriminant`, `binaryProperClass`, `binaryOrder`, `binaryNumberFieldOrder`, `binaryOrderEquivProductOfSq`); no prerequisites here |
 | B2 | T `scale`, `binaryProperClass`, `posDefProperClassEquivPic`, `properClassEquivNarrowPic`, `SplitProperClass`, `splitProperClassEquivUnits`; L B1 |
-| B3 | T `posDefProperClassToPic_mk_mul_of_united`, `properClassToNarrowPic_mk_mul_of_united`, `exists_smul_splitTriangularForm_eq_iff`, `splitProperClassEquivUnits`, `ringClassArtinEquiv`, `posDefProperClassEquivGal`; L 3F, B2 for the genus; L B6 for the split torus quotient; no split ring class field, and none is formable |
+| B3 | T `posDefProperClassToPic_mk_mul_of_united`, `properClassToNarrowPic_mk_mul_of_united`, `exists_smul_splitTriangularForm_eq_iff`, `splitProperClassEquivUnits`, `ringClassArtinEquiv`, `posDefProperClassEquivGal`; for fundamental `Δ` also T `isSquare_iff_forall_genusCharFunNarrowClassGroupHom_eq_one`, `mem_range_genusCharFunElementaryTwoQuotientFamilyLinearMap_iff`, `natCard_narrowClassGroup_sq_eq_one_eq_two_pow`, `maximalOrderNarrowPicEquiv`; M `jacobiSym.quadratic_reciprocity`, `Nat.forall_exists_prime_gt_and_eq_mod` (the bound and the realization of the genus characters); L 3C, 3F, B2, B4 for the genus, with Gauss's ambiguous-form count proved in B3; L B6 for the split torus quotient; no split ring class field, and none is formable |
 | B4 | native (`specialOrthogonalGroupEquivNormOneUnits`, `index_specialOrthogonalGroup_eq_two_iff_reflected`, `IsPosDef.index_specialOrthogonalGroup_eq_two_iff_picClass_sq_eq_one`, `index_specialOrthogonalGroup_eq_two_iff_narrowPicClass_sq_eq_one`); no prerequisites here |
-| B5 | T `posDefProperClass_mk_primitiveReducedForms_bijective`, `picClass_primitiveReducedForms_bijective`, `lagrangeReducedForms`, `exists_finset_forall_exists_smul_mem`, `splitProperClassEquivUnits`, `finite_pic`, `NumberFieldOrder.finite_narrowPic`; L B2 for the cycles of indefinite reduced forms |
+| B5 | T `posDefProperClass_mk_primitiveReducedForms_bijective`, `picClass_primitiveReducedForms_bijective`, `lagrangeReducedForms`, `exists_finset_forall_exists_smul_mem`, `splitProperClassEquivUnits`, `finite_pic`, `NumberFieldOrder.finite_narrowPic`, `properClassEquivNarrowPic` (the transport of the cycle count to `NarrowPic`); L B2; the reduction step `ρ` and the cycle theorem of indefinite reduced forms are proved in B5 |
 | B6 | M `ℤ_[p]`, `ℚ_[p]`, `LinearMap.BilinForm.baseChange`; L 3A, B4 |
-| B7 | M `MeasureTheory.Measure.haar`; L B4, B5, B6; R Restricted Products `RestrictedProductGroup`, `CompactOpenSubgroups`, `integralSubgroup`, `isCompact_integralSubgroup`, `rationalDiagonal` |
+| B7 | M `MeasureTheory.Measure.haar`; T `RestrictedProductGroup`, `CompactOpenSubgroups`, `integralSubgroup`, `isCompact_integralSubgroup`, `rationalDiagonal`; L B3, B4, B5, B6 |
 | B8 | T `properMass`, `properMass_eq_two_mul_mass`, `card_specialOrthogonalGroup_of_binaryDiscriminant_neg`, `SameGenus.determinant_eq`, `IsPosDef.finite_genusClasses`; L B1 |
 
 ## Layer 4: classes, spinor genera, and neighbors
@@ -1677,6 +1809,20 @@ almost every `p`, the intersection `M = V ∩ ⋂_p M_p` is a full finite free l
 exceptional coordinates (O'Meara 81:14). *Needs:* 3A; T `localizationToCompletion`,
 `localStabilizer`, `orthogonalCompactOpens`; Restricted Products Layers 1–3.
 
+N0 also owns the improper element of a local stabilizer, which 4B and 7C use. For a
+nondegenerate `L` of positive rank and every prime `p`, `p = 2` included, `K_p(L)` contains an
+element of determinant `−1`, so `[K_p(L) : K_p⁺(L)] = 2`; in rank 0, `K_p(L) = {1}` and the index
+is 1. Choose `v ∈ L_p` whose norm `β(v, v)` generates the norm ideal `𝔫(L_p)` of 0D: the norms
+span `𝔫(L_p)`, which is nonzero because a nondegenerate symmetric form over `ℚ_p` of positive rank
+is not alternating, and over the discrete valuation ring `ℤ_p` a norm of least valuation
+generates it. The reflection `s_v(x) = x − (2β(x, v)/β(v, v))·v` has determinant `−1` and
+preserves `L_p`, because `2β(x, v) ∈ 2𝔰(L_p) ⊆ 𝔫(L_p) = β(v, v)ℤ_p`, the inclusion coming from
+`2β(x, y) = β(x + y, x + y) − β(x, x) − β(y, y)`. This is proved here. When `Q(v) = β(v, v)/2` is
+a `p`-adic unit it is Tau Ceti's `reflectionOrthogonal_mem_integralOrthogonalSubgroup`, whose
+unit-norm hypothesis fails for `⟨3⟩` at `3` and for `⟨1⟩` and `⟨4⟩` at `2`, where no vector has
+`Q(v)` a unit. *Needs:* 0D; T `localStabilizer_eq_integralOrthogonalSubgroup`,
+`reflectionOrthogonal_mem_integralOrthogonalSubgroup` for the unit-norm case.
+
 **Checks.**
 
 - `⟨1⟩`: `O(V_p) = {±1}` and `K_p(L)` is all of it at every `p`; `K_p⁺(L)` is trivial.
@@ -1690,6 +1836,19 @@ exceptional coordinates (O'Meara 81:14). *Needs:* 3A; T `localizationToCompletio
   (basis `(3/5, −4/5)`, `(−4/5, −3/5)`), `M_p = L_p` otherwise, the intersection is that
   neighbour: full, of determinant 1, not equal to `L` (`(3/5, −4/5) ∉ ℤ²`), with
   `[L : L ∩ M] = 5`.
+- Improper element, `⟨4⟩` at `2`: `𝔫(L_2) = 4ℤ₂`, `v = e`, and `s_e = −1 ∈ K_2(L)` has
+  determinant `−1`, although `Q(e) = 2` is not a unit and the native unit-norm lemma does not
+  apply.
+- Improper element, `U` at `2`: every norm `β(v, v) = 2ab` is even, so no vector has unit norm
+  `β(v, v)`; `v = e + f` has norm `2`, which generates `𝔫(U_2) = 2ℤ₂`, and `s_v(e) = −f`,
+  `s_v(f) = −e`, an integral isometry of determinant `−1`. The primitive vector `e` has norm 0 and
+  gives no reflection, so the choice of `v` matters. Here `Q(v) = 1` is a unit, so this instance
+  is native.
+- Improper element, `⟨1⟩ ⊕ ⟨2⟩` at `3`: `𝔫 = ℤ₃`, and the reflection in `e₁`, of norm 1,
+  preserves `L_3`, while the reflection in `e₁ + e₂`, of norm 3, which does not generate `𝔫`,
+  sends `e₁` to `e₁ − (2/3)(e₁ + e₂) ∉ L_3`.
+- Improper element, rank 0: `K_p(L) = {1}` contains no element of determinant `−1` and
+  `[K_p(L) : K_p⁺(L)] = 1`, so the positive-rank hypothesis cannot be dropped.
 
 ### N1. Local integral spinor images
 
@@ -1720,9 +1879,15 @@ the finiteness statement of 4C. *Needs:* 3C–3E, N0; T `localSpinorNormImage` a
 
 **Checks.**
 
-- `p` odd, `L_p` unimodular of rank `≥ 2`: `H_p(L) = ℤ_pˣ(ℚ_pˣ)²`, of order 2, the native value; a
-  definition through the full group `SO(V_p)` would give all of `ℚ_pˣ/(ℚ_pˣ)²`, of order 4, and
-  lose the integral constraint.
+- `p` odd, `L_p` unimodular of rank `≥ 2`: `H_p(L) = ℤ_pˣ(ℚ_pˣ)²`, of order 2, the native value.
+  When `V_p` has rank `≥ 3`, or is an isotropic plane, a definition through the full group
+  `SO(V_p)` would give all of `ℚ_pˣ/(ℚ_pˣ)²`, of order 4, and lose the integral constraint: for
+  `⟨1⟩ ⊕ ⟨−1⟩` at any odd `p`, `SO(V_p) ≅ ℚ_pˣ` has spinor norms of every square class, and so
+  does `SO(V_3)` for `⟨1⟩³` at `p = 3`.
+- `⟨1⟩ ⊕ ⟨1⟩` at `p = 3`, where the two definitions agree: `V_3` is anisotropic, `SO(V_3)` is the
+  norm-one torus of the unramified `ℚ₃(i)`, and its spinor norms, the norms from `ℚ₃(i)`, are the
+  classes of even valuation, `{1, 2}·(ℚ₃ˣ)²`, of order 2, which is `H_3(L)`. A binary anisotropic
+  example of this kind does not separate `H_p(L)` from `θ(SO(V_p))`.
 - `L = ⟨1⟩ ⊕ ⟨1⟩` at `p = 2`: `K_2⁺(L)` is the rotation group of the Gaussian lattice and
   `H_2(L)` is the norm group of `ℚ₂(i)` modulo squares, `{1, 2, 5, 10}·(ℚ₂ˣ)²`, of index 2 in
   `ℚ₂ˣ/(ℚ₂ˣ)²`.
@@ -1804,9 +1969,9 @@ such a representative `M` and such an adele `g`, by the route below. The route: 
 `g_p ∈ O(V_p)` with `g_p L_p = M_p`, with `g_p = 1` wherever `M_p = L_p`; the double coset of
 `(g_p)` does not depend on the choices and on the representative of the class, and conversely an
 adele determines `M = V ∩ ⋂_p g_p L_p` by N0's reconstruction, in the genus of `L` (O'Meara
-§§101–102). In positive rank every `K_p(L)` contains an element of determinant `−1` (a reflection
-in a vector of least valuation), so the `g_p` can be taken in `SO(V_p)`, which gives the proper
-version. Tau Ceti's `SameGenus.exists_isometry` transports a lattice in the genus of `L` from any
+§§101–102). In positive rank every `K_p(L)` contains an element of determinant `−1` (N0: the
+reflection in a vector of `L_p` whose norm generates `𝔫(L_p)`), so the `g_p` can be taken in
+`SO(V_p)`, which gives the proper version. Tau Ceti's `SameGenus.exists_isometry` transports a lattice in the genus of `L` from any
 ambient space to a lattice on `V`, but with the transported form, not with `B_L`; the
 representative on `(V, B_L)` that the route needs is 3H together with Global Quadratic Forms
 `hasseMinkowski_equivalent`, followed in positive rank by a reflection of `(V, B_L)` when a proper
@@ -2017,7 +2182,7 @@ classes from neighbor steps.
 | 4A | native (`isometryClass`, `properIsometryClass`, `genusClasses`, `classNumber`, `properClassNumber`, `properClassNumber_add_card_eq_two_mul_classNumber`); L 4C for `spn`; L B2, B5 for the binary counts |
 | 4B | T `SameGenus`, `genusClasses`, `genusProperClasses`, `SameGenus.exists_isometry`, `localStabilizer`, `orthogonalCompactOpens`, `finiteAdelicOrthogonalDiagonal`, `finiteAdelicOrthogonalDoubleCoset`, `finiteAdelicSpecialOrthogonalDoubleCoset`, `integralSubgroup`; M `DoubleCoset.Quotient`; L 3A, 3H, N0; R Orthogonal and Spin Groups 0C; R Global Quadratic Forms `hasseMinkowski_equivalent` |
 | 4C | T `squareClass`, `localSpinorNormImage`, `adelicSpinorNorm`, `finiteAdelicSquareClasses`; L 3C, 3D, 4B, N1; rank 2 also L B2, B3, B6; R Orthogonal and Spin Groups Layers 1 and 2 |
-| N0 | T `integralOrthogonalSubgroup`, `OrthogonalCompactOpens.integral`, `localizationToCompletion`, `localStabilizer`, `localStabilizer_eq_integralOrthogonalSubgroup`, `orthogonalCompactOpens`; L 3A; R Restricted Products Layers 1--3 |
+| N0 | T `integralOrthogonalSubgroup`, `OrthogonalCompactOpens.integral`, `localizationToCompletion`, `localStabilizer`, `localStabilizer_eq_integralOrthogonalSubgroup`, `orthogonalCompactOpens`, `reflectionOrthogonal_mem_integralOrthogonalSubgroup`; L 0D (the norm ideal, for the improper element), 3A; R Restricted Products Layers 1--3 |
 | N1 | T `localSpinorNormImage`, `eventually_localSpinorNormImage_integral_eq_unitSquareClasses`, `map_spinorNorm_comap_integralOrthogonalSubgroup_eq_unitSquareClasses`, `spinorNorm`, `spinorNorm_reflectionPairSpecialOrthogonal`; L 3C, 3D, 3E, N0 |
 | 4E, rank 2 | native (`finite_genusClasses_of_finrank_eq_two`); no prerequisites here |
 | 4F | native (`infinite_isometry_of_isIndefinite`); no prerequisites here |
@@ -2047,7 +2212,8 @@ conditions of `NikulinExistenceConditions` necessary, from the completions, the 
 Milgram's theorem 1I. For sufficiency construct local Jordan lattices of rank `t₊ + t₋` with the
 prescribed discriminant forms, enforcing both equality-case determinant clauses; choose the real
 signature; convert the local invariants into a rational global form with the realization theorem
-of Global Quadratic Forms and the native Hilbert product formula `hilbertSymbol_productFormula`;
+of Global Quadratic Forms (`exists_globalForm_of_isAdmissible`) and the native Hilbert product
+formula `hilbertSymbol_productFormula`;
 and produce the integral lattice and its discriminant-form isometry by the adelic
 reconstruction of N0.
 
@@ -2122,7 +2288,8 @@ decomposition of `q` (`FiniteQuadraticModule.NikulinDecomposition.padicDiscrimin
 realizations are `⟨θ·p^k⟩` for `q_θ^{(p)}(p^k)`, `⟨θ·2^k⟩` for `q_θ^{(2)}(2^k)`, `2^k·U` of
 determinant `−4^k` for `u^{(2)}(2^k)` and `2^k·!![2,1;1,2]` of determinant `3·4^k` for
 `v^{(2)}(2^k)`, and `discr K(q_p)` is the square class of the product over the `p`-primary
-generators. It states the choice-independence with the
+generators, those whose `NikulinGenerator.prime`, the prime at which a generator is primary, is
+`p`. It states the choice-independence with the
 exception in its hypothesis (`padicDiscriminant_eq_squareClass_gramDet`); the pair `⟨2⟩`, `⟨10⟩`
 above is the Check that refutes a version claiming unconditional independence.
 The ratio in conditions 3 and 4 is a `p`-adic unit because `A_{K(q_p)} ≅ q_p` forces
@@ -2273,7 +2440,7 @@ predicates and with no local copy of either. Conditions 4 to 7 are boundary clau
 | Milestone | Direct prerequisites |
 | --- | --- |
 | 5A | T `SameGenus`, `SameGenus.nonempty_isometry_discriminantQuadraticModule`, `SameGenus.nonempty_isometry_discriminantBilinearModule`, `sameGenus_iff_of_isUnimodular`; L 1D, 1G, 3E |
-| 5B | L 1G, 1H, 3C, 3D, 5A |
+| 5B | T `hilbertSymbol_productFormula`; L 1G, 1H, 1I, 3C, 3D, 5A, N0 (the adelic reconstruction); R Global Quadratic Forms `exists_globalForm_of_isAdmissible` |
 | 5F | M `Submodule.basisOfPid`, `IsCompl` |
 | 5G | L 1E, 1F, 5B, 5F |
 | 5I | L 1F, 5G |
@@ -2431,11 +2598,14 @@ declarations of §*From Tau Ceti*.
   24, so they lie in one genus (5A) and no genus invariant separates them; the shell of norm 2
   does, with minimum 4 against 2.
 
-**6F. Two models of `E₈`.** The Gram matrix model of 0G and the coordinate model
-`{x ∈ ℤ⁸ ∪ (ℤ+½)⁸ : ∑ x ∈ 2ℤ}` are isometric (Serre V.1.4.3; Conway–Sloane, SPLAG Chapter 4).
-The proof gives Tau Ceti one `E₈` and one isometry, rather than two unrelated lattices; the native
-`typeE₈IsometryD8Plus` is that isometry for the spinor coset of `D₈`, and the milestone identifies
-the coordinate model above with `D₈⁺`. *Needs:* 0G, 1K, 2B.
+**6F. Two models of `E₈` (native).** The Gram matrix model of 0G and the coordinate model
+`{x ∈ ℤ⁸ ∪ (ℤ+½)⁸ : ∑ x ∈ 2ℤ}` are isometric (Serre V.1.4.3; Conway–Sloane, SPLAG Chapter 4),
+so Tau Ceti has one `E₈` and one isometry rather than two unrelated lattices. Both halves are
+native: `typeE₈IsometryD8Plus` is an isometry from `typeE₈RootLattice` onto
+`checkerboardPlusLattice 8`, and `mem_checkerboardPlusCarrier_iff` describes `D₈⁺` as
+`D₈ ∪ (h + D₈)` with `h = (½, …, ½)`. That union is the coordinate model:
+`D₈ = {x ∈ ℤ⁸ : ∑ x ∈ 2ℤ}`, and `h + D₈ = {x ∈ (ℤ+½)⁸ : ∑ x ∈ 2ℤ}` because `∑ h = 4`, so
+`∑ (h + d) = 4 + ∑ d`. Nothing is a target here.
 
 **Checks.**
 
@@ -2446,6 +2616,10 @@ the coordinate model above with `D₈⁺`. *Needs:* 0G, 1K, 2B.
   `E₈` by a sign change; the odd coset `e₁ + D₈` gives `ℤ⁸ = I₈`, which is not `E₈`, so the
   choice of coset is part of the definition.
 - `D₈` itself is not unimodular and has only 112 roots.
+- The coset identity: `∑ (h + d) = 4 + ∑ d`, so `h` (sum 4) and `h + e₁ − e₂` (sum 4) lie in the
+  coordinate model, while `h + e₁`, with `e₁ ∉ D₈`, has sum 5 and does not; a model written with
+  `∑ x ∈ ℤ` in place of `∑ x ∈ 2ℤ` would be `ℤ⁸ ∪ (h + ℤ⁸) = D₈*`, the union of all four cosets
+  of `D₈`, which is not integral (`β(h, h + e₁) = 5/2`).
 
 **6G. The order of `O(E₈)` (native).** Reflections in the 240 roots of `E₈` generate `O(E₈)`, and
 `−1` lies in that group, so `O(E₈) = W(E₈)`. The order is computed by orbits and
@@ -2503,7 +2677,7 @@ and 240 roots; `U³ ⊕ E₈(−1)²` is the K3 lattice `Λ_{K3}` of signature `
 | 6C | native (`IsPosDef.nonempty_isometry_of_isUnimodular_of_finrank_le_nine`, `IsPosDef.nonempty_isometry_typeE₈RootLattice_of_isEven`); no prerequisites here |
 | 6D | native (`sameGenus_e8PowLattice_checkerboardPlusLattice`, `isEmpty_isometry_e8PowLattice_checkerboardPlusLattice`); no prerequisites here |
 | 6E | T `Isometry.map_span_vectorsOfNorm`, `RootfulNiemeierType.lattice`, `RootfulNiemeierType.components_multiset_injective`, `leechLattice`, `vectorsOfNorm_two_leechLattice`; the native rows 0F, 0G, 2B |
-| 6F | L 0G, 2B |
+| 6F | native (`typeE₈IsometryD8Plus`, `mem_checkerboardPlusCarrier_iff`); no prerequisites here |
 | 6G | native (`card_isometry_typeE₈RootLattice`); no prerequisites here |
 | 6H | native (`nonempty_isometry_orthogonalSum_hyperbolicPlane_e8PowLattice`, `not_forall_nonempty_isometry_of_orthogonalSum`); no prerequisites here |
 
@@ -2644,7 +2818,7 @@ the mass `1/696729600` of the genus of `E₈` (7A), the local density with its s
 every prime, its values at odd `p` from the Jordan form, its dyadic values for `⟨1⟩`, `⟨2⟩` and
 `U`, and the convergent Euler products of its normalized good-prime factors outside rank 2 (7C),
 the Euclidean real factor (7E) and the low-rank values (7G), together with the dyadic Jordan data
-and exponents of 3I. Its targets are the stabilizer-index and Conway–Sloane dictionaries of 7C,
+and exponents of 3I. Its targets are the Conway–Sloane dictionary of 7C,
 the Riemannian comparison of 7E and the rank-2 mass of 7G through B8. None of them uses an adelic
 volume or a group scheme.
 
@@ -2690,8 +2864,8 @@ records:
   (`tendsto_localDensityCount_div_of_det_ne_zero`) and is a positive rational number;
 - independence of the basis (native, `localDensity_transpose_mul_mul`), hence dependence only on
   the isometry class of `L_p`;
-- `[K_p(L) : K_p⁺(L)] = 2` exactly when `K_p(L)` contains an element of determinant `−1`.
-  The comparison with a Haar volume is OTM's separate local-model/gauge theorem. It must
+- `[K_p(L) : K_p⁺(L)] = 2` at every `p` when `rank L ≥ 1`, and `1` in rank 0, by the improper
+  element of N0, which is where it is proved. The comparison with a Haar volume is OTM's separate local-model/gauge theorem. It must
   specify O versus SO, `B` versus `B/2`, the integral model, conductor and all density factors;
   the raw count does not itself assert an unscaled Tamagawa-volume identity;
 - the unramified value (native, `tendsto_localDensityCount_div_of_card_eq_two_mul_add_one` and
@@ -2766,10 +2940,10 @@ nonzero products (`hasProd_inv_half_localDensity_of_card_eq_one`,
 `hasProd_inv_half_localDensity_of_card_eq_two_mul_add_one`,
 `hasProd_inv_half_localDensity_of_card_eq_two_mul_add_two` and the two
 `tprod_inv_half_localDensity_ne_zero_…`; Conway–Sloane, equation (6)). The targets of this
-milestone are the stabilizer-index statement and the Conway–Sloane dictionary at odd `p`; the
+milestone is the Conway–Sloane dictionary at odd `p`, the stabilizer index being N0's; the
 conditional rank-2 product is OTM §1.4's, and the definition, stabilization, values and the
 other products are consumed. *Needs:* T the native density declarations above; L 3C, 4B for the
-stabilizers.
+stabilizers, N0 for the stabilizer index.
 
 **7E. The archimedean factor.** The Euclidean-volume lane below is constructed before any
 Tamagawa comparison. On the native real groups `SO(n)` and `O(n)` use the bi-invariant metric
@@ -2827,8 +3001,10 @@ the `n = 0` instance being `2 = 2/1` with empty products. In particular `vol(SO(
 *The target: the Riemannian comparison.* What the native file leaves open, and this milestone
 proves, is that its Euclidean normalization is the Riemannian volume of the bi-invariant metric
 `−tr(XY)/2`: for the measures `Archimedean.soEuclideanMeasure` and `Archimedean.oEuclideanMeasure`
-induced on the native real groups through the coordinate maps `Archimedean.soCoordinates` and
-`Archimedean.oCoordinates` (entrywise coordinates divided by `√2`,
+induced on the native real groups `Archimedean.SO` and `Archimedean.O` (abbreviations, for each
+`n`, of Mathlib's `Matrix.specialOrthogonalGroup (Fin n) ℝ` and `Matrix.orthogonalGroup (Fin n) ℝ`)
+through the coordinate maps `Archimedean.soCoordinates` and `Archimedean.oCoordinates`
+(entrywise coordinates divided by `√2`,
 `Archimedean.skewMetricCoordinates`), for a `C¹` charted structure in which those maps are
 immersions, the Riemannian measure of `O(n)` **is** `orthogonalGroupMeasure n`
 (`Archimedean.oEuclideanMeasure_eq_orthogonalGroupMeasure`: both are Haar measures of a compact
@@ -2844,10 +3020,13 @@ this lane and proves its explicit odd-rank scalar and the global integral/real c
 Nothing here uses an orthogonal Tamagawa value, a positive definite mass, strong approximation,
 a Cartan or `KAN` decomposition or a homotopy long exact sequence as a premise. The native
 covolume identity `covolume(L)² = det L` (2D) is a separate theorem and proves neither a sphere
-area nor this quotient-volume identity. *Needs:* M native ball volume, `volume.toSphere` and
-the Gamma function; T `inducedRiemannianMetric`, `riemannianVolume`; R
-RepresentationTheory/LieGroups finite-dimensional matrix Lie groups; R DifferentialGeometry 12.1
-and 12.4.
+area nor this quotient-volume identity. The statements assume the `C¹` charted structure and the
+immersion; they construct none, so no smooth structure on the matrix groups is consumed
+(`RepresentationTheory/LieGroups` Layer 2 gives one to a consumer who instantiates them). *Needs:* M native ball
+volume, `volume.toSphere` and the Gamma function; T `inducedRiemannianMetric`,
+`riemannianVolume`, `eq_riemannianVolume_iff`, the native volumes above; R DifferentialGeometry
+12.1 (pullback metrics) and 12.4 (the bridge from `TauCeti.riemannianVolume` to densities and
+integration).
 
 **Checks.**
 
@@ -2904,8 +3083,8 @@ Rank 0 and rank 1 masses `1` and `1/2` (7G); `α_3(U) = 4/3` and `α_2(U) = 4` (
 | Milestone | Direct prerequisites |
 | --- | --- |
 | 7A | native (`mass`, `properMass`, `properMass_eq_two_mul_mass`, `mass_typeE₈RootLattice`); no prerequisites here |
-| 7C | T `Matrix.localDensityCount`, `Matrix.localDensity`, `localDensityCount_div_pow_of_det_ne_zero`, `tendsto_localDensityCount_div_of_card_eq_two_mul_add_one`, `tendsto_localDensityCount_div_of_card_eq_two_mul_add_two`, `localDensity_diagonal_unit_mul_pow`, `hasProd_inv_half_localDensity_of_card_eq_two_mul_add_one`, `hasProd_inv_half_localDensity_of_card_eq_two_mul_add_two`; L 3C, 4B |
-| 7E | M native ball/radial measure and Gamma; T `orthogonalGroupMeasure`, `specialOrthogonalGroupVolume`, `specialOrthogonalGroupVolume_eq_prod`, `inducedRiemannianMetric`, `riemannianVolume`; R RepresentationTheory/LieGroups finite-dimensional matrix Lie groups; R DifferentialGeometry 12.1 and 12.4 |
+| 7C | T `Matrix.localDensityCount`, `Matrix.localDensity`, `localDensityCount_div_pow_of_det_ne_zero`, `tendsto_localDensityCount_div_of_card_eq_two_mul_add_one`, `tendsto_localDensityCount_div_of_card_eq_two_mul_add_two`, `localDensity_diagonal_unit_mul_pow`, `hasProd_inv_half_localDensity_of_card_eq_two_mul_add_one`, `hasProd_inv_half_localDensity_of_card_eq_two_mul_add_two`; L 3C, 4B, N0 |
+| 7E | M native ball/radial measure and Gamma; T `orthogonalGroupMeasure`, `specialOrthogonalGroupVolume`, `specialOrthogonalGroupVolume_eq_prod`, `inducedRiemannianMetric`, `riemannianVolume`, `eq_riemannianVolume_iff`; R DifferentialGeometry 12.1 and 12.4 |
 | 7G | T `mass_eq_one_of_finrank_eq_zero`, `mass_eq_inv_two_of_finrank_eq_one`, `mass`, `properMass`, `properMass_eq_two_mul_mass`, `IsPosDef.finite_isometry`, `classNumber`; L B8 |
 
 ## Layer 8: what this roadmap supplies to Theta Series
@@ -3149,7 +3328,9 @@ native API is checked against.
 
 - `A₂`: content 2, primitive part `x² + xy + y²`, `Δ = −3`, `𝒪 = ℤ[ζ₃]` with 6 units.
 - `U`: content 2, primitive part `xy`, `Δ = 1`, split branch `ℤ × ℤ`, never a `NumberFieldOrder`.
-- `⟨1, −2⟩`: content 1, `Δ = 8`, `ℤ[√2]`, infinite `O(L)` from the unit `1 + √2`.
+- `⟨1, −2⟩`: content 1, `Δ = 8`, `ℤ[√2]`, infinite `O(L)` from the norm-one unit
+  `(1 + √2)² = 3 + 2√2`, which generates `SO(L) = {±(3 + 2√2)^k}`; multiplication by `1 + √2`
+  itself, of norm `−1`, negates the form and is not an isometry.
 
 ### The mass (7A)
 
@@ -3187,7 +3368,7 @@ native API is checked against.
 | Milgram's theorem (1I, native) | Nikulin Thm 1.3.3; Milnor–Husemoller App. 4 | `L` is even and nondegenerate | "every unimodular lattice has `8 ∣ t₊ − t₋`". The odd lattice `⟨1⟩` is unimodular with `t₊ − t₋ = 1`. |
 | Van der Blij's congruence (1L, native) | van der Blij, Indag. Math. 21 (1959); Milnor–Husemoller App. 4 | `L` is unimodular, and `w` is characteristic: `β(w,x) ≡ β(x,x) (mod 2)` for all `x` | "for nondegenerate integral `L` and characteristic `w`, `t₊ − t₋ ≡ β(w,w) (mod 8)`". For `⟨2⟩` every vector is characteristic, because every value of `β` is even; `t₊ − t₋ = 1` while every `β(w,w) = 2k²` is even, so the congruence fails for every characteristic `w`. |
 | The Gauss sign of a metabolic module (1H) | Wall, Topology 2 (1963); Milnor–Husemoller App. 4 | the Lagrangian subgroup is isotropic for `q`, not merely for its polar `b` | "a subgroup with `H = H^⊥` on which `b` vanishes forces `sign q = 0`". The discriminant form of `A₁ ⊕ A₁` has such an `H` with `q = ½` on its generator and `sign = 2`. The converse "`sign q = 0` makes a nondegenerate module metabolic" is also false: `q_θ^{(5)}(5)` with `(θ\|5) = −1` has `sign = 0` and order 5, which is no `#H²`. |
-| Finiteness of `O(L)` (2C) | O'Meara §102 | `L` is definite | "`O(L)` is finite for every nondegenerate `L`". `O(⟨1,−2⟩)` is infinite, being carried by the unit group of `ℤ[√2]` (B4), and 4F gives infinitude in every indefinite rank at least 3. |
+| Finiteness of `O(L)` (2C) | O'Meara §102 | `L` is definite | "`O(L)` is finite for every nondegenerate `L`". `O(⟨1,−2⟩)` is infinite, its `SO` being the norm-one units `±(3 + 2√2)^k` of `ℤ[√2]` (B4), and 4F gives infinitude in every indefinite rank at least 3. |
 | Diagonalization over `ℤ_p` (3C, native) | O'Meara 92:1 | `p` is odd | "every symmetric form over `ℤ_2` has an orthogonal basis". The hyperbolic plane `U` has none. |
 | Two unimodular classes per rank (3C, native) | O'Meara 92:1a | `p` odd and rank at least 1 | "exactly two for every rank". In rank 0 there is one. |
 | Uniqueness of Jordan invariants (3C, native) | O'Meara 91:9 | `p` is odd | "Jordan invariants are unique for every `p`". At `p = 2` they are not, which is why 3E states the moves. |
@@ -3201,6 +3382,8 @@ native API is checked against.
 | Automorphisms of a binary lattice (B4) | Pell's equation; Cassels ch. 13 | `Δ > 0` and `Δ` not a square | "an indefinite binary lattice has infinite `O(L)`". `U` has `Δ = 1`, a square, and `\|O(U)\| = 4`. |
 | Improper binary automorphisms (B4) | Cox, Theorem 3.9, p. 50 (uncertified) | the proper class of the primitive part is fixed by inversion | "`[O(L) : SO(L)] = 2` for every nondegenerate binary `L`". `!![4,1;1,6]` has `Δ = −23` and only `±e₁` of norm 4, so `O(L) = SO(L) = {±I}` has order 2, while `2·#𝒪ˣ = 4`. |
 | Forms to ideals for `Δ > 0` (B2) | Cohen, *Computational ANT*, §5.2 (uncertified); the oriented branch is Tau Ceti's `properClassEquivNarrowPic` | the image of `f = (a,b,c)` is `𝔞_f` for `a > 0` and `√Δ·𝔞_f` for `a < 0` | "`f ↦ [𝔞_f] ∈ NarrowPic 𝒪_Δ` is well defined on proper classes". For `Δ = 12`, `x² − 3y²` and `−x² + 3y²` give the same ideal `𝒪_{12}`, hence the same narrow class, yet are not properly equivalent, since `x² − 3y²` does not represent `−1` modulo 3; the oriented map sends the second to `√3·𝒪_{12}`, the other narrow class. |
+| The principal genus theorem (B3) | Cox, §3.B, Theorem 3.15 (uncertified), for `Δ < 0`; native for fundamental `Δ` on `NarrowClassGroup` | the image of the genus characters is the kernel of the Kronecker character `(Δ \| ·)`, read through the prime discriminants of the fundamental part `Δ₀` | "the genus characters take every tuple of product one". For `Δ = −36`, `(2, 2, 5)` has tuple `(−, +)` for `(χ₃, δ)`, of product `−1`; the Kronecker character is `δ` alone, because `3` divides only the conductor. |
+| Indefinite reduction (B5) | Cohen, §5.6 (uncertified) | the cycles are of Gauss-reduced forms, `0 < b < √Δ` and `\|√Δ − 2\|a\|\| < b`, under `ρ`, and proper equivalence of two reduced forms is equality of cycles | "the Lagrange reduced forms, `\|b\| ≤ \|a\| ≤ \|c\|`, fall into `ρ`-cycles, one per class". For `Δ = 12` they are `(±1, 0, ∓3)`, disjoint from the four reduced forms, and `ρ(1, 0, −3) = (−3, 0, 1)` is not Lagrange reduced. |
 | The rank-2 mass (B8) | Conway–Sloane, equation (1) for the mass, with B4's native `|SO(M)| = #𝒪ˣ` and the native `m⁺ = 2m` of 7A | the count is of **proper** classes | "`m(gen L) = h(gen L)/(2·#𝒪ˣ)` with `h` the class number". The genus of `!![4,1;1,6]` has `h = 2`, `h⁺ = 3` and `w = 2`, and its mass is `1/4 + 1/2 = 3/4 = h⁺/(2w)`, not `1/2`. |
 | Eichler transvections (4F) | O'Meara §104; Cassels ch. 13 | `w` is taken modulo `ℤu`, and `N_L(w)` is even | "`w ↦ E_{u,w}` is injective on a finite-index subgroup of `u^⊥ ∩ L`". `E_{u,w+au} = E_{u,w}` for every `a`, and every finite-index subgroup contains a nonzero multiple of `u`. |
 | The odd local density type (7C) | Conway–Sloane §12; Gan–Yu Thm 7.3 | `ε` is the type of the reduction, `((−1)^m det \| p)` | "`ε = +1` exactly when `det L_p` is a square". The hyperbolic plane over `p = 3` has `det = −1`, a nonsquare, and is split, with `α_3 = 4/3`. |
@@ -3306,8 +3489,7 @@ The rest of the order follows the prerequisite tables:
 - Layer 5 (5A, 5B, 5F, 5G, 5I, 5J) needs Layers 1 and 3 and N0's adelic lattice
   reconstruction, together with the realization theorem of Global Quadratic Forms and the
   native Hilbert product formula named at the start of Layer 5;
-- Layer 6 follows its separate odd/characteristic/even construction order above, and 6C
-  additionally needs Root Systems;
+- Layer 6 follows its separate odd/characteristic/even construction order above;
 - Layer 7 — the targets of 7C, 7E and 7G — needs Layers 3, 4 and B, and nothing adelic; 7A
   is native;
 - Layer 8 is a contract and orders nothing here: it imports nothing, no milestone of Layers 0
@@ -3412,8 +3594,10 @@ of Layers 2, 6 or 7, and of Layer 4 only N0. Their uniqueness statements are
 - D. A. Cox, *Primes of the Form x² + ny²*, Wiley (1989): Theorem 2.8 (p. 27) and Theorem 2.13
   (p. 29) for reduced positive definite forms and the finiteness of `h(D)` (B5, and the
   class-set input of B7), Theorem 3.9
-  (p. 50) for the opposite form as the inverse class and ambiguous forms (B4), and Theorem 7.7 (p. 137) for primitive positive definite forms and
-  `Pic` of an imaginary quadratic order (B2). Text uncertified; cited by locator.
+  (p. 50) for the opposite form as the inverse class and ambiguous forms (B4), §3.B, Theorem 3.15,
+  for the principal genus theorem, `ker Φ = C²`, in negative discriminant (B3), and Theorem 7.7
+  (p. 137) for primitive positive definite forms and `Pic` of an imaginary quadratic order (B2).
+  Text uncertified; cited by locator.
 - H. Cohen, *A Course in Computational Algebraic Number Theory*, GTM 138, Springer (1993), §5.2
   for the correspondence of forms and ideal classes of both signs, and §5.6 for the reduction
   cycles of indefinite forms (B2, B5, and the class-set input of B7). Text uncertified; cited by
