@@ -127,7 +127,7 @@ This roadmap owns the following constructions and theorems.
     Mathlib's `legendreSym.quadratic_reciprocity` and is not a target here; recovering it from
     `hilbertProductFormula` is a Check of Layer 14.
 
-### Consumers and boundaries
+### Boundaries with neighbouring roadmaps
 
 - `ProfiniteCohomology` owns continuous cohomology of profinite groups, its explicit low-degree
   models, continuous cups, change-of-group maps, Kummer theory, and the finite-quotient colimit;
@@ -140,41 +140,13 @@ This roadmap owns the following constructions and theorems.
 - `FunctionFieldArithmetic` owns Artin–Schreier–Witt theory and, in equal characteristic,
   `p`-primary local existence, local Kronecker–Weber, injectivity of the absolute Artin map and the
   full local class-field correspondence. Unit-filtration reciprocity (Layer 7) is this roadmap's in
-  both characteristics, since its proof uses finite reciprocity and filtered norms only;
-  `FunctionFieldArithmetic` consumes it rather than restating it;
+  both characteristics, since its proof uses finite reciprocity and filtered norms only, and
+  `FunctionFieldArithmetic` consumes it (*Downstream consumers*);
 - `GlobalNumberFields` owns places, mixed weak approximation, moduli, ray and narrow class
   groups, adeles, ideles, Hecke-character carriers, infinity types, number-field orders, `Pic`,
   and `NarrowPic`;
 - `NumberFieldArithmetic` owns finite-place Frobenius and the ideal-theoretic Artin map
-  `artinHomAway` on `idealsAway`;
-- `LocalGaloisGroups` consumes the local-cohomological row of this roadmap without constructing
-  private stand-ins: the coefficient objects and Kummer theory, `GalRep`, `H`, `muNRep` and
-  `kummerEquiv_mixed`; degree two and local duality, `finite_H`, `h2MuEquivZMod_mixed`,
-  `h2FpEquivZMod_of_mu`, `tateDual`, `tateDualityPairing`, `tateDualityPairing_perfect_mixed` and
-  `eulerCharacteristic_finrank_fp`; the chosen-root comparison of the cup square with duality,
-  `muNRepEquivZMod`, `muNRep_ρ_eq_self`, `kummerCupPairing`, `kummerCupPairing_bil`, `localSymbol`,
-  `muNRepToTateDual`, `bijective_muNRepToTateDual` and `tateDualityPairing_muNRepToTateDual`;
-  reciprocity and the orientation, `artinMap`, `restrictAbsolute`, `artinMap_restrict`,
-  `absoluteGaloisGroupExtend`, `artinMap_norm`, `denseRange_artinMap`, `localArtinMap`,
-  `normResidue`, `unramifiedCoordinate`, `unramifiedCoordinate_artinMap`,
-  `cyclotomicCharacter_artinMap`, `cyclotomicCharacter_artinMap_padic` and
-  `cyclotomicCharacter_artinMap_padic_uniformizer`; the class formation and Tate's theorem,
-  `ClassFormation` (Tau Ceti's, re-exported), Tau Ceti's `ClassFormation.fundamentalClass` and
-  `ClassFormation.fundamentalClass_generates`, and this roadmap's `tateTheorem` and
-  `artinMap_conj`; the Nakayama–Rim theorem `projective_ker_of_isZero_res` and
-  `primaryComponent_tateCohomology_eq_bot`; and `scd_p_absoluteGaloisGroup_eq_two`. The
-  smoothness hypotheses of `finite_H`, `tateDualityPairing_perfect_mixed` and
-  `eulerCharacteristic_finrank_fp` are instance arguments, found at `μ_p`, at its Tate dual and at
-  the trivial module `𝔽_p`, the modules this consumer uses. The cyclotomic normalization is Tau
-  Ceti's at the pin and is proved from the explicit local symbols of the cyclotomic fields over
-  `ℚ` (Layer 7), so this consumer does not depend on the global layers;
-- `GlobalQuadraticForms` owns Hasse–Minkowski and the global classification of quadratic
-  forms, and consumes `hilbertProductFormula`, `cyclicHasseNorm`,
-  `isGlobalNorm_iff_isLocalNormEverywhere` and `card_ideleClassNormQuotient`;
-- `QuadraticFormInvariants` owns the norm-equation and quaternion presentations of local
-  Hilbert symbols and proves that they agree with the cohomological `localSymbol` exported here;
-- `IntegralLattices` consumes `ringClassField`, `ringClassArtinMap`,
-  `gal_ringClassField_equiv_pic` and the Hilbert invariants.
+  `artinHomAway` on `idealsAway`.
 
 Consequently this roadmap defines no modulus, ray-class carrier, idele carrier, Hecke character,
 order, Picard group, local quadratic-form invariant, or global quadratic form. It has no
@@ -211,6 +183,13 @@ formula is proved cohomologically. This fixes the dependency direction
 - pro-`p` group theory and the Demushkin structure of local Galois groups.
 
 ## Conventions
+
+Other roadmaps cite these sections by number:
+
+- §2.4 → *Tate's theorem and its Tate–Nakayama generalization*, below;
+- §2.5 → *The direction of reciprocity*, below;
+- §2.6 → *Frobenius convention*, below;
+- §4 → the layers, *Layer 0* to *Layer 14*; "§4 Layer 9" is *Layer 9*.
 
 ### Formations
 
@@ -405,10 +384,12 @@ artinMap : A^U → Γ^ab,
 ```
 
 obtained by composing the quotient map with `artinEquiv`. Consequently its kernel is exactly the
-norm subgroup. In `Suggested.lean`, `tateIso`, `nakayamaNegTwo`, `artinEquiv` and `artinMap` are
-reducible aliases of Tau Ceti's constructions: `tateIso` applies `tateTheorem` to the fundamental
-class, `artinEquiv` is `nakayamaNegTwo.symm` **definitionally**, `artinMap_apply` and
-`artinEquiv_eq_tateIso` are proved by `rfl`, and `tateIso_toAddMonoidHom` is a closed proof.
+norm subgroup. These are Tau Ceti's constructions, `ClassFormation.tateIso`,
+`ClassFormation.nakayamaNegTwo`, `ClassFormation.artinEquiv` and `ClassFormation.artinMap`:
+`tateIso` applies `tateTheorem` to the fundamental class, `artinEquiv` is `nakayamaNegTwo.symm`
+**definitionally**, Tau Ceti's `ClassFormation.artinEquiv_eq_tateIso` is proved by `rfl`, and
+`ClassFormation.tateIso_toAddMonoidHom` identifies `tateIso` with cup product with the fundamental
+class. `Suggested.lean` keeps `ClassFormation.artinMap` under this roadmap's name.
 The generic theorem and its cup-product characterization are implemented in Tau Ceti's
 Formation/Tate/Theorem.lean, and the Artin constructions in Formation/ArtinMap.lean;
 the two low-degree identifications
@@ -509,7 +490,7 @@ only as the precomposition of the arithmetic map with inversion, for interoperab
 | The coefficient dictionary between discrete modules and topological representations, the Galois-cohomology coefficients `μ_n` and `(Kˢ)ˣ`, the Kummer map, the explicit `H¹` with its functoriality and its comparison with continuous cohomology, and the internal hom with its conjugation action and evaluation pairing | Tau Ceti: `ofDiscreteModule`, `ofDiscreteModuleMap`, `IsSmoothDiscrete`, `ofDiscreteModule_isSmoothDiscrete`, `KummerCoeff`, `UnitsCoeff`, `kummerMap`, `kummerMap_eq_kummerCocycleClass`, `ContCohomology.H1`, `ContCohomology.explicitMap1`, `ContCohomology.explicitH1AddEquivContinuousCohomology`, `ContCohomology.cocycleEquiv1`, `InternalHom`, `homAction`, `InternalHom.evalPairing`, `InternalHom.smul_eq_self_iff` |
 | Grothendieck groups of modular representations, the lattice defect, and the modular Artin induction theorem | `RepresentationTheory/ModularInduction` Layers 0, 1, 3 and 4 (below) |
 | The Sylow equality for `cd_p` and the pro-`p` test for it | `ProfiniteProPGroups` (completed): `cd_p_eq_of_isProPSylow`, `cd_p_le_iff_elementaryAbelian_of_isProP` |
-| Number fields, places, completions, ideles, idele classes, moduli, ray classes, weak approximation, orders, and Picard groups | `GlobalNumberFields` (completed): Mathlib's `NumberField.IdeleGroup` and `NumberField.IdeleClassGroup`; Tau Ceti's `GlobalNumberFields.NumberFieldOrder`, `GlobalNumberFields.Pic`, `GlobalNumberFields.Modulus`, `GlobalNumberFields.ideleNormMap`, `GlobalNumberFields.ideleClassNormMap`, `GlobalNumberFields.IsFiniteLocalNorm`, `IsInfiniteLocalNorm` and `IsLocalNormEverywhere` |
+| Number fields, places, completions, ideles, idele classes, moduli, ray classes, weak approximation, orders, and Picard groups | `GlobalNumberFields` (completed): Mathlib's `NumberField.IdeleGroup`, its principal-idele map `NumberField.IdeleGroup.unitEmbedding` (`Mathlib/NumberTheory/NumberField/AdeleRing.lean`) and `NumberField.IdeleClassGroup`; Tau Ceti's `GlobalNumberFields.NumberFieldOrder`, `GlobalNumberFields.Pic`, `GlobalNumberFields.Modulus`, `GlobalNumberFields.ideleNormMap`, `GlobalNumberFields.ideleClassNormMap`, `GlobalNumberFields.IsFiniteLocalNorm`, `IsInfiniteLocalNorm` and `IsLocalNormEverywhere` |
 | Relative discriminants of extensions of Dedekind domains | Tau Ceti's `TauCeti.relDiscr` (`RingTheory/DedekindDomain/Discriminant/Basic.lean`) |
 | This roadmap's own targets that Tau Ceti implements at the pin, under the names used here: the coefficient objects, Kummer classes and equivalences, `Br`, `invMap`, `brRes`, `brCor`, `h2MuEquivZMod`, `localSymbol`, `kummerCupPairing`, `tateDual`, local duality and the Euler characteristic; the local class formation, `localArtinEquiv`, `normResidue`, the absolute `artinMap` with `artinMap_restrict`, `artinMap_norm` and `ker_artinMap_eq_iInf`, `unramifiedCoordinate`, `conductorExponent`, `conductorIdeal`, `characterConductorExp`, the explicit cyclotomic symbols and the cyclotomic normalization; local existence and the local correspondence; the local Weil group; the global formation, the Brauer sequence, `globalInv`, the global class formation and global reciprocity, global existence and the global correspondence, the Hasse norm theorem, the ray, Hilbert, narrow Hilbert and ring class fields, `kroneckerWeber` and the Hilbert invariants | Tau Ceti, `TauCeti/NumberTheory/ClassFieldTheory/` (`Brauer/`, `Local/`, `LocalExistence/`, `WeilGroup/`, `Global/`, `GlobalExistence/`, `ClassFields/`); `Suggested.lean` names the ones other roadmaps consume from this roadmap |
 | Frobenius classes and the ideal-theoretic Artin map away from ramified primes | `NumberFieldArithmetic` (completed) |
@@ -517,14 +498,14 @@ only as the precomposition of the arithmetic map with inversion, for interoperab
 ### From TauCetiRoadmap.ProfiniteCohomology
 
 Continuous cohomology of profinite groups on Mathlib's `continuousCohomology`, as Tau Ceti
-implements it: coefficient maps `ContinuousCohomology.coeffMap` and degree casts (Layer 1); the
-finite-quotient colimit (Layers 4 and 10); the conjugation invariants `H1ConjInvariants` (Layer 5);
+implements it: coefficient maps `ContinuousCohomology.coeffMap` (Layer 1); the finite-quotient
+colimit (Layers 4 and 10); the conjugation invariants `H1ConjInvariants` (Layer 5);
 the long exact sequence `longExact_exact`, corestriction with `corestriction_comp_res` and the
 Mackey formula `corestriction_mackey`, and Shapiro's lemma `shapiroIso` (Layer 10); `cd_p`,
 `scd_p`, `cd_p_le_of_isClosed`, `cd_p_le_scd_p` and the strict-dimension criterion
 `strictCohomologicalDimensionAt_le_iff_forall_openSubgroup` at `n = 2` (Layer 11); and the
 coefficient pairings `TopPairing` with the graded cup and its laws `cup_coeffMap`, `cup_add_left`
-and `cup_gradedComm` (Layer 12).
+and `cup_gradedComm`, and the degree casts `ContinuousCohomology.degreeCast` (Layer 12).
 
 ### From TauCetiRoadmap.RepresentationTheory.ModularInduction
 
@@ -583,14 +564,17 @@ Euler characteristic.
 `Suggested.lean` is an acceptance test of suggested forms, not a second implementation and not an
 exhaustive checklist. It imports `Mathlib` and individual Tau Ceti modules only, never another
 roadmap's `Suggested.lean`, and it consumes Mathlib's and Tau Ceti's declarations by name. It
-contains the transparent aliases `ClassFormation`, `tateTheorem`, `tateIso`, `nakayamaNegTwo`,
-`artinEquiv` and `artinMap` with their defining equations; the declarations other roadmaps consume
-from this one, each a Tau Ceti declaration under this roadmap's name and a closed proof; and, with
+contains the transparent aliases `ClassFormation`, `tateTheorem` and `ClassFormation.artinMap`;
+the declarations other roadmaps consume from this one, each a Tau Ceti declaration under this
+roadmap's name and a closed proof, except that `eulerCharacteristic_finrank_fp` and
+`cyclotomicCharacter_artinMap` take Tau Ceti's compatibility hypothesis from Layer 5's open
+`algebraMap_vle_algebraMap_iff_of_finite_padic` and are closed once it is proved; and, with
 `sorry`, the targets whose Lean form it fixes and that are open at the Tau Ceti pin: Layer 5's
 `algebraMap_vle_algebraMap_iff_of_finite_padic`, Layer 7's `map_unitFiltration_normResidue`,
 `sup_norm_unitFiltration_eq_of_upper_eq_top` and `closure_map_artinMap_unitFiltration`, and Layer
-13's `isPrincipal_map_hilbertClassField`, `relDiscr_eq_finprod_abelianConductor` and
-`ringClassField_maximal`. It contains no definition whose body is `sorry`, no arbitrary
+13's `isPrincipal_map_hilbertClassField` and `relDiscr_eq_finprod_abelianConductor`. Everything
+else this roadmap names is Mathlib's or Tau Ceti's, under its library name. It contains no
+definition whose body is `sorry`, no arbitrary
 `Nonempty (X ≃ Y)` where a canonical map is required, no theorem quantified over an arbitrary
 pairing where a named pairing is meant, and no coordinate left free where the arithmetic coordinate
 is meant.
@@ -678,8 +662,9 @@ a `p`-adic field, under this roadmap's names `TateCohomology.projective_ker_of_i
 `TateCohomology.primaryComponent_tateCohomology_eq_bot`; `Suggested.lean` restates those two as
 closed proofs.
 
-**Exit criterion.** `Suggested.lean` states `tateTheorem`, `tateIso`, `nakayamaNegTwo`, and
-`artinEquiv` using imported Tate groups and imported cup products, with no locally defined
+**Exit criterion,** met by Tau Ceti at the pin. `tateTheorem` and Tau Ceti's
+`ClassFormation.tateIso`, `ClassFormation.nakayamaNegTwo` and `ClassFormation.artinEquiv` are
+stated on the imported Tate groups and the imported cup product `cupClass`, with no locally defined
 cohomology object.
 
 ### Examples
@@ -826,7 +811,7 @@ Layer 1.
 
 Use Tau Ceti's generic theorem `tateTheorem` on its layers, with its three hypotheses as separate
 explicit arguments (Conventions, *Tate's theorem*), and its characterization by `cupClass`
-(`tateTheorem_toAddMonoidHom`), re-exported from Formation/Tate/Theorem.lean.
+(Tau Ceti's `tateTheorem_toAddMonoidHom`), both in Formation/Tate/Theorem.lean.
 Its class-formation specialization is
 
 ```text
@@ -835,8 +820,9 @@ tateIso (r : ℤ) :
 ```
 
 as that theorem applied to Tau Ceti's fundamental class and to Tau Ceti's three Layer 2 theorems, so
-that `tateIso_toAddMonoidHom` (against Tau Ceti's `ClassFormation.cupFundamentalClass`) is a closed
-proof rather than a second assertion. Its compatibilities are Tau Ceti's:
+that Tau Ceti's `ClassFormation.tateIso_toAddMonoidHom` (against
+`ClassFormation.cupFundamentalClass`) is a proof rather than a second assertion. Its compatibilities
+are Tau Ceti's:
 
 - with restriction to a subgroup (`tateIso_res`, through `tateRes` and `trivialTateRes`);
 - with corestriction (`tateIso_cor`, through `tateCor` and `trivialTateCor`);
@@ -855,8 +841,8 @@ degrees, `tateIso`, obtained from a generic theorem whose hypotheses are visible
 
 ### Examples
 
-- For `C₂` acting on `ℂˣ` by complex conjugation, `H¹ = 0` and `#H² = #(ℝˣ/ℝ_{>0}) = 2 =
-  #Ĥ⁻²(C₂, ℤ)`, and the three hypotheses hold.
+- For `C₂` acting on `ℂˣ` by complex conjugation, `H¹ = 0` and
+  `#H² = #(ℝˣ/ℝ_{>0}) = 2 = #Ĥ⁻²(C₂, ℤ)`, and the three hypotheses hold.
 - For `C₂` acting trivially on `ℤ/2`, `H¹ = ℤ/2 ≠ 0`, so the first hypothesis excludes it.
 
 ### Dependencies
@@ -874,8 +860,8 @@ artinEquiv     : A^U / N(A^V) ≃ (U/V)^ab := nakayamaNegTwo.symm,
 artinMap       : A^U → (U/V)^ab.
 ```
 
-The aliases in `Suggested.lean` expose Tau Ceti's definitions from Formation/ArtinMap.lean
-with this same definitional chain. Tau Ceti proves:
+These are Tau Ceti's definitions in Formation/ArtinMap.lean, with this definitional chain;
+`Suggested.lean` keeps `ClassFormation.artinMap` under this roadmap's name. Tau Ceti proves:
 
 1. `ker artinMap = N(A^V)` (`ker_artinMap`) and the elementwise `artinMap_eq_zero_iff`;
 2. `artinMap` is surjective (`surjective_artinMap`);
@@ -892,9 +878,9 @@ with this same definitional chain. Tau Ceti proves:
    ```
 
    for every character `χ : (U/V)^ab → ℚ/ℤ` (`character_artinMap`), where `class(a)` is Tau
-   Ceti's `NormalLayer.zeroTateClass`; `characterConnectingClass` and `artinCharacterCup` are
-   reducible adapters to the native connecting class and bundled additive pairing in
-   Formation/Character.lean;
+   Ceti's `NormalLayer.zeroTateClass`, and `δ(χ)` and the cup are Tau Ceti's connecting class
+   `NormalLayer.characterConnectingClass` and bundled additive pairing
+   `NormalLayer.artinCharacterCup` in Formation/Character.lean;
 5. uniqueness: any homomorphism satisfying the character formula is `artinMap`
    (`eq_artinMap_of_character`);
 6. **the norm limitation theorem** `ClassFormation.normSubgroup_maximalAbelianLayer`
@@ -956,8 +942,8 @@ separable closure. `muNRep n F` is Tau Ceti's `muNRep` (MuNRep.lean): the `n`-th
 `μ_n(Fˢ)`, Tau Ceti's `KummerCoeff F n` restricted along the comparison, a smooth discrete
 `ZMod n`-module (`isSmoothDiscrete_muNRep`, as an instance `instFactIsSmoothDiscreteMuNRep`), with
 `muNRepCoeffDictionary`, Tau Ceti's `kummerCoeffEquivMuNRep`, identifying its carrier with
-`KummerCoeff F n` equivariantly (`kummerCoeffEquivMuNRep_smul`). In the same way `unitsRep F` is
-Tau Ceti's `unitsRep`, the units `(Fˢ)ˣ` over `ℤ`.
+`KummerCoeff F n` equivariantly (`kummerCoeffEquivMuNRep_smul`). The units `(Fˢ)ˣ` over `ℤ` are
+Tau Ceti's `unitsRep F`.
 
 **The Kummer class.** `kummerClass n F a` is Tau Ceti's `kummerClass F hn a` when `n` is invertible
 in `F` (`kummerClass_eq`): the transport to `H¹(G_F, μ_n)` of the Kummer map `kummerMap F n hn a`,
@@ -967,7 +953,8 @@ the degree-zero connecting map of the Kummer sequence, by the degree-one compari
 invertible in `F` there is no Kummer sequence and the value is `0`; every theorem that uses it makes
 `n` invertible. The Kummer equivalences are Tau Ceti's: `kummerEquiv` for `n` invertible in `F`,
 with `kummerEquiv_ofMul_mk`, and, for `F/ℚ_p` finite, `kummerEquivOfCharZero`, exported as
-`kummerEquiv_mixed` with `kummerEquiv_mixed_mk`. `kummerEquiv_mixed` is valid for every `n ≠ 0`,
+`kummerEquiv_mixed`, which sends the power class of `a` to its Kummer class
+(`kummerEquivOfCharZero_ofMul_mk`). `kummerEquiv_mixed` is valid for every `n ≠ 0`,
 including `n = p`; this is not a consequence of the prime-to-`p` unit case.
 
 The Brauer carrier `Br F = H²(G_F,(Fˢ)ˣ)`, its invariant `invMap` normalized by arithmetic
@@ -998,12 +985,13 @@ all of `Br K`, Tau Ceti proves, in this order (Milne, *Class Field Theory*, III,
   `Ĥ⁻¹ ≅ H¹` vanishes by Hilbert 90 (`groupCohomology.H1ofAutOnUnitsUnique`) and two-periodicity.
   ⚠ This is a Herbrand-quotient computation; it is not the norm-index theorem
   `index_localNormSubgroup` of Layer 8, which is reciprocity;
-- **the local `H²` bound and finiteness**: `natCard_h2_units_dvd_finrank` re-exports Tau Ceti's
-  divisibility theorem from Brauer/LocalH2Bound.lean for every finite Galois `L/K`, by cyclic
-  two-periodicity, the unit Herbrand quotient and solvable reduction. Since `[L:K] > 0`,
-  divisibility forces the natural cardinal to be nonzero, giving `finite_h2_units`, and implies
-  `natCard_h2_units_le_finrank`. Finiteness is a separate input: an infinite type has natural
-  cardinal zero, so the inequality alone would not suffice.
+- **the local `H²` bound and finiteness**: Tau Ceti's divisibility theorem
+  `natCard_H2_units_dvd_finrank` (Brauer/LocalH2Bound.lean) says that `#H²(Gal(L/K), Lˣ)` divides
+  `[L:K]` for every finite Galois `L/K`, by cyclic two-periodicity, the unit Herbrand quotient and
+  solvable reduction. Since `[L:K] > 0`, divisibility forces the natural cardinal to be nonzero, so
+  `H²(Gal(L/K), Lˣ)` is finite, and it gives `#H²(Gal(L/K), Lˣ) ≤ [L:K]`. Finiteness is a
+  separate consequence: an infinite type has natural cardinal zero, so the inequality alone would
+  not give it.
 
 Then the invariant extends: the unramified relative Brauer group of degree `[L:K]` has `[L:K]`
 elements and lies in the kernel of restriction to `L`, since restriction multiplies the unramified
@@ -1036,13 +1024,13 @@ the Galois action on `μ_n(Fˢ)` trivial (`muNRep_ρ_eq_self`). `kummerCupPairin
 followed by an additive coordinate `tr` of `H²(G_F, μ_n)`. `localSymbol` is the symbol at a
 supplied coordinate, an auxiliary construction: its kernel, bilinearity, Steinberg relation,
 antisymmetry, norm criterion and nondegeneracy hold at every coordinate, but a free coordinate does
-not determine a symbol. The coordinate of the public symbol is the arithmetic one,
-`invCoordinate`, Tau Ceti's `h2MuEquivZMod`: inflate along `μ_n ↪ (Kˢ)ˣ` to `Br K` (`h2MuToBr`),
-apply `invMap`, and read the class `c/n` of `ℚ/ℤ` as `c ∈ ℤ/n`
-(`invMap_h2MuToBr_invCoordinate_symm`). The local Hilbert symbol is
-`localHilbertSymbol ζ a b = localSymbol (kummerCupPairing ζ) invCoordinate (kummerClass a)
-(kummerClass b)`. This is the canonical owner of the cohomological local Hilbert pairing; no
-quadratic-form or quaternion symbol is imported.
+not determine a symbol. The coordinate of the public symbol is the arithmetic one, Tau Ceti's
+`h2MuEquivZMod`: inflate along `μ_n ↪ (Kˢ)ˣ` to `Br K` (`h2MuToBr`), apply `invMap`, and read the
+class `c/n` of `ℚ/ℤ` as `c ∈ ℤ/n` (`invMap_h2MuToBr_h2MuEquivZMod_symm`). The local Hilbert symbol
+of `a, b ∈ Kˣ` at a primitive `n`-th root `ζ ∈ K` is
+`localSymbol (kummerCupPairing ζ) (h2MuEquivZMod K hn) (kummerClass n K a) (kummerClass n K b)`,
+with `hn` the invertibility of `n` in `K`. This is the canonical owner of the cohomological local
+Hilbert pairing; no quadratic-form or quaternion symbol is imported.
 
 Its laws are Tau Ceti's (Local/Symbol.lean, Local/CyclicClass.lean), for `n` invertible in `K`,
 which at `n = 2` over `ℚ_2` is the case Layer 14 needs:
@@ -1064,16 +1052,16 @@ which at `n = 2` over `ℚ_2` is the case Layer 14 needs:
 **Checks.**
 
 - Over `ℚ_7` with `n = 3` (`μ_3 ⊆ ℚ_7`), the cyclic algebra of the unramified cubic extension with
-  arithmetic Frobenius and parameter `7` has invariant `1/3`, so its coordinate is `1`; the inverse
-  coordinate `−invCoordinate` gives `2`, and every coordinate-free law holds for both.
+  arithmetic Frobenius and parameter `7` has invariant `1/3`, so its coordinate is `1`; the negated
+  coordinate gives `2`, and every coordinate-free law holds for both.
 - At `n = 2` the two coordinates agree, `−1 = 1` in `ℤ/2`, so the quadratic symbol cannot detect a
   sign error in the coordinate.
-- If `a` is an `n`-th power its Kummer class vanishes and `localHilbertSymbol ζ a b = 0` for every
-  `b`. Two Kummer classes naturally cup into `μ_n ⊗ μ_n`, not `μ_n`: multiplication of roots of
-  unity is not biadditive. A primitive root supplies the additional pairing, and the Steinberg law
-  is stated only for that named pairing. At exponent two the primitive root is `-1` and the
-  identification is canonical, which is what lets Layer 6 read the quadratic Artin symbol off
-  `localSymbol` at the named pairing `kummerCupPairing (-1)`
+- If `a` is an `n`-th power its Kummer class vanishes and the local Hilbert symbol of `a` and `b` is
+  `0` for every `b`. Two Kummer classes naturally cup into `μ_n ⊗ μ_n`, not `μ_n`: multiplication of
+  roots of unity is not biadditive. A primitive root supplies the additional pairing, and the
+  Steinberg law is stated only for that named pairing. At exponent two the primitive root is `-1`
+  and the identification is canonical, which is what lets Layer 6 read the quadratic Artin symbol
+  off `localSymbol` at the named pairing `kummerCupPairing (-1)`
   (`localArtinMap_quadratic_eq_hilbertSymbol`). That theorem, like the Steinberg law and local
   duality, is stated for the named pairing only: a statement quantified over an arbitrary pairing
   admits the zero pairing, under which every symbol is trivial.
@@ -1156,16 +1144,23 @@ under these names for `LocalGaloisGroups`.
 
 **Checks.**
 
-- For an unramified module and its dual, the two annihilator orders are separately `#H⁰(K,M)` and
-  `#H⁰(K,M')`; they need not agree: over `ℚ_2` with the nontrivial unramified action on `ℤ/3` they
-  are `3` and `1`.
+- Over `ℚ_2` let `M` be `ℤ/3` with the nontrivial unramified action; Frobenius acts by
+  `2 ≡ −1 mod 3`, so `M` is `μ_3`, `H⁰(ℚ_2, M) = 0`, and its dual `M' = Hom(μ_3, μ_3)` is the
+  trivial module `ℤ/3`, with `#H⁰(ℚ_2, M') = 3`. Duality in degrees `(0,2)` and `(2,0)` gives
+  `#H²(ℚ_2, M) = 3`, matching `H²(ℚ_2, μ_3) ≅ ℤ/3`, and `#H²(ℚ_2, M') = 1`. The Euler
+  characteristic gives `#H¹(ℚ_2, M) = 1 · 3 · 1 = 3`, the factor `p^{[F:ℚ_p] v_p(#A)}` being `1`
+  because `2 ∤ 3`; Kummer theory agrees, `ℚ_2ˣ/(ℚ_2ˣ)³ ≅ ℤ/3`, and so does `M'`:
+  `#H¹(ℚ_2, ℤ/3) = 3 · 1 · 1`. A pairing that matched `H⁰(M)` with `H²(M)` instead of
+  `H²(M')` would give `#H²(ℚ_2, μ_3) = 1`.
 - Over `ℚ_p` with `p` odd and `A = ℤ/p` trivial, `#H¹ = p² = p · 1 · p`, since `ℚ_pˣ/(ℚ_pˣ)^p` has
   `𝔽_p`-dimension `2` and `μ_p ⊄ ℚ_p`; over `ℚ_2` with `A = ℤ/2`, `#H¹ = 8 = 2 · 2 · 2`, since
   `#ℚ_2ˣ/(ℚ_2ˣ)² = 8`.
+- Finiteness needs the local hypothesis: over `ℚ`, which is not a local field,
+  `H¹(G_ℚ, ℤ/2) ≅ ℚˣ/(ℚˣ)²` is infinite, the classes of `−1` and of the primes being independent.
 
 **Exit criterion.** `Br K`, `invMap`, `localSymbol`, `tateDualityPairing_perfect_mixed`,
 `finite_H`, `eulerCharacteristic_mixed` and `eulerCharacteristic_finrank_fp` all exist and none of
-them mentions an Artin map.
+them mentions an Artin map, and `algebraMap_vle_algebraMap_iff_of_finite_padic` is proved.
 
 ### Examples
 
@@ -1188,32 +1183,31 @@ particular not the local class formation, the local Artin map, or local existenc
 
 ## Layer 6: the local class formation and finite local reciprocity
 
-For a nonarchimedean local field `K`, the formation is the field formation `fieldFormation K`,
-whose module is the multiplicative group of a separable closure written additively: Tau Ceti's
-`UnitsCoeff K` through `ofDiscreteModule`, on Tau Ceti's `AbsoluteGaloisGroup K`, so that the local
-Brauer group `Br K = H²(G_K, (Kˢ)ˣ)` of Layer 5 is the continuous `H²` of the same coefficients.
-Its ground level is `H⁰(G_K, (Kˢ)ˣ)` (`h0_unitsCoeff_eq_level_top`), which Tau Ceti's
-`baseUnitsEquivInvariants` identifies with `Kˣ`; that identification is `localGroundEquiv`, through
-which the norm subgroups of `Kˣ` are read in Layer 8. The formation and
-`localClassFormation` are aliases of Tau Ceti's units formation and local class formation from
-Formation/Units.lean and Local/ClassFormation.lean. Its invariant is Layer 5's: Tau Ceti's
-`localClassFormation_inv` identifies it with `invMap` after inflation `brInfl`, so that Layers 5
-and 6 carry one normalization. Its axioms rest on:
+For a nonarchimedean local field `K`, the formation is the field formation, Tau Ceti's
+`unitsFormation K` (Formation/Units.lean), whose module is the multiplicative group of a separable
+closure written additively: Tau Ceti's `UnitsCoeff K` through `ofDiscreteModule`, on Tau Ceti's
+`AbsoluteGaloisGroup K`, so that the local Brauer group `Br K = H²(G_K, (Kˢ)ˣ)` of Layer 5 is the
+continuous `H²` of the same coefficients. Its ground level is `H⁰(G_K, (Kˢ)ˣ)`, the units of `Kˢ`
+fixed by all of `G_K`, which Tau Ceti's `baseUnitsEquivInvariants` identifies with `Kˣ`; that
+identification is `localGroundEquiv`, through which the norm subgroups of `Kˣ` are read in Layer 8.
+The local class formation is Tau Ceti's `localClassFormation` (Local/ClassFormation.lean). Its
+invariant is Layer 5's: Tau Ceti's `localClassFormation_inv` identifies it with `invMap` after
+inflation `brInfl`, so that Layers 5 and 6 carry one normalization. Its axioms rest on:
 
 - Hilbert 90;
 - the Layer 5 local Brauer invariant `invMap`;
 - compatibility of restriction with multiplication by degree;
 - the finite-layer description of the Brauer group;
-- the Layer 5 cyclic norm index `index_normGroup_of_isCyclic` and local `H²` finiteness and bound
-  `finite_h2_units` and `natCard_h2_units_le_finrank`, which show that the degree-`n` layer
-  contributes the subgroup of order `n`.
+- the Layer 5 cyclic norm index `index_normGroup_of_isCyclic` and the local `H²` finiteness and
+  bound, from `natCard_H2_units_dvd_finrank`, which show that the degree-`n` layer contributes the
+  subgroup of order `n`.
 
 The proof of `localClassFormation` uses no local reciprocity, norm-index theorem, local existence or
 local duality: each is downstream of Tate's theorem.
 
-For a finite extension `L/K` embedded in `Kˢ` by `iota`, the restriction of `localFormation K` to
+For a finite extension `L/K` embedded in `Kˢ` by `iota`, the restriction of `unitsFormation K` to
 the open subgroup `galoisSubgroup K L iota`, read on `G_L` through Tau Ceti's
-`galoisSubgroupEquiv K L iota`, is `localFormation L`, the module isomorphism being induced on units
+`galoisSubgroupEquiv K L iota`, is `unitsFormation L`, the module isomorphism being induced on units
 by `separableClosureRingEquiv K L iota`; this is Tau Ceti's `localFormationRestrict`. The invariant
 of `localClassFormation L` on a layer is then that of `localClassFormation K` on the corresponding
 layer with ground `galoisSubgroup K L iota`: the first is `invMap L` after inflation, the second is
@@ -1230,11 +1224,12 @@ Kˣ / N_{L/K}(Lˣ),
 Gal(L/K)^ab,
 ```
 
-and `localArtinEquiv`, `localArtinMap` and `normResidue` are the reducible aliases of Tau Ceti's
-Local/Reciprocity.lean constructions. They transport `ClassFormation.artinEquiv` through Tau Ceti's
-`layerNormQuotientEquiv` and the abelianization of `layerGalEquiv`, the native layer
-identifications. The map does not depend on `iota` (`localArtinEquiv_eq_of_iota`); `normResidue`
-is its multiplicative form for the canonical embedding. The arithmetic normalization
+and `localArtinEquiv`, `localArtinMap` and `normResidue` are Tau Ceti's Local/Reciprocity.lean
+constructions; `Suggested.lean` keeps `localArtinMap` and `normResidue` as reducible aliases. They
+transport `ClassFormation.artinEquiv` through Tau Ceti's `layerNormQuotientEquiv` and the
+abelianization of `layerGalEquiv`, the native layer identifications. The map does not depend on
+`iota` (`localArtinEquiv_eq_of_iota`); `normResidue` is its multiplicative form for the canonical
+embedding. The arithmetic normalization
 
 ```text
 localArtinMap(π_K) = arithmeticFrobenius
@@ -1317,9 +1312,9 @@ equations, each stated against a defined map, all Tau Ceti's.
 - **Restriction.** `restrictAbsolute K L iota : G_K →* Gal(L/K)` is the restriction of the absolute
   Galois group to a finite Galois extension embedded by `iota`: Tau Ceti's restriction along an
   embedding, `AlgHom.restrictNormalHom` (FieldTheory/Galois/Restriction.lean), after
-  `absoluteGaloisGroupComparison`. It is characterized by `iota_restrictAbsolute_apply`
-  (`iota (restrictAbsolute σ x) = absoluteGaloisGroupComparison σ (iota x)`, Tau Ceti's
-  `AlgHom.restrictNormalHom_commutes`). The finite maps are the restrictions of the absolute map
+  `absoluteGaloisGroupComparison`. It is characterized by
+  `iota (restrictAbsolute σ x) = absoluteGaloisGroupComparison σ (iota x)`, Tau Ceti's
+  `AlgHom.restrictNormalHom_commutes`. The finite maps are the restrictions of the absolute map
   (`artinMap_restrict`); because the finite quotients of `G_K^ab` are the `Gal(L/K)^ab`, this
   determines `artinMap`.
 - **Unramified coordinate.** `unramifiedCoordinate : G_K^ab →ₜ* Ẑ` is Tau Ceti's: the descent to the
@@ -1357,7 +1352,8 @@ Local/Cyclotomic.lean), `localCyclotomicCharacter_artinMap_padic` (`χ_cyc(Art_{
 `ValuativeExtension ℚ_[p] F`), in Local/ExplicitCyclotomicSymbol/ArtinMap.lean. This roadmap exports
 them as `cyclotomicCharacter_artinMap_padic_uniformizer`, `cyclotomicCharacter_artinMap_padic` and
 `cyclotomicCharacter_artinMap`, read through Mathlib's `cyclotomicCharacter`; the last carries no
-compatibility hypothesis, which `algebraMap_vle_algebraMap_iff_of_finite_padic` of Layer 5 supplies.
+compatibility hypothesis, which `algebraMap_vle_algebraMap_iff_of_finite_padic` of Layer 5 supplies,
+so it is closed once that target is proved.
 Tau Ceti's proof compares `Art_{ℚ_p}` with the explicit local symbols of the cyclotomic fields over
 `ℚ` (`cyclotomicSymbol`, `realCyclotomicSymbol`, with the product formula `prod_cyclotomicSymbol`,
 a direct computation along Milne, *Class Field Theory*, VII Example 8.2, and
@@ -1395,16 +1391,18 @@ local-field structure on finite intermediate fields (`finiteIntermediateFieldVal
 `finiteIntermediateField_isNonarchimedeanLocalField`), installed as local instances. (Jean-Pierre
 Serre, [Local Fields](#source-serre-local-fields), XV §2, Theorem 2 and Corollary 3 to Theorem 1.)
 
-**Filtered norms.** Two norm statements for a finite totally ramified extension `E/F` with group
-`J`, in either characteristic, at an integer `r ≥ 0`, enter the proof:
+**Filtered norms.** Two norm statements for a finite Galois extension `E/F` of nonarchimedean
+local fields with group `J`, in either characteristic, at an integer `r ≥ 0`, enter the proof:
 
 - if `J^r = 1`, then `N_(E/F)(U_E^(ψ_(E/F)(r))) = U_F^(r)`. This is Tau Ceti's
   `map_normUnits_unitFiltration_psiNat_eq_of_upperRamificationGroup_eq_bot`, for every finite
   Galois `E/F` and without an abelian or totally ramified hypothesis;
 - if `J` is abelian and `J^r = J`, then `U_F^(0) = N_(E/F)(U_E^(0)) · U_F^(r)`
   (`sup_norm_unitFiltration_eq_of_upper_eq_top`), a target of this layer (Serre, *Local Fields*,
-  V §§3, 6). For prime degree it follows from surjectivity of the graded norms (`normGradedMap`)
-  at depths strictly below the unique break. For a general finite abelian group, induct along a
+  V §§3, 6). The hypothesis `J^r = J` forces `E/F` to be totally ramified, since
+  `J^r ⊆ J^0 = J_0` for `r ≥ 0`, so total ramification is not a separate hypothesis. For prime
+  degree it follows from surjectivity of the graded norms (`normGradedMap`) at depths strictly
+  below the unique break. For a general finite abelian group, induct along a
   prime-order quotient series: Herbrand's quotient and subgroup theorems
   (`upperRamificationGroup_quotient`, `upperRamificationGroup_fixedField`) transport the hypothesis
   to the two steps; decompose `U_F^(0)` using the quotient step and then `U_M^(0)` using the
@@ -1471,7 +1469,8 @@ and term at `0`); Mathlib compactness for the absolute Artin-image comparison.
   exponent is `3`.
 
 **Exit criterion.** `LocalGaloisGroups` can consume the local-cohomological exports of this roadmap
-by name, `cyclotomicCharacter_artinMap` included.
+by name, `cyclotomicCharacter_artinMap` included, and `map_unitFiltration_normResidue`,
+`sup_norm_unitFiltration_eq_of_upper_eq_top` and `closure_map_artinMap_unitFiltration` are proved.
 
 ### Examples
 
@@ -1545,7 +1544,7 @@ After reciprocity is established, develop the topology of norm subgroups and pro
   abelian extension of conductor exponent `n` contains `U(K,n)` and no smaller step of the unit
   filtration. In either scope of existence, the class field attached to `U(K,n)·⟨π⟩` has
   conductor at most `n`, equal to `n` exactly when this subgroup contains no `U(K,m)` with `m < n`
-  (Milne, *Class Field Theory*, I §1, Remark 1.9).
+  (Milne, *Class Field Theory*, I §1, 1.9, p. 23).
 
 The construction order is normative: norm subgroups first define the normic topology and its
 completion; norm limitation precedes `localAbelianExistence_primeToResidueCharacteristic`; the
@@ -1659,7 +1658,7 @@ Global/Formation.lean: `ideleFormation` and `globalFormation` are reducible alia
 formations for a fixed separable closure of the number field `K`. Their finite-layer coefficient
 comparisons identify the action with the placewise arithmetic Galois action on ideles and its
 quotient action on idele classes. The formation of the multiplicative groups `Lˣ` themselves is the
-field formation `fieldFormation K` of Layer 6, Tau Ceti's `unitsFormation`. Tau Ceti implements the
+field formation of Layer 6, Tau Ceti's `unitsFormation K`. Tau Ceti implements the
 layer, under the names below.
 
 Build the archimedean half of the local package here, since the global sum needs it: the complex
@@ -1779,7 +1778,7 @@ local Brauer groups, and `ideleSumLocalInv` is the sum of `ideleLocalInvAt` and
 
 ⚠ That image is not the whole of `H²(Gal(L/K), C_L)`. From `1 → Lˣ → I_L → C_L → 1` the
 obstruction to lifting a class lies in `H³(Gal(L/K), Lˣ)`: the connecting map is
-`classToMultiplicativeH3`, into the third cohomology of `fieldFormation K`, and
+`classToMultiplicativeH3`, into the third cohomology of `unitsFormation K`, and
 `range_ideleToClassH2` is the exactness statement. The maps `ideleToClassH2` and
 `classToMultiplicativeH3` are reducible aliases of Tau Ceti's arithmetic quotient and connecting
 maps, and `range_ideleToClassH2` and `surjective_ideleToClassH2_of_isCyclic` are Tau Ceti's
@@ -1842,7 +1841,7 @@ and no declaration of this layer mentions `globalArtinMap`.
 
 Layer 1; from Layer 5, `Br K`, `invMap` and the local unit computations
 (`herbrandQuotient_unitFiltration_zero`, `herbrandQuotient_units_eq_finrank`,
-`index_normGroup_of_isCyclic`); from Layer 6, `fieldFormation`;
+`index_normGroup_of_isCyclic`); from Layer 6, `unitsFormation`;
 `LocalFieldsRamification`; `GlobalNumberFields`; `ProfiniteCohomology`. That is all the layer needs
 through injectivity of `brLocalization`: the carriers, the archimedean Brauer computation, the
 Herbrand quotients, both fundamental inequalities and `H¹`-vanishing. None of it waits for Layer
@@ -2039,8 +2038,9 @@ consumer-facing composite is `isGlobalNorm_iff_isLocalNormEverywhere`. The globa
 vanishing of `Ĥ^{-1}(Γ, C_L)`, a consequence of the Layer 10 computation of the Herbrand quotient
 of the idele classes; the cyclic hypothesis is essential. All of this is Tau Ceti's
 (Global/HasseNorm/), and this roadmap exports `cyclicHasseNorm`,
-`isGlobalNorm_iff_isLocalNormEverywhere`, the carriers `principalIdele`, `ideleNormMap` and
-`ideleClassNorm`, and the predicates under its own names.
+`isGlobalNorm_iff_isLocalNormEverywhere`, the carriers `principalIdele` (Mathlib's
+`NumberField.IdeleGroup.unitEmbedding`), `ideleNormMap` and `ideleClassNorm`, and the predicates
+under its own names.
 
 Every named class field of this layer is an **application** of the Layer 12 correspondence, never a
 substitute for it: each one names its own norm subgroup and is then `classField` of
@@ -2100,10 +2100,10 @@ its inverse; the ideal-form Artin map `I ↦ ringClassArtinEquiv (O.mkPic I)` on
 Tau Ceti's `ringClassArtinMap`, exported under that name, with its principal-kernel criterion
 `ringClassArtinMap_eq_one_iff`. The conductor bound on the ramification of `H_O/K` and the
 splitting criterion are Tau Ceti's (`isAdmissibleModulus_ringClassField`,
-`ncard_primesOver_ringClassField_eq_finrank_iff`). The maximal-order comparison
-`ringClassField_maximal`, `H_O = hilbertClassField K` at Tau Ceti's `maximalNumberFieldOrder K`,
-reduces by `globalClassField_unique` to identifying the two norm subgroups: at the maximal order the
-kernel of `ringClassIdeleQuotient` is the ray subgroup of the trivial modulus. Orders and Picard
+`ncard_primesOver_ringClassField_eq_finrank_iff`). At Tau Ceti's maximal order
+`maximalNumberFieldOrder K` the kernel of `ringClassIdeleQuotient` is the ray subgroup of the
+trivial modulus (`ker_ringClassIdeleQuotient_maximalNumberFieldOrder`), so the two norm subgroups
+agree and `H_O = hilbertClassField K` (the first Check below). Orders and Picard
 groups remain owned by `GlobalNumberFields`.
 
 The description of `Pic O` as the ray-class quotient `I_K(𝔣)/P_{K,ℤ}(𝔣)` uses `O = ℤ + 𝔣𝒪_K`,
@@ -2121,7 +2121,8 @@ congruence description for imaginary quadratic orders.
 **Checks.**
 
 - At the maximal order, the conductor is the unit ideal and the ring class field equals the
-  Hilbert class field.
+  Hilbert class field: both are the class field of the ray subgroup of the trivial modulus, which
+  at the maximal order is the kernel of the ring-class quotient.
 - For the maximal order of `ℚ(√3)`, the ordinary class group is trivial and the narrow class
   group has order `2`, the fundamental unit `2 + √3` having norm `1`; the ring class field is `K`,
   and its trivial infinite modulus does not produce the narrow Hilbert class field.
@@ -2135,8 +2136,8 @@ congruence description for imaginary quadratic orders.
 **Exit criterion.** `cyclicHasseNorm`, `rayClassField`, `hilbertClassField`,
 `narrowHilbertClassField`, `ringClassField` for every order, and `kroneckerWeber` are all
 stated against the imported carriers, every class field among them is a value of `classField`
-at a value of `globalClassField`, and `isPrincipal_map_hilbertClassField`,
-`relDiscr_eq_finprod_abelianConductor` and `ringClassField_maximal` are proved.
+at a value of `globalClassField`, and `isPrincipal_map_hilbertClassField` and
+`relDiscr_eq_finprod_abelianConductor` are proved.
 
 ### Examples
 
@@ -2161,18 +2162,18 @@ conductor–discriminant formula.
 
 The Hilbert invariants are Tau Ceti's (Global/Hilbert/), exported under this roadmap's names:
 
-- `finiteHilbertInvariantAt` applies `localHilbertSymbol` of Layer 5 at the completion `K_v`, with
-  `ζ = −1`, to the images of `a, b ∈ Kˣ` in `K_vˣ`; at exponent two the arithmetic coordinate
-  `invCoordinate` is the unique additive equivalence `H²(K_v, μ_2) ≃ ℤ/2`;
+- `finiteHilbertInvariantAt` applies the local Hilbert symbol of Layer 5 at the completion `K_v`,
+  with `ζ = −1`, to the images of `a, b ∈ Kˣ` in `K_vˣ`; at exponent two the arithmetic coordinate
+  `h2MuEquivZMod` is the unique additive equivalence `H²(K_v, μ_2) ≃ ℤ/2`;
 - `infiniteHilbertInvariantAt` is the invariant at a real place of the localized Kummer-cup
   Brauer class, and `0` at a complex place; it is `1` exactly when the place is real and both
   arguments are negative there, so at every real place `(−1, −1)` has invariant `1`. This agrees
   with Layer 10's archimedean invariant;
 - `finiteHilbertSupport a b` is the support of the finite invariants: the finite set of finite
   places at which `finiteHilbertInvariantAt` is nonzero, so every finite invariant outside it
-  vanishes (`finiteHilbertInvariantAt_eq_zero_of_not_mem`). It is contained in the set of places
-  at which `2`, `a` or `b` is not a unit, by `localSymbol_eq_zero_iff_mem_normGroup` and the norm
-  surjectivity on units of unramified extensions.
+  vanishes (Tau Ceti's `finiteHilbertInvariantAt_eq_zero_of_notMem`). It is contained in the set of
+  places at which `2`, `a` or `b` is not a unit, by `localSymbol_eq_zero_iff_mem_normGroup` and the
+  norm surjectivity on units of unramified extensions.
 
 Then freeze
 
@@ -2222,6 +2223,47 @@ this roadmap.
 ### Dependencies
 
 Layers 5, 10, 11 and 13.
+
+## Downstream consumers
+
+- `LocalGaloisGroups` consumes the local-cohomological row of this roadmap without constructing
+  private stand-ins: the coefficient objects and Kummer theory, `GalRep`, `H`, `muNRep` and
+  `kummerEquiv_mixed`; degree two and local duality, `finite_H`, `h2MuEquivZMod_mixed`,
+  `h2FpEquivZMod_of_mu`, `tateDual`, `tateDualityPairing`, `tateDualityPairing_perfect_mixed` and
+  `eulerCharacteristic_finrank_fp`; the chosen-root comparison of the cup square with duality,
+  `muNRepEquivZMod`, `muNRep_ρ_eq_self`, `kummerCupPairing`, `kummerCupPairing_bil`, `localSymbol`,
+  `muNRepToTateDual`, `bijective_muNRepToTateDual` and `tateDualityPairing_muNRepToTateDual`;
+  reciprocity and the orientation, `artinMap`, `restrictAbsolute`, `artinMap_restrict`,
+  `absoluteGaloisGroupExtend`, `artinMap_norm`, `denseRange_artinMap`, `localArtinMap`,
+  `normResidue`, `unramifiedCoordinate`, `unramifiedCoordinate_artinMap`,
+  `cyclotomicCharacter_artinMap`, `cyclotomicCharacter_artinMap_padic` and
+  `cyclotomicCharacter_artinMap_padic_uniformizer`; the class formation and Tate's theorem,
+  `ClassFormation` (Tau Ceti's, re-exported), Tau Ceti's `ClassFormation.fundamentalClass` and
+  `ClassFormation.fundamentalClass_generates`, and this roadmap's `tateTheorem` and
+  `artinMap_conj`; the Nakayama–Rim theorem `projective_ker_of_isZero_res` and
+  `primaryComponent_tateCohomology_eq_bot`; and `scd_p_absoluteGaloisGroup_eq_two`. The
+  smoothness hypotheses of `finite_H`, `tateDualityPairing_perfect_mixed` and
+  `eulerCharacteristic_finrank_fp` are instance arguments, found at `μ_p`, at its Tate dual and at
+  the trivial module `𝔽_p`, the modules this consumer uses. The cyclotomic normalization is Tau
+  Ceti's at the pin and is proved from the explicit local symbols of the cyclotomic fields over
+  `ℚ` (Layer 7), so this consumer does not depend on the global layers.
+- `GlobalQuadraticForms` owns Hasse–Minkowski and the global classification of quadratic
+  forms, and consumes `hilbertProductFormula`, `cyclicHasseNorm`,
+  `isGlobalNorm_iff_isLocalNormEverywhere` and `card_ideleClassNormQuotient`.
+- `QuadraticFormInvariants` owns the norm-equation and quaternion presentations of local
+  Hilbert symbols and proves that they agree with the cohomological `localSymbol` exported here.
+- `IntegralLattices` consumes `ringClassField`, `ringClassArtinMap`,
+  `gal_ringClassField_equiv_pic` and the Hilbert invariants.
+- `FunctionFieldArithmetic` consumes Layer 7's unit-filtration reciprocity in equal
+  characteristic, `map_unitFiltration_normResidue` and its absolute form
+  `closure_map_artinMap_unitFiltration`, and extends Layer 8's local existence, injectivity of
+  `artinMap` and the local correspondence to every nonarchimedean local field.
+- `PadicPeriodRings` consumes Layer 7's unit-filtration reciprocity,
+  `map_unitFiltration_normResidue` with its absolute form, and the conductor consequence
+  `conductorExponent_eq_sInf_upperRamificationGroup`.
+- `ArithmeticGaloisRepresentations` consumes Layer 7's absolute `artinMap` and character conductor
+  `characterConductorExp`, and `FiniteFlatGroupsAndIntegralPadicHodgeTheory` consumes the
+  cyclotomic normalization `cyclotomicCharacter_artinMap` of Layer 7.
 
 ## References
 
