@@ -811,13 +811,14 @@ attribute [local instance] TauCeti.finiteIntermediateFieldValuativeRel
   TauCeti.finiteIntermediateField_valuativeExtension
 
 /-- **Unit-filtration reciprocity, absolute form**: for every `n ≥ 0` the closure of
-`artinMap (U_K^(n))` in `G_K^ab` is the image of the absolute upper ramification group `G_K^n`.
-That group is `RamificationOfCompleteDiscretelyValuedFields` §4a.1's; it enters as the argument
-`absoluteUpperRamificationGroup` together with its description on a nonarchimedean local field,
-the set of `σ` whose restriction to every finite Galois `M/K` lies in `Gal(M/K)^n`, each `M`
-carrying Tau Ceti's local-field structure on finite intermediate fields. Both sides are closed
-subgroups with the same image in every finite abelian quotient (`map_unitFiltration_normResidue`
-and `artinMap_restrict`), the image of `G_K^n` being compact. -/
+`artinMap (U_K^(n))` in `G_K^ab` is the image of the absolute upper ramification group `G_K^n`
+(Milne, *Class Field Theory*, I §4, the definition after Proposition 4.4). That group is defined in
+the README's Layer 7 from Tau Ceti's finite upper groups and enters as the argument
+`absoluteUpperRamificationGroup` together with its defining description, the set of `σ` whose
+restriction to every finite Galois `M/K` lies in `Gal(M/K)^n`, each `M` carrying Tau Ceti's
+local-field structure on finite intermediate fields. Both sides are closed subgroups with the same
+image in every finite abelian quotient (`map_unitFiltration_normResidue`, `artinMap_restrict` and
+the finite projections of `G_K^n`), the image of `G_K^n` being compact. -/
 theorem closure_map_artinMap_unitFiltration (n : ℕ)
     (absoluteUpperRamificationGroup : Subgroup (Field.absoluteGaloisGroup K))
     (_habs : ∀ σ : Field.absoluteGaloisGroup K, σ ∈ absoluteUpperRamificationGroup ↔

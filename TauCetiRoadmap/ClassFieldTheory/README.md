@@ -91,8 +91,9 @@ This roadmap owns the following constructions and theorems.
    topological abelianization of `G_K`, pinned by restriction, its unramified coordinate and norm
    functoriality, and its cyclotomic-character normalization; unit-filtration reciprocity, which
    carries `U_K^(n)` onto the upper ramification group `G^n` at every depth `n ≥ 0`, in both
-   characteristics, and its absolute form on the absolute upper ramification groups `G_K^n` of
-   `RamificationOfCompleteDiscretelyValuedFields` §4a.1; local conductors.
+   characteristics, and its absolute form; for that form, the absolute upper ramification groups
+   `G_K^u` of a nonarchimedean local field, defined from Tau Ceti's finite upper ramification
+   groups, with their closedness and finite projections; local conductors.
 7. The norm limitation theorem: a layer and its maximal abelian sublayer have the same norm
    subgroup. The abelian-layer condition and the canonical maximal abelian sublayer it is stated
    on are Tau Ceti's.
@@ -133,10 +134,14 @@ This roadmap owns the following constructions and theorems.
   models, continuous cups, change-of-group maps, Kummer theory, and the finite-quotient colimit;
 - `LocalFieldsRamification` owns valuations, unit and ramification filtrations, arithmetic
   Frobenius, conductors that are purely ramification-theoretic, and the tame quotient;
-- `RamificationOfCompleteDiscretelyValuedFields` owns the absolute upper ramification groups
-  `G_K^u` (§4a.1, `absoluteUpperRamificationGroup`), on nonarchimedean local fields as on every
-  complete discretely valued field with perfect residue field; Layer 7 takes them, with their
-  finite projections and their term at `0`, for the absolute form of unit-filtration reciprocity;
+- on a nonarchimedean local field `K`, the absolute upper ramification group `G_K^u` taken
+  directly from Tau Ceti's finite upper groups, the set of `σ ∈ G_K` whose restriction to every
+  finite Galois `M/K` lies in `LocalFieldsRamification.upperRamificationGroup K M u`, is this
+  roadmap's (Layer 7), with its closedness and finite projections. The filtration relative to a
+  valuation subring over an arbitrary complete discretely valued field with perfect residue field,
+  its inertia and wild-inertia terms, and its agreement with Layer 7's on a local field are
+  `RamificationOfCompleteDiscretelyValuedFields` §4a.1's, a consumer of Layer 7 (*Downstream
+  consumers*); Layer 7 takes nothing from it;
 - `FunctionFieldArithmetic` owns Artin–Schreier–Witt theory and, in equal characteristic,
   `p`-primary local existence, local Kronecker–Weber, injectivity of the absolute Artin map and the
   full local class-field correspondence. Unit-filtration reciprocity (Layer 7) is this roadmap's in
@@ -485,7 +490,7 @@ only as the precomposition of the arithmetic map with inversion, for interoperab
 | The normal basis theorem for a finite Galois extension of arbitrary fields: a basis indexed by the Galois group whose value at `σ` is `σ θ` | Mathlib, `Mathlib/FieldTheory/Galois/NormalBasis.lean`: `IsGalois.normalBasis`, `IsGalois.normalBasis_apply` |
 | Local fields, valuations, unit filtrations, norms, ramification, and arithmetic Frobenius; the maximal unramified extension, inertia, arithmetic Frobenius lifts and `Gal(K^ur/K) ≅ Ẑ`, under their Tau Ceti names | `LocalFieldsRamification` (completed): Tau Ceti's `unitFiltration`, `normGroup`, `ramificationIndex`, `normalizedValuation`, `frobeniusAlgEquiv`, `IsUnramified`, `IsTotallyRamified`, `LocalFieldsRamification.upperRamificationGroup`, `LocalFieldsRamification.psiNat`, `inertiaSubgroup` |
 | Herbrand's theorem, filtered norms and Hasse–Arf for finite extensions of nonarchimedean local fields | `LocalFieldsRamification` (completed), at the pin in `TauCeti/NumberTheory/LocalField/`: Herbrand's quotient and subgroup theorems `upperRamificationGroup_quotient` and `upperRamificationGroup_fixedField` (`Herbrand/UpperQuotient.lean`), `LocalFieldsRamification.psiNat` (`Herbrand/Basic.lean`), the shifted norm inclusion `map_normUnits_unitFiltration_psiNat_le` (`Norm/Herbrand.lean`), the graded norms `normGradedMap` (`Norm/Graded.lean`), the norm equality at a trivial upper group `map_normUnits_unitFiltration_psiNat_eq_of_upperRamificationGroup_eq_bot` for every finite Galois extension (`Norm/Surjectivity.lean`), `LocalFieldsRamification.hasseArf` (`Herbrand/HasseArf/Abelian.lean`), and the unit Herbrand quotient `herbrandQuotient_unitFiltration_zero` (`UnitFiltration/TateCohomology.lean`) |
-| The absolute upper ramification groups `G_K^u` of `Field.absoluteGaloisGroup K` | `RamificationOfCompleteDiscretelyValuedFields` §4a.1 (below) |
+| For the absolute upper ramification groups of Layer 7: Herbrand's theorem for restriction between finite Galois levels, the local-field structure on finite intermediate fields, compactness of the absolute Galois group, and surjectivity and continuity of restriction | Tau Ceti's `LocalFieldsRamification.map_restrictNormalHom_upperRamificationGroup` (`TauCeti/NumberTheory/LocalField/Herbrand/UpperQuotient.lean`), `finiteIntermediateFieldValuativeRel`, `finiteIntermediateFieldTopology`, `finiteIntermediateField_isNonarchimedeanLocalField` and `finiteIntermediateField_valuativeExtension` (`TauCeti/NumberTheory/LocalField/FiniteExtension/IntermediateField.lean`) and its `CompactSpace (Field.absoluteGaloisGroup K)` instance (`TauCeti/FieldTheory/Galois/AbsoluteGaloisGroup/Basic.lean`); Mathlib's `AlgEquiv.restrictNormalHom_surjective` and `InfiniteGalois.restrictNormalHom_continuous` |
 | The comparison of the algebraic-closure and separable-closure absolute Galois groups, restriction along an embedding, the open subgroup cut out by a finite extension, the class field of an open normal subgroup and the abelian layers, the profinite integers `zHat`, the Herbrand quotient and two-periodicity, and the Galois action on the integers of a local field | Tau Ceti: `absoluteGaloisGroupRestrictEquiv`, `AlgHom.restrictNormalHom`, `galoisSubgroup`, `galoisSubgroupEquiv`, `ClassFieldTheory.classField`, `OpenNormalSubgroup.IsAbelianClassFieldLayer`, `zHat`, `TateCohomology.herbrandQuotient`, `Rep.FiniteCyclicGroup.periodicIso`, `integerRingIsInvariantSubring` |
 | The coefficient dictionary between discrete modules and topological representations, the Galois-cohomology coefficients `μ_n` and `(Kˢ)ˣ`, the Kummer map, the explicit `H¹` with its functoriality and its comparison with continuous cohomology, and the internal hom with its conjugation action and evaluation pairing | Tau Ceti: `ofDiscreteModule`, `ofDiscreteModuleMap`, `IsSmoothDiscrete`, `ofDiscreteModule_isSmoothDiscrete`, `KummerCoeff`, `UnitsCoeff`, `kummerMap`, `kummerMap_eq_kummerCocycleClass`, `ContCohomology.H1`, `ContCohomology.explicitMap1`, `ContCohomology.explicitH1AddEquivContinuousCohomology`, `ContCohomology.cocycleEquiv1`, `InternalHom`, `homAction`, `InternalHom.evalPairing`, `InternalHom.smul_eq_self_iff` |
 | Grothendieck groups of modular representations, the lattice defect, and the modular Artin induction theorem | `RepresentationTheory/ModularInduction` Layers 0, 1, 3 and 4 (below) |
@@ -515,18 +520,6 @@ property `modRepK0.lift` (Layer 0) and induction `modRepK0.ind` (Layer 1); the l
 `latticeDefect_eq_of_finiteIndex` (Layer 3); and the modular Artin theorem
 `modularArtin_exists_nsmul_mem_indCyclicCoprime` (Layer 4), proved there without Brauer
 characters.
-
-### From TauCetiRoadmap.RamificationOfCompleteDiscretelyValuedFields
-
-§4a.1: the absolute upper ramification groups `G_K^u = absoluteUpperRamificationGroup K O u` of
-`Field.absoluteGaloisGroup K`, relative to a valuation subring `O` of `AlgebraicClosure K`, with
-term at `0` the inertia subgroup (`absoluteUpperRamificationGroup_zero`); over a complete discretely
-valued field with perfect residue field, closed, normal and antitone, mapping onto `Gal(M/K)^u` at
-every finite Galois `M` (`map_restrictNormalHom_absoluteUpperRamificationGroup`); and on a
-nonarchimedean local field, with every finite level carrying Tau Ceti's local-field structure on
-finite intermediate fields, finite images `LocalFieldsRamification.upperRamificationGroup K M u`
-and `G_K^0` equal to Tau Ceti's `inertiaSubgroup`. Layer 7 takes the group at depth `n` as an
-argument of `closure_map_artinMap_unitFiltration`, together with that local-field description.
 
 ## How to read the build
 
@@ -1373,6 +1366,59 @@ exactly when `G^n = 1`; so `conductorExponent K L` is the least `n ≥ 0` with `
 character `χ` of `Gal(L/K)`, the least `n` with `χ ∘ normResidue` trivial on `U_K^(n)` is the least
 `n` with `χ(G^n) = 1` (Tau Ceti's `conductorExponent_fixedField_ker`).
 
+**The absolute upper ramification groups.** Let `K` be a nonarchimedean local field, in either
+characteristic, and `G_K = Field.absoluteGaloisGroup K` with the Krull topology. Its finite levels
+are the `M : FiniteGaloisIntermediateField K (AlgebraicClosure K)`, each carrying Tau Ceti's
+local-field structure on finite intermediate fields (`finiteIntermediateFieldValuativeRel`,
+`finiteIntermediateFieldTopology`, `finiteIntermediateField_isNonarchimedeanLocalField`,
+`finiteIntermediateField_valuativeExtension`). For real `u ≥ −1` define the absolute upper
+ramification group `G_K^u` as the set of `σ ∈ G_K` whose restriction
+`AlgEquiv.restrictNormalHom M σ` lies in
+`Gal(M/K)^u = LocalFieldsRamification.upperRamificationGroup K M u` for every finite level `M`:
+the intersection over `M` of the preimages of the finite upper groups, hence a subgroup (Milne,
+*Class Field Theory*, I §4, the definition after Proposition 4.4, p. 46). It has no Lean name of
+its own: `closure_map_artinMap_unitFiltration` takes it as an argument together with this
+membership description.
+
+- For every `u ≥ −1`, `G_K^u` is closed in `G_K`, since each restriction is continuous into the
+  finite discrete group `Gal(M/K)` (`InfiniteGalois.restrictNormalHom_continuous`); hence it is
+  compact, `G_K` being compact (Tau Ceti's `CompactSpace (Field.absoluteGaloisGroup K)` instance).
+- **Finite projections.** For every finite level `M` and every `u ≥ −1`, restriction maps `G_K^u`
+  onto `Gal(M/K)^u`. For finite levels `M ⊆ M′`, restriction carries `Gal(M′/K)^u` onto
+  `Gal(M/K)^u`: Herbrand's theorem in the upper numbering, Tau Ceti's
+  `LocalFieldsRamification.map_restrictNormalHom_upperRamificationGroup`, applied to `M′/M/K` with
+  the local-field structures of the two levels (Milne, *Class Field Theory*, I, Proposition 4.4,
+  p. 46). Given `τ ∈ Gal(M/K)^u`, for each finite level `M′ ⊇ M` the set of `σ ∈ G_K` with
+  `σ|_M = τ` and `σ|_(M′) ∈ Gal(M′/K)^u` is closed, and it is nonempty because `τ` lifts to
+  `Gal(M′/K)^u` and every element of `Gal(M′/K)` lifts to `G_K`
+  (`AlgEquiv.restrictNormalHom_surjective`). Finitely many of these sets contain the one of the
+  compositum of their levels, so compactness of `G_K` gives an element in all of them; it lies in
+  `G_K^u`, because every finite level lies in a level containing `M`, and restricts to `τ`.
+
+*Needs:* Tau Ceti's `LocalFieldsRamification.upperRamificationGroup`,
+`LocalFieldsRamification.map_restrictNormalHom_upperRamificationGroup`, the local-field structure
+on finite intermediate fields and the compactness of `G_K`; Mathlib's
+`FiniteGaloisIntermediateField`, `AlgEquiv.restrictNormalHom`,
+`AlgEquiv.restrictNormalHom_surjective` and `InfiniteGalois.restrictNormalHom_continuous`.
+
+**Checks.**
+
+- At `u = −1` every finite upper group is the whole group, so `G_K^(−1) = G_K`. For
+  `−1 < u ≤ 0` every finite upper group is the inertia group `G_0`, a real index being read
+  through its ceiling, so at the unramified level `M` of degree `f`, `G_K^u` restricts trivially
+  to `M` while `G_K` maps onto `Gal(M/K) ≅ ℤ/f`: the filtration drops below `G_K` just above `−1`
+  and is constant on `(−1, 0]`; reading the index through its floor would keep `G_K^u = G_K` there.
+- For odd `p`, `K = ℚ_p` and the level `ℚ_p(ζ_p)`, the image of `G_K^0` is all of
+  `Gal(ℚ_p(ζ_p)/ℚ_p) ≅ (ℤ/p)ˣ` and the image of `G_K^u` is trivial for every `u > 0`, the level being
+  tamely and totally ramified.
+- For `K = ℚ_2`, take the levels `ℚ_2(ζ_8)`, with group `(ℤ/8)ˣ` and upper groups `G` for `u ≤ 1`,
+  `{1, 5}` for `1 < u ≤ 2` and `1` for `u > 2`, and its subfield `ℚ_2(√2)`, the fixed field of
+  `{1, 7}`, with break `2`. The images of `G_K^u` at both levels agree with restriction at every
+  `u`. The lower numbering cannot replace the upper one in the definition: at depth `3` the lower
+  group of `ℚ_2(ζ_8)/ℚ_2` is `{1, 5}`, but `σ_5` restricts to the nontrivial element of
+  `Gal(ℚ_2(√2)/ℚ_2)`, whose lower group at depth `3` is trivial, so the set defined with lower
+  groups at depth `3` does not map onto `{1, 5}`.
+
 **Unit-filtration reciprocity** (`map_unitFiltration_normResidue`). Let `L/K` be a finite abelian
 extension of nonarchimedean local fields, in equal or mixed characteristic, with group `G`, and let
 `G^v` be its upper ramification groups, `LocalFieldsRamification.upperRamificationGroup`. Write
@@ -1382,13 +1428,12 @@ integer `n ≥ 0`, `normResidue` carries the image of `U_K^(n)` in `Kˣ/N_(L/K)(
 the inertia group `G_0`; the map is the arithmetic normalization of Layer 6, under which a
 uniformizer maps to an arithmetic Frobenius on the maximal unramified subextension. The absolute
 form follows (`closure_map_artinMap_unitFiltration`): for every `n ≥ 0`, the closure of
-`artinMap(U_K^(n))` in `G_K^ab` is the image of the absolute upper ramification group `G_K^n` of
-`RamificationOfCompleteDiscretelyValuedFields` §4a.1 under the quotient map
+`artinMap(U_K^(n))` in `G_K^ab` is the image of the absolute upper ramification group `G_K^n`
+defined above under the quotient map
 `Field.absoluteGaloisGroup K → Field.absoluteGaloisGroupAbelianization K`. `Suggested.lean` takes
-`G_K^n` as an argument together with its §4a.1 description on a local field, the set of `σ` whose
-restriction to every finite Galois `M/K` lies in `Gal(M/K)^n`, each `M` carrying Tau Ceti's
-local-field structure on finite intermediate fields (`finiteIntermediateFieldValuativeRel`,
-`finiteIntermediateField_isNonarchimedeanLocalField`), installed as local instances. (Jean-Pierre
+`G_K^n` as an argument together with its defining description, the set of `σ` whose restriction to
+every finite Galois `M/K` lies in `Gal(M/K)^n`, with the local-field structure of the finite levels
+installed as local instances. (Jean-Pierre
 Serre, [Local Fields](#source-serre-local-fields), XV §2, Theorem 2 and Corollary 3 to Theorem 1.)
 
 **Filtered norms.** Two norm statements for a finite Galois extension `E/F` of nonarchimedean
@@ -1425,10 +1470,10 @@ Depth-zero reciprocity for `L/M` therefore gives `Art_(L/M)(U_M^(s)) = H`. Norm 
 carries this equality to `Art_(L/K)(U_K^(n)) = H`, including `H = G`, `H = 1` and `n = 0`.
 
 For the absolute form, restrict to every finite abelian quotient using `artinMap_restrict`. The
-finite projections of `RamificationOfCompleteDiscretelyValuedFields` §4a.1, with its local-field
-agreement, identify the image of the absolute upper group with the finite upper group at each
-depth. Its image in `G_K^ab` is compact, hence closed, so agreement in all finite abelian quotients
-identifies it with the closure of the Artin image.
+finite projections of `G_K^n` identify its image in `Gal(L/K)` with `Gal(L/K)^n` at every finite
+abelian level `L`. Its image in `G_K^ab` is compact, `G_K^n` being closed in the compact `G_K`,
+hence closed, so agreement in all finite abelian quotients identifies it with the closure of the
+Artin image.
 
 *Needs:* Layer 4 (`artinMap_quotient`, `artinMap_groundNorm`); Layer 6 (`normResidue`, finite
 reciprocity, the norm kernel and unramified normalization); `artinMap_restrict` above; Tau Ceti's
@@ -1436,9 +1481,9 @@ reciprocity, the norm kernel and unramified normalization); `artinMap_restrict` 
 `upperRamificationGroup_quotient`, `upperRamificationGroup_fixedField`,
 `map_normUnits_unitFiltration_psiNat_le`, `normGradedMap`,
 `map_normUnits_unitFiltration_psiNat_eq_of_upperRamificationGroup_eq_bot` and
-`LocalFieldsRamification.hasseArf`; `RamificationOfCompleteDiscretelyValuedFields` §4a.1 (the
-absolute upper ramification group, with its closedness, finite projections, local-field agreement
-and term at `0`); Mathlib compactness for the absolute Artin-image comparison.
+`LocalFieldsRamification.hasseArf`; for the absolute form, the absolute upper ramification groups
+above, with their closedness and finite projections, and Mathlib compactness for the Artin-image
+comparison.
 
 **Checks.**
 
@@ -1454,7 +1499,8 @@ and term at `0`); Mathlib compactness for the absolute Artin-image comparison.
   `ψ(1) = 3`, so `N(U_L^(3)) = U_K^(1)`: the first statement needs neither abelian nor totally
   ramified extensions.
 - At depth `0`, the absolute comparison identifies the closure of `artinMap(𝒪[K]ˣ)` with the
-  image of `inertiaSubgroup`; its image in an unramified finite quotient is trivial.
+  image of `G_K^0`, whose restriction to every finite level is that level's inertia group; its
+  image in an unramified finite quotient is trivial.
 - For an unramified `L/K`, `G^0 = G_0 = 1`, so `normResidue` kills `U_K^(0)`, the conductor
   exponent is `0`, and a uniformizer maps to the arithmetic Frobenius.
 - For odd `p`, `K = ℚ_p` and `L = ℚ_p(ζ_p)`, `G^0 = G` and `G^v = 1` for `v > 0`, so
@@ -1486,9 +1532,10 @@ by name, `cyclotomicCharacter_artinMap` included, and `map_unitFiltration_normRe
 
 Layers 4–6; `LocalFieldsRamification` (with Tau Ceti's maximal unramified extension, inertia,
 arithmetic Frobenius lifts and `Gal(K^ur/K) ≅ Ẑ`, and, for unit-filtration reciprocity, the
-declarations listed under *Needs*); `RamificationOfCompleteDiscretelyValuedFields` §4a.1; Tau Ceti's
-`galoisSubgroup`, `galoisSubgroupEquiv`, `zHat`, `inertiaSubgroup` and the local-field structure on
-finite intermediate fields; for the cyclotomic normalization, Tau Ceti's explicit cyclotomic
+declarations listed under *Needs*); Tau Ceti's `galoisSubgroup`, `galoisSubgroupEquiv`, `zHat`,
+`inertiaSubgroup`, the local-field structure on finite intermediate fields,
+`LocalFieldsRamification.map_restrictNormalHom_upperRamificationGroup` and the compactness of
+`G_K`; for the cyclotomic normalization, Tau Ceti's explicit cyclotomic
 symbols and Layer 5's `algebraMap_vle_algebraMap_iff_of_finite_padic`.
 
 ## Layer 8: separate arithmetic local existence and the local class-field correspondence
@@ -2261,6 +2308,10 @@ Layers 5, 10, 11 and 13.
 - `PadicPeriodRings` consumes Layer 7's unit-filtration reciprocity,
   `map_unitFiltration_normResidue` with its absolute form, and the conductor consequence
   `conductorExponent_eq_sInf_upperRamificationGroup`.
+- `RamificationOfCompleteDiscretelyValuedFields` §4a.1 consumes Layer 7's absolute upper
+  ramification groups of a nonarchimedean local field: it proves that its filtration relative to a
+  valuation subring, over every complete discretely valued field with perfect residue field,
+  agrees with them on such a field.
 - `ArithmeticGaloisRepresentations` consumes Layer 7's absolute `artinMap` and character conductor
   `characterConductorExp`, and `FiniteFlatGroupsAndIntegralPadicHodgeTheory` consumes the
   cyclotomic normalization `cyclotomicCharacter_artinMap` of Layer 7.
