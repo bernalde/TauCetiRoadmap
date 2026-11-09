@@ -108,6 +108,10 @@ them is restated here.
 
 Headline theorems that are **not statable at the pins**, and what each lacks:
 
+* O'Meara's classification of lattices over a dyadic local field, 93:28, by the fundamental type
+  of a Jordan splitting together with the determinant and representation conditions on its
+  partial sums (3D): the scale and norm ideals and the Jordan splittings are native, but the norm
+  groups, weights and the ideals `𝔣_k` of adjacent constituents have no carrier;
 * the Conway–Sloane genus symbol, the 2-adic symbol calculus, and the oddity formula and sign
   product conditions on a symbol (3E, 3G): no carrier for genus symbols; the Hilbert symbol the
   oddity formula uses is native;
