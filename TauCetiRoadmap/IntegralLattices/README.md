@@ -870,11 +870,11 @@ Allcock–Gal–Mark (Theorem 5.1 there, which proves the canonical symbol a com
   each; a canonical form that compared the constituents one at a time would separate them.
 - Oddity fusion: over `ℤ₂` the basis `e₁ + e₂`, `−14e₁ + e₂` of `⟨1⟩ ⊕ ⟨14⟩` is orthogonal
   (`−14 + 14 = 0`), with norms `15` and `210` and a change of basis of determinant `15`, a unit.
-  Since `15·7 = 105 ≡ 1 (mod 8)` and `210 = 2·105`, this gives `⟨1⟩ ⊕ ⟨14⟩ ≅ ⟨7⟩ ⊕ ⟨2⟩`, with
-  Jordan symbols `1_1^{+1} 2_7^{+1}` and `1_7^{+1} 2_1^{+1}`: the same scales, ranks, types and
-  signs, individual oddities `1, 7` against `7, 1`, and compartment oddity `1 + 7 ≡ 0` in both
-  (Allcock–Gal–Mark, Lemma 5.2 and Theorem 6.3). A canonical form that compared the oddity of
-  each constituent separately would separate two isometric lattices.
+  Since `15 ≡ 7` and `105 ≡ 1 (mod 8)`, with `210 = 2·105`, this gives
+  `⟨1⟩ ⊕ ⟨14⟩ ≅ ⟨7⟩ ⊕ ⟨2⟩`, with Jordan symbols `1_1^{+1} 2_7^{+1}` and `1_7^{+1} 2_1^{+1}`: the
+  same scales, ranks, types and signs, individual oddities `1, 7` against `7, 1`, and compartment oddity `1 + 7 ≡ 0` in both
+  (Allcock–Gal–Mark, Lemma 5.2, pp. 17–18, and Theorem 6.3, p. 20). A canonical form that
+  compared the oddity of each constituent separately would separate two isometric lattices.
 
 **3F. The genus.** `gen L = gen M` when `L_p ≅ M_p` for every `p` and the real signatures
 agree (O'Meara §102A). For nondegenerate integral lattices, a finite test first compares the
