@@ -1098,10 +1098,13 @@ Ceti's `trivialFp` (`instFactIsSmoothDiscreteTrivialFp`). Discreteness is part o
 pairing `tateDualityPairing` and its perfectness theorem keep that binder only because the
 evaluation pairing is defined for discrete `A` without reference to smoothness.
 
-**The `p`-adic valuation on a finite extension of `ℚ_p`.** Tau Ceti states local duality, the Euler
-characteristic and the cyclotomic normalization for `F` whose valuation extends that of `ℚ_p`
-(`ValuativeExtension ℚ_[p] F`, through Tau Ceti's `FinitePadicExtension`). The exported forms of
-this roadmap carry no such hypothesis, because it is automatic:
+**The `p`-adic valuation on a finite extension of `ℚ_p`.** Tau Ceti states the Euler
+characteristic, through its class `FinitePadicExtension`, and the cyclotomic normalization
+`localCyclotomicCharacter_artinMap_unit` for `F` whose valuation extends that of `ℚ_p`
+(`ValuativeExtension ℚ_[p] F`). Its `finite_H` needs only `(n : F) ≠ 0` and its
+`tateDualityPairing_perfect_mixed` only `CharZero F`, both of which the `ℚ_p`-algebra structure
+gives. The exported `eulerCharacteristic_finrank_fp` and `cyclotomicCharacter_artinMap` of this
+roadmap carry no compatibility hypothesis, because it is automatic:
 `algebraMap_vle_algebraMap_iff_of_finite_padic` says that for a nonarchimedean local field `F` with
 a `ℚ_p`-algebra structure of finite degree, no continuity of `ℚ_p → F` being assumed, the
 valuation of `F` restricts to the `p`-adic valuation: for `a, b ∈ ℚ_p`, the images satisfy
@@ -2077,11 +2080,15 @@ induction on the index from three named inputs, along Milne VII §9, which is Ar
   the roots-of-unity adjunction;
 - **the Kummer case**, `exists_abelianLayer_globalNormSubgroup_eq_of_pow_mem` (Lemma 9.3): for
   `K ∋ ζ_p` every open subgroup containing the `p`-th powers is a norm subgroup. Its inputs are,
-  for a finite set `S` of primes containing those above `p` and generating the class group, the
-  Kummer layer `kummerLayer p` of the `S`-units, cutting out `K(U(S)^{1/p})`, abelian of degree
-  `p^{|S|+r}`; the index of the idele subgroup `E_S`, computed from the local indices `p²/‖p‖_v`
-  and the product formula; and the equality `globalNormSubgroup_kummerLayer_sUnits` of two
-  subgroups of the same index. The quotient
+  for a finite set `S` of finite primes containing those above `p` and generating the class
+  group, the Kummer layer `kummerLayer p` of the `S`-units `U(S)`, cutting out `K(U(S)^{1/p})`,
+  abelian of degree `[U(S) : U(S)^p] = p^{|S|+r₁+r₂}`, where `r₁` and `r₂` are the numbers of real
+  and complex places of `K` (Milne puts the archimedean places into `S` and writes `p^{|S|}`); the
+  index `p^{|S|+r₁+r₂}` of the image in `C_K` of the idele subgroup `E_S` of ideles that are `p`-th
+  powers at the places of `S` and at every archimedean place and units elsewhere, computed from
+  the local indices `[K_vˣ : (K_vˣ)^p] = p²/‖p‖_v` at those places (`‖·‖_v` the normalized
+  absolute value) and the product formula; and the equality
+  `globalNormSubgroup_kummerLayer_sUnits` of two subgroups of the same index. The quotient
   equivalence `globalAbelianGaloisEquiv` and `index_globalNormSubgroup` are consequences of
   Layer 11 for an already given abelian layer and precede this Kummer construction.
 
@@ -2107,6 +2114,11 @@ read on fields — together with `globalAbelianGaloisEquiv` and `globalClassFiel
   exponent carries `NeZero`: already `a = 1` would admit every element of `Kˢ` as a root. The nonzero-exponent construction uses Kummer theory
   after adjoining `μ_p` (Milne VII, Appendix A, Theorem A.3).
 - For `ℚ(i)/ℚ` the norm index is `[C_ℚ : N C_{ℚ(i)}] = 2`, and for `L = K` it is `1`.
+- The Kummer degree counts every archimedean place. For `K = ℚ`, `p = 2`, `S = {(2)}`:
+  `U(S) = ±2^ℤ`, `[U(S) : U(S)²] = 4 = 2^{1+1+0}`, and `K(U(S)^{1/2}) = ℚ(i, √2)` has degree `4`.
+  For `K = ℚ(ζ_3)`, `p = 3`, `S = {(1 − ζ_3)}` (class number one): `U(S) = μ_6 × (1 − ζ_3)^ℤ` and
+  `[U(S) : U(S)³] = 3 · 3 = 9 = 3^{1+0+1}`. Counting only the complex places in the first case, or
+  only the real places in the second, gives the wrong value `p`.
 
 ### Dependencies
 
@@ -2162,7 +2174,8 @@ group-theoretic Theorem 3.19, p. 163.)
 *Needs:* Layer 11 (`globalClassFormation`, `globalArtinMap` and its ideal form
 `globalArtinMap_ideal`) and Layer 12 (the Hilbert class field as a value of `globalClassField`); Tau
 Ceti's `ClassFormation.groundInclusion_mem_normSubgroup_of_range_eq_commutator`
-(`Formation/PrincipalIdeal.lean`, through Mathlib's `MonoidHom.transfer_commutator_eq_one`), and
+(`Formation/PrincipalIdeal.lean`, through Tau Ceti's `MonoidHom.transfer_commutator_eq_one`,
+Furtwängler's group-theoretic theorem, in `TauCeti/GroupTheory/Transfer/Commutator.lean`), and
 `hilbertClassArtinEquiv` and `fieldRange_le_hilbertClassField_iff`
 (`ClassFields/RayClassField.lean`). The target itself proves two steps. First, the commutator
 identification: `H′/K` is Galois, since every `K`-conjugate of `H′` is the Hilbert class field of

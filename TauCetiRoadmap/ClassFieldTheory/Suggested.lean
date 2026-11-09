@@ -506,8 +506,9 @@ Hensel's lemma every element of `1 + pℤ_p` is an `n`-th power for every `n` pr
 image has trivial value in the infinite cyclic value group of `F`; hence so has every unit of
 `ℤ_p`, while `p = 1 + (p - 1)` gets value `≤ 1`, and value `1` would make the valuation trivial on
 `ℚ_p`, hence on the algebraic extension `F`. This is the compatibility `ValuativeExtension ℚ_[p] F`
-that Tau Ceti's local duality, Euler characteristic and cyclotomic normalization assume, and it is
-what lets the exported forms below omit it. -/
+that Tau Ceti's Euler characteristic and cyclotomic normalization assume (its `finite_H` and local
+duality need only `CharZero F`), and it is what lets `eulerCharacteristic_finrank_fp` and
+`cyclotomicCharacter_artinMap` below omit it. -/
 theorem algebraMap_vle_algebraMap_iff_of_finite_padic (p : ℕ) [Fact p.Prime] (F : Type)
     [Field F] [ValuativeRel F] [TopologicalSpace F] [IsNonarchimedeanLocalField F]
     [Algebra ℚ_[p] F] [Module.Finite ℚ_[p] F] (a b : ℚ_[p]) :
