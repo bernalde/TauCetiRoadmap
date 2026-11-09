@@ -30,8 +30,9 @@ Lean files, because those roadmaps import the module:
 - `hilbertSymbol` and `localHasse` (`GlobalQuadraticForms`, `OrthogonalSpinGroups`);
 - `hasseInvariant_eq_localHasse` (`OrthogonalSpinGroups`).
 
-Every other name that a roadmap cites from this namespace is a Tau Ceti declaration; the table
-under Downstream consumers gives its Tau Ceti name.
+The only other declaration in the file is the local instance `qfiNativeBrauerCommGroup` of 6E,
+which is `TauCeti.BrauerGroup.instCommGroup`. Every other name that a roadmap cites from this
+namespace is a Tau Ceti declaration; the table under Downstream consumers gives its Tau Ceti name.
 
 **Excluded.** The exclusions are deliberate, and a separate roadmap for any of them is welcome.
 
@@ -288,12 +289,12 @@ Each layer states its results against this list.
   `2` (so that `e = v_K(2)`), ramification and inertia degrees, the Teichmüller section, the
   square-class counts and the unramified norm group. Its `normalizedValuation`, `unitFiltration`,
   `natCastValuation`, `UnitFiltrationGraded`, `ramificationIndex`, `inertiaDegree`,
-  `absoluteRamificationIndex`, `teichmuller`, `normGroup` and
-  `LocalFieldsRamification.map_norm_unitFiltration_zero` are Tau Ceti's declarations under that
-  roadmap's names. Its `LocalFieldsRamification.square_eq_range_powMonoidHom`,
-  `LocalFieldsRamification.card_squareClasses_dyadic` and
-  `LocalFieldsRamification.mem_normGroup_iff_dvd_normalizedValuation` are that roadmap's
-  prototypes; Sublayer 6A uses Tau Ceti's own statements of the facts it needs.
+  `absoluteRamificationIndex`, `teichmuller`, `normGroup`,
+  `LocalFieldsRamification.square_eq_range_powMonoidHom`,
+  `LocalFieldsRamification.map_norm_unitFiltration_zero` and
+  `LocalFieldsRamification.mem_normGroup_iff_dvd_normalizedValuation` are Tau Ceti's declarations
+  under that roadmap's names. Its `LocalFieldsRamification.card_squareClasses_dyadic` is that
+  roadmap's prototype; Sublayer 6A uses Tau Ceti's own statements of the facts it needs.
 - **From TauCetiRoadmap.ClassFieldTheory** ([Layers 5 and 14](../ClassFieldTheory/README.md)):
   the coefficient object `μ_n`, the Kummer class, the Kummer-cup pairing, the local symbol and
   local Tate duality (Layer 5), and Hilbert reciprocity (Layer 14). Its `H`, `muNRep` and
@@ -1227,7 +1228,7 @@ the Hasse invariant (`TauCeti.RegularFormClass.hasseInvariant_baseChange`) and w
 invariant (`TauCeti.RegularFormClass.cliffordInvariant_baseChange`). The first holds because
 `ℍ[K,a,b] ⊗_K L` has the generators and relations of `ℍ[L,a,b]`, the second follows from it and the
 product formula for `s`, and the third because `C(q) ⊗_K L ≅ C(q_L)` by the universal property of
-the Clifford algebra (EKM §11, p. 58). Rank `0` and `1` give
+the Clifford algebra (EKM §11, pp. 57–58). Rank `0` and `1` give
 `s = c = 1` (`TauCeti.RegularFormClass.hasseInvariant_eq_one_of_rank_le_one`,
 `TauCeti.RegularFormClass.cliffordInvariant_eq_one_of_rank_le_one`); the hyperbolic class has
 `s = c = 1`. Downstream, sublayer 6E compares `s` with the local Hasse invariant, and Layer 8
@@ -2305,8 +2306,10 @@ degree, which is an exclusion of this roadmap; see "Scope and ownership".
   *Needs:* Layer 5; Layer 7B milestones 4 and 6.
 - ⚠ **The comparison with the Clifford invariant, exact.** `c(q)` and `s(q)` differ by
   dimension-dependent terms, so a source that says "`w₂` is the Hasse–Witt invariant" must be read
-  through the convention table first. Fröhlich and Serre state their trace-form results with `w₂`
-  against the Witt invariant, with correction terms of `(2) ∪ (d)` type. Write
+  through the convention table first. Serre calls `w₂` itself the Witt invariant (Serre,
+  *L'invariant de Witt de la forme Tr(x²)*, §1.2, p. 652), and his formula for `w₂` of the trace
+  form of an étale algebra `E` (Théorème 1, p. 655) carries the correction term `(2) ∪ (d_E)`;
+  read for `c(q)`, it acquires the two further terms of the identity below. Write
   `A_n = C(n−1, 2) mod 2` and `B_n = C(n+1, 4) mod 2` for the binomial coefficients that are the
   exponents `(n−1)(n−2)/2` and `(n+1)n(n−1)(n−2)/24` of Lam V.3.20. The milestone is the identity
   `ι(c(q)) = w₂(q) + A_n · ((−1) ∪ (d(q))) + B_n · ((−1) ∪ (−1))` in `H²(G_K, μ₂)`, with `d(q)`
@@ -2314,8 +2317,8 @@ degree, which is an exclusion of this roadmap; see "Scope and ownership".
   `TauCeti.brauer2EquivH2_cliffordInvariant`
   (`TauCeti/FieldTheory/QuadraticForm/StiefelWhitney/Clifford.lean`), stated with
   `w₁(q) = (d(q))`; on forms of even rank with trivial signed discriminant it specializes to
-  `TauCeti.brauer2EquivH2_cliffordInvariant_of_signedDiscr_eq_zero`. A documentation note maps the
-  Fröhlich, Serre and Kahn statements onto it.
+  `TauCeti.brauer2EquivH2_cliffordInvariant_of_signedDiscr_eq_zero`. A documentation note maps
+  Serre's and Kahn's statements onto it.
 
   *Needs:* Layer 5's Clifford invariant; Layer 7B milestones 4 and 6.
 
@@ -2798,8 +2801,10 @@ Ceti's declarations:
   and Prop. II.3.5; the source of Layer 9's relative formula and of the value of the
   Evens norm.
 - J.-P. Serre, *L'invariant de Witt de la forme Tr(x²)*, Comment. Math. Helv. 59 (1984)
-  651-676, Théorème 1′ and its second proof, which Layer 9 follows at `n = 2` in
-  explicit matrices.
+  651-676: §1.1, p. 652 (the quaternion class as a cup product and its vanishing criterion;
+  6E, 7B item 6 and 7C), §1.2, p. 652 (`w₂` as the Witt invariant; Layer 8), Théorème 1,
+  p. 655 (the trace-form formula with its `(2) ∪ (d_E)` term; Layer 8), and Théorème 1′ with
+  its second proof, which Layer 9 follows at `n = 2` in explicit matrices.
 - A. Kozlowski, *The Evens-Kahn formula for the total Stiefel-Whitney class*, Proc. AMS
   91 (1984) 309-313, Thm 1.1.
 - L. Evens, *A generalization of the transfer map in the cohomology of groups*, Trans.
@@ -2819,7 +2824,10 @@ Ceti's declarations:
   Ch. 5 (local fields).
 - R. Elman, N. Karpenko, A. Merkurjev, *The Algebraic and Geometric Theory of Quadratic
   Forms*, AMS Colloq. 56 (2008): II §7 is the source of Mathlib's `Nondegenerate`, and
-  the modern reference for Layers 0 to 4.
+  the modern reference for Layers 0 to 4; §10, p. 55 and Example 13.5 for the excluded
+  characteristic-2 theory; §11, pp. 57–58, Lemma 14.2, p. 63, Theorem 14.3, pp. 63–64, §98.C,
+  p. 388 and §98.E, p. 389 for Layer 5; Example 98.2, p. 388 for 6C; Corollary 12.5, p. 61 for
+  6E.
 - J.-P. Serre, *Local Fields*, GTM 67, Springer (1979): Ch. X (crossed products and
   `H²`), XIV §2 (the symbol as a cup product and the norm criterion).
 - J. S. Milne, *Class Field Theory*, v4.03 (2020), author's notes: III Theorem 2.1 (the local

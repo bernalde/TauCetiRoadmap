@@ -106,17 +106,6 @@ noncomputable def localHasse {n : ℕ} (w : Fin n → Kˣ) : ℤˣ :=
 theorem hilbertSymbol_neg_self (a : Kˣ) : hilbertSymbol a (-a) = 1 :=
   TauCeti.hilbertSymbol_neg_self a
 
-/-- The pairwise product over the pairs `i < j` is the iterated product over `j ∈ Ioi i`, which is
-how Tau Ceti's `TauCeti.RegularFormClass.localHasse_mk` writes it. -/
-private theorem localHasse_eq_prod_prod_Ioi {n : ℕ} (w : Fin n → Kˣ) :
-    localHasse w = ∏ i, ∏ j ∈ Finset.Ioi i, TauCeti.hilbertSymbol (w i) (w j) := by
-  rw [localHasse, Finset.prod_filter, Fintype.prod_prod_type]
-  refine Finset.prod_congr rfl fun i _ => ?_
-  rw [← Finset.prod_filter]
-  congr 1
-  ext j
-  simp
-
 /-- **Bimultiplicativity** over a nonarchimedean local field, Tau Ceti's
 `TauCeti.hilbertSymbol_mul_right`. -/
 theorem hilbertSymbol_mul [ValuativeRel K] [TopologicalSpace K] [IsNonarchimedeanLocalField K]
@@ -193,8 +182,12 @@ theorem hasseInvariant_eq_localHasse {K : Type u} [Field K] [ValuativeRel K] [To
   have := TauCeti.RegularFormClass.quaternionSubgroupSignEquiv_apply_hasseInvariant
     (Quotient.mk (TauCeti.regularFormSetoid K) ⟨_, w⟩)
   rw [TauCeti.RegularFormClass.localHasse_mk] at this
-  rw [localHasse_eq_prod_prod_Ioi]
-  exact this
+  rw [localHasse, Finset.prod_filter, Fintype.prod_prod_type]
+  refine this.trans (Finset.prod_congr rfl fun i _ => ?_)
+  rw [← Finset.prod_filter]
+  congr 1
+  ext j
+  simp
 
 end HasseComparison
 
