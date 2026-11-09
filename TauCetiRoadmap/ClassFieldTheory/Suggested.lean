@@ -54,16 +54,19 @@ import TauCeti.RingTheory.DedekindDomain.Discriminant.Basic
 import TauCeti.Topology.Algebra.Group.Profinite.ZHat.Basic
 
 /-!
-# Class field theory: class formations, Tate's theorem, Artin reciprocity, and their consequences
+# Class field theory: target signatures
 
-The normative roadmap is `README.md`. This file is an acceptance test of suggested forms, not an
-exhaustive checklist: it names under this roadmap's names the Tau Ceti declarations that other
-roadmaps consume from it, and it states, on Mathlib's and Tau Ceti's own carriers, the targets
-whose Lean form the roadmap fixes and that are open at the Tau Ceti pin. `sorry` marks an open
-target, never a definition: every definition, abbreviation and instance below has a body. Every
-alias of a Tau Ceti theorem is a closed proof except two: `eulerCharacteristic_finrank_fp` and
-`cyclotomicCharacter_artinMap` build Tau Ceti's hypothesis `ValuativeExtension ℚ_[p] F` from the
-open Layer 5 target `algebraMap_vle_algebraMap_iff_of_finite_padic`, and are closed once it is.
+The roadmap is `README.md`; this file is not the roadmap. It is the roadmap's acceptance test, not
+an exhaustive checklist: it states against the pinned Mathlib and Tau Ceti, on their own carriers,
+the headline theorems whose Lean form the roadmap fixes and that are open at the Tau Ceti pin,
+with the one definition they need, `localAbsoluteUpperRamificationGroup`; and it names under this
+roadmap's names the Tau Ceti declarations that other roadmaps consume from it. Every headline item
+of the README's *Scope and ownership* is statable at the pins; the inventory below says where each
+is stated. `sorry` marks an open target, never a definition: every definition, abbreviation and
+instance below has a body. Every alias of a Tau Ceti theorem is a closed proof except two:
+`eulerCharacteristic_finrank_fp` and `cyclotomicCharacter_artinMap` build Tau Ceti's hypothesis
+`ValuativeExtension ℚ_[p] F` from the open Layer 5 target
+`algebraMap_vle_algebraMap_iff_of_finite_padic`, and are closed once it is.
 
 ## Carriers
 
@@ -106,7 +109,8 @@ The fourteen numbered items of `README.md`, *Scope and ownership*, are realized 
    `scd_p_absoluteGaloisGroup_eq_two`; the absolute `artinMap` with `artinMap_restrict`,
    `unramifiedCoordinate_artinMap`, `artinMap_norm` and `cyclotomicCharacter_artinMap`; the open
    targets `map_unitFiltration_normResidue`, `sup_norm_unitFiltration_eq_of_upper_eq_top` and
-   `closure_map_artinMap_unitFiltration`, and the corollary
+   `closure_map_artinMap_unitFiltration`, the last on the absolute upper ramification groups
+   `localAbsoluteUpperRamificationGroup`, and the corollary
    `conductorExponent_eq_sInf_upperRamificationGroup` of Tau Ceti's
    `conductorExponent_le_iff_upperRamificationGroup_eq_bot`, with the character form
    `conductorExponent_fixedField_ker`.
@@ -207,16 +211,6 @@ namespace TauCetiRoadmap.ClassFieldTheory
 open CategoryTheory NumberField IsDedekindDomain
 open scoped MonoidalCategory nonZeroDivisors ValuativeRel TensorProduct
 open TauCeti.ClassFieldTheory hiding ClassFormation
-
-/-! ## Preliminaries: the invariant target `ℚ/ℤ`
-
-Tau Ceti's `ClassFormation` writes `ℚ/ℤ` as the rational circle `AddCircle (1 : ℚ)`, its subgroup
-of order `n` as the `n`-torsion `AddSubgroup.torsionBy`, and the invariant of the fundamental class
-of a layer of degree `n` as the class of `1/n`. The abbreviation below names the circle for the
-target of the local invariant `invMap`; it is Tau Ceti's convention, not a second normalization. -/
-
-/-- The target `ℚ/ℤ` of the class-formation invariant: Tau Ceti's `AddCircle (1 : ℚ)`. -/
-abbrev RatModInt : Type := AddCircle (1 : ℚ)
 
 /-! ## Layer 0: cohomological triviality and projective dimension
 
@@ -486,10 +480,11 @@ end KummerClass
 noncomputable abbrev Br (F : Type) [Field F] : Type :=
   TauCeti.ClassFieldTheory.Br F
 
-/-- **The local invariant**, normalized by arithmetic Frobenius: Tau Ceti's `invMap`. The
-local-field structure is bound in the header: `Br ℂ = 0`. -/
+/-- **The local invariant**, normalized by arithmetic Frobenius: Tau Ceti's `invMap`, with
+values in `ℚ/ℤ` written, as in Tau Ceti's `ClassFormation`, as the rational circle
+`AddCircle (1 : ℚ)`. The local-field structure is bound in the header: `Br ℂ = 0`. -/
 noncomputable abbrev invMap (K : Type) [Field K] [ValuativeRel K] [TopologicalSpace K]
-    [IsNonarchimedeanLocalField K] : Br K ≃+ RatModInt :=
+    [IsNonarchimedeanLocalField K] : Br K ≃+ AddCircle (1 : ℚ) :=
   TauCeti.ClassFieldTheory.invMap K
 
 /-- **The invariant coordinate of `H²(F, μ_n)` in mixed characteristic**, for every `n ≠ 0`: Tau
@@ -810,24 +805,27 @@ attribute [local instance] TauCeti.finiteIntermediateFieldValuativeRel
   TauCeti.finiteIntermediateFieldTopology TauCeti.finiteIntermediateField_isNonarchimedeanLocalField
   TauCeti.finiteIntermediateField_valuativeExtension
 
+/-- **The absolute upper ramification group** `G_K^u` of a nonarchimedean local field, for real
+`u ≥ −1`: the `σ ∈ G_K` whose restriction to every finite Galois `M/K` inside `AlgebraicClosure K`
+lies in Tau Ceti's finite upper group `Gal(M/K)^u`, each `M` carrying Tau Ceti's local-field
+structure on finite intermediate fields; the intersection over `M` of the preimages of the finite
+upper groups (Milne, *Class Field Theory*, I §4, the definition after Proposition 4.4). -/
+noncomputable def localAbsoluteUpperRamificationGroup
+    (u : TauCeti.LocalFieldsRamification.RamificationIndexDomain) :
+    Subgroup (Field.absoluteGaloisGroup K) :=
+  ⨅ M : FiniteGaloisIntermediateField K (AlgebraicClosure K),
+    (TauCeti.LocalFieldsRamification.upperRamificationGroup K M u).comap
+      (AlgEquiv.restrictNormalHom (F := K) (K₁ := AlgebraicClosure K) M)
+
 /-- **Unit-filtration reciprocity, absolute form**: for every `n ≥ 0` the closure of
-`artinMap (U_K^(n))` in `G_K^ab` is the image of the absolute upper ramification group `G_K^n`
-(Milne, *Class Field Theory*, I §4, the definition after Proposition 4.4). That group is defined in
-the README's Layer 7 from Tau Ceti's finite upper groups and enters as the argument
-`absoluteUpperRamificationGroup` together with its defining description, the set of `σ` whose
-restriction to every finite Galois `M/K` lies in `Gal(M/K)^n`, each `M` carrying Tau Ceti's
-local-field structure on finite intermediate fields. Both sides are closed subgroups with the same
-image in every finite abelian quotient (`map_unitFiltration_normResidue`, `artinMap_restrict` and
-the finite projections of `G_K^n`), the image of `G_K^n` being compact. -/
-theorem closure_map_artinMap_unitFiltration (n : ℕ)
-    (absoluteUpperRamificationGroup : Subgroup (Field.absoluteGaloisGroup K))
-    (_habs : ∀ σ : Field.absoluteGaloisGroup K, σ ∈ absoluteUpperRamificationGroup ↔
-      ∀ M : FiniteGaloisIntermediateField K (AlgebraicClosure K),
-        AlgEquiv.restrictNormalHom (F := K) (K₁ := AlgebraicClosure K) M σ ∈
-          TauCeti.LocalFieldsRamification.upperRamificationGroup K M
-            ⟨(n : ℝ), le_trans (by norm_num : (-1 : ℝ) ≤ 0) (Nat.cast_nonneg n)⟩) :
+`artinMap (U_K^(n))` in `G_K^ab` is the image of the absolute upper ramification group
+`localAbsoluteUpperRamificationGroup K n` (Serre, *Local Fields*, XV §2, Theorem 2 and Corollary 3
+to Theorem 1). Both sides are closed subgroups with the same image in every finite abelian quotient
+(`map_unitFiltration_normResidue`, `artinMap_restrict` and the finite projections of `G_K^n`), the
+image of `G_K^n` being compact. -/
+theorem closure_map_artinMap_unitFiltration (n : ℕ) :
     ((TauCeti.unitFiltration K n).map (artinMap K)).topologicalClosure =
-      absoluteUpperRamificationGroup.map
+      (localAbsoluteUpperRamificationGroup K ⟨n, Nat.cast_mem_ramificationIndexDomain n⟩).map
         (QuotientGroup.mk' (commutator (Field.absoluteGaloisGroup K)).topologicalClosure) :=
   sorry
 

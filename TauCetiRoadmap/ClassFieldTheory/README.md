@@ -483,14 +483,14 @@ only as the precomposition of the arithmetic map with inversion, for interoperab
 | Integer-graded finite-group Tate cohomology, its long exact sequence, and its comparison with ordinary cohomology and homology | Mathlib `RepresentationTheory/Homological/TateCohomology` |
 | Cohomological triviality and projective dimension (Nakayama–Rim), submodules of free modules over a principal ideal domain, primary components of Tate cohomology, and the Tate–Nakayama theorem | Tau Ceti: `Rep.isZero_res_of_projective`, `Rep.projective_of_isZero_res`, `Rep.isZero_res_of_exact` (`RepresentationTheory/Homological/TateCohomology/Projective/Basic.lean`), `Rep.projective_ker_of_isZero_res` (`TateCohomology/NakayamaRim.lean`), `Submodule.free_of_isPrincipalIdealRing` (`LinearAlgebra/FreeModule/PID.lean`), `TauCeti.TateCohomology.primaryComponent_tateCohomology_eq_bot` (`TateCohomology/PrimaryComponent.lean`), `TauCeti.TateCohomology.cup_bijective_of_forall_isPGroup_of_lTensor_injective` (`TateCohomology/Cup/TateNakayama.lean`) |
 | The formation machinery of Artin–Tate: formations and their levels, finite normal layers with their Galois groups, degrees, coefficient modules, cohomology carriers, norms and low Tate degrees, the finite quotient system, restriction, corestriction, inflation and conjugation of layers with their tower laws, the maps of abelianized Galois groups, the abelian layers, class formations with the invariant as data, fundamental classes with their restriction, corestriction, inflation and conjugation formulae, the three hypotheses of Tate's theorem, and the cup product with a class | Tau Ceti, `TauCeti/NumberTheory/ClassFieldTheory/Formation/`: `ClassFieldTheory.Formation`, `NormalLayer`, `LayerRestriction`, `LayerRefinement`, `ClassFormation`, `AbelianLayer`, `cupClass`, and the declarations listed in the Conventions and Layers 1 and 2 |
-| Tate's theorem and its cup-product characterization and naturality, the Nakayama and Artin constructions, the four functoriality diagrams and norm limitation, the units formation, the local class formation and finite local reciprocity | Tau Ceti, Formation/Tate/Theorem.lean, Formation/Tate/Naturality.lean, Formation/Tate/Conjugation.lean, Formation/Tate/Inflation.lean, Formation/ArtinMap.lean, Formation/NormLimitation.lean, Formation/Units.lean, Local/ClassFormation.lean and Local/Reciprocity.lean; the roadmap names are reducible aliases |
+| Tate's theorem and its cup-product characterization and naturality, the Nakayama and Artin constructions, the four functoriality diagrams and norm limitation, the units formation, the local class formation and finite local reciprocity | Tau Ceti, Formation/Tate/Theorem.lean, Formation/Tate/Naturality.lean, Formation/Tate/Conjugation.lean, Formation/Tate/Inflation.lean, Formation/ArtinMap.lean, Formation/NormLimitation.lean, Formation/Units.lean, Local/ClassFormation.lean and Local/Reciprocity.lean, consumed under Tau Ceti's names; `Suggested.lean` keeps `tateTheorem`, `ClassFormation.artinMap`, `localArtinMap` and `normResidue` as reducible aliases under this roadmap's names, and restates `artinMap_conj` as a closed proof |
 | Restriction, corestriction, inflation, cup products, and low-degree Tate descriptions | Tau Ceti's `LayerRestriction.tateRes`, `tateCor`, `trivialTateRes`, `trivialTateCor`, `LayerRefinement.cohomologyInfl`, `cupClass`, `NormalLayer.tateHMinusTwoEquivAbelianization` and `NormalLayer.tateHZeroEquivNormQuotient` |
 | Continuous cohomology of profinite groups and its operations | `ProfiniteCohomology` Layers 1, 4, 5, 10, 11 and 12 (below); at the pin Tau Ceti's `TopPairing`, `TopPairing.cup`, `TopPairing.cup_coeffMap`, `TopPairing.cup_gradedComm`, `ContinuousCohomology.coeffMap`, `ContinuousCohomology.degreeCast`, `cohomologicalDimensionAt` and `strictCohomologicalDimensionAt` on Mathlib's `continuousCohomology` |
 | Profinite groups, open subgroups, finite quotients, and topological abelianization | Mathlib (`OpenSubgroup`, `OpenNormalSubgroup`, `TopologicalAbelianization`, `Field.absoluteGaloisGroupAbelianization`) |
 | The normal basis theorem for a finite Galois extension of arbitrary fields: a basis indexed by the Galois group whose value at `σ` is `σ θ` | Mathlib, `Mathlib/FieldTheory/Galois/NormalBasis.lean`: `IsGalois.normalBasis`, `IsGalois.normalBasis_apply` |
 | Local fields, valuations, unit filtrations, norms, ramification, and arithmetic Frobenius; the maximal unramified extension, inertia, arithmetic Frobenius lifts and `Gal(K^ur/K) ≅ Ẑ`, under their Tau Ceti names | `LocalFieldsRamification` (completed): Tau Ceti's `unitFiltration`, `normGroup`, `ramificationIndex`, `normalizedValuation`, `frobeniusAlgEquiv`, `IsUnramified`, `IsTotallyRamified`, `LocalFieldsRamification.upperRamificationGroup`, `LocalFieldsRamification.psiNat`, `inertiaSubgroup` |
 | Herbrand's theorem, filtered norms and Hasse–Arf for finite extensions of nonarchimedean local fields | `LocalFieldsRamification` (completed), at the pin in `TauCeti/NumberTheory/LocalField/`: Herbrand's quotient and subgroup theorems `upperRamificationGroup_quotient` and `upperRamificationGroup_fixedField` (`Herbrand/UpperQuotient.lean`), `LocalFieldsRamification.psiNat` (`Herbrand/Basic.lean`), the shifted norm inclusion `map_normUnits_unitFiltration_psiNat_le` (`Norm/Herbrand.lean`), the graded norms `normGradedMap` (`Norm/Graded.lean`), the norm equality at a trivial upper group `map_normUnits_unitFiltration_psiNat_eq_of_upperRamificationGroup_eq_bot` for every finite Galois extension (`Norm/Surjectivity.lean`), `LocalFieldsRamification.hasseArf` (`Herbrand/HasseArf/Abelian.lean`), and the unit Herbrand quotient `herbrandQuotient_unitFiltration_zero` (`UnitFiltration/TateCohomology.lean`) |
-| For the absolute upper ramification groups of Layer 7: Herbrand's theorem for restriction between finite Galois levels, the local-field structure on finite intermediate fields, compactness of the absolute Galois group, and surjectivity and continuity of restriction | Tau Ceti's `LocalFieldsRamification.map_restrictNormalHom_upperRamificationGroup` (`TauCeti/NumberTheory/LocalField/Herbrand/UpperQuotient.lean`), `finiteIntermediateFieldValuativeRel`, `finiteIntermediateFieldTopology`, `finiteIntermediateField_isNonarchimedeanLocalField` and `finiteIntermediateField_valuativeExtension` (`TauCeti/NumberTheory/LocalField/FiniteExtension/IntermediateField.lean`) and its `CompactSpace (Field.absoluteGaloisGroup K)` instance (`TauCeti/FieldTheory/Galois/AbsoluteGaloisGroup/Basic.lean`); Mathlib's `AlgEquiv.restrictNormalHom_surjective` and `InfiniteGalois.restrictNormalHom_continuous` |
+| For the absolute upper ramification groups of Layer 7: Herbrand's theorem for restriction between finite Galois levels, the local-field structure on finite intermediate fields and the valuative structure of one level over another, compactness of the absolute Galois group, and surjectivity and continuity of restriction | Tau Ceti's `LocalFieldsRamification.map_restrictNormalHom_upperRamificationGroup` (`TauCeti/NumberTheory/LocalField/Herbrand/UpperQuotient.lean`), `finiteIntermediateFieldValuativeRel`, `finiteIntermediateFieldTopology`, `finiteIntermediateField_isNonarchimedeanLocalField` and `finiteIntermediateField_valuativeExtension` (`TauCeti/NumberTheory/LocalField/FiniteExtension/IntermediateField.lean`), `AlgHom.valuativeExtension` (`TauCeti/NumberTheory/LocalField/AlgebraicExtension/Basic.lean`), and Tau Ceti's `CompactSpace (Field.absoluteGaloisGroup K)` instance (`TauCeti/FieldTheory/Galois/AbsoluteGaloisGroup/Basic.lean`); Mathlib's `AlgEquiv.restrictNormalHom_surjective` and `InfiniteGalois.restrictNormalHom_continuous` |
 | The comparison of the algebraic-closure and separable-closure absolute Galois groups, restriction along an embedding, the open subgroup cut out by a finite extension, the class field of an open normal subgroup and the abelian layers, the profinite integers `zHat`, the Herbrand quotient and two-periodicity, and the Galois action on the integers of a local field | Tau Ceti: `absoluteGaloisGroupRestrictEquiv`, `AlgHom.restrictNormalHom`, `galoisSubgroup`, `galoisSubgroupEquiv`, `ClassFieldTheory.classField`, `OpenNormalSubgroup.IsAbelianClassFieldLayer`, `zHat`, `TateCohomology.herbrandQuotient`, `Rep.FiniteCyclicGroup.periodicIso`, `integerRingIsInvariantSubring` |
 | The coefficient dictionary between discrete modules and topological representations, the Galois-cohomology coefficients `μ_n` and `(Kˢ)ˣ`, the Kummer map, the explicit `H¹` with its functoriality and its comparison with continuous cohomology, and the internal hom with its conjugation action and evaluation pairing | Tau Ceti: `ofDiscreteModule`, `ofDiscreteModuleMap`, `IsSmoothDiscrete`, `ofDiscreteModule_isSmoothDiscrete`, `KummerCoeff`, `UnitsCoeff`, `kummerMap`, `kummerMap_eq_kummerCocycleClass`, `ContCohomology.H1`, `ContCohomology.explicitMap1`, `ContCohomology.explicitH1AddEquivContinuousCohomology`, `ContCohomology.cocycleEquiv1`, `InternalHom`, `homAction`, `InternalHom.evalPairing`, `InternalHom.smul_eq_self_iff` |
 | Grothendieck groups of modular representations, the lattice defect, and the modular Artin induction theorem | `RepresentationTheory/ModularInduction` Layers 0, 1, 3 and 4 (below) |
@@ -561,16 +561,16 @@ contains the transparent aliases `ClassFormation`, `tateTheorem` and `ClassForma
 the declarations other roadmaps consume from this one, each a Tau Ceti declaration under this
 roadmap's name and a closed proof, except that `eulerCharacteristic_finrank_fp` and
 `cyclotomicCharacter_artinMap` take Tau Ceti's compatibility hypothesis from Layer 5's open
-`algebraMap_vle_algebraMap_iff_of_finite_padic` and are closed once it is proved; and, with
+`algebraMap_vle_algebraMap_iff_of_finite_padic` and are closed once it is proved; with
 `sorry`, the targets whose Lean form it fixes and that are open at the Tau Ceti pin: Layer 5's
 `algebraMap_vle_algebraMap_iff_of_finite_padic`, Layer 7's `map_unitFiltration_normResidue`,
 `sup_norm_unitFiltration_eq_of_upper_eq_top` and `closure_map_artinMap_unitFiltration`, and Layer
-13's `isPrincipal_map_hilbertClassField` and `relDiscr_eq_finprod_abelianConductor`. Everything
-else this roadmap names is Mathlib's or Tau Ceti's, under its library name. It contains no
-definition whose body is `sorry`, no arbitrary
-`Nonempty (X ≃ Y)` where a canonical map is required, no theorem quantified over an arbitrary
-pairing where a named pairing is meant, and no coordinate left free where the arithmetic coordinate
-is meant.
+13's `isPrincipal_map_hilbertClassField` and `relDiscr_eq_finprod_abelianConductor`; and the one
+definition these need, Layer 7's `localAbsoluteUpperRamificationGroup`, with a real body.
+Everything else this roadmap names is Mathlib's or Tau Ceti's, under its library name. It contains
+no definition whose body is `sorry`, no arbitrary `Nonempty (X ≃ Y)` where a canonical map is
+required, no theorem quantified over an arbitrary pairing where a named pairing is meant, and no
+coordinate left free where the arithmetic coordinate is meant.
 
 The Examples of the layers are acceptance tests. They pin the direction and normalization of the
 Artin map in cases where the answer is elementary, and they are meant to catch four errors which
@@ -1376,9 +1376,10 @@ ramification group `G_K^u` as the set of `σ ∈ G_K` whose restriction
 `AlgEquiv.restrictNormalHom M σ` lies in
 `Gal(M/K)^u = LocalFieldsRamification.upperRamificationGroup K M u` for every finite level `M`:
 the intersection over `M` of the preimages of the finite upper groups, hence a subgroup (Milne,
-*Class Field Theory*, I §4, the definition after Proposition 4.4, p. 46). It has no Lean name of
-its own: `closure_map_artinMap_unitFiltration` takes it as an argument together with this
-membership description.
+*Class Field Theory*, I §4, the definition after Proposition 4.4, p. 46). This is
+`localAbsoluteUpperRamificationGroup K u`, with `u` in Tau Ceti's
+`LocalFieldsRamification.RamificationIndexDomain`, the reals `u ≥ −1`; the local-field structure
+of the finite levels is installed as local instances.
 
 - For every `u ≥ −1`, `G_K^u` is closed in `G_K`, since each restriction is continuous into the
   finite discrete group `Gal(M/K)` (`InfiniteGalois.restrictNormalHom_continuous`); hence it is
@@ -1387,18 +1388,21 @@ membership description.
   onto `Gal(M/K)^u`. For finite levels `M ⊆ M′`, restriction carries `Gal(M′/K)^u` onto
   `Gal(M/K)^u`: Herbrand's theorem in the upper numbering, Tau Ceti's
   `LocalFieldsRamification.map_restrictNormalHom_upperRamificationGroup`, applied to `M′/M/K` with
-  the local-field structures of the two levels (Milne, *Class Field Theory*, I, Proposition 4.4,
-  p. 46). Given `τ ∈ Gal(M/K)^u`, for each finite level `M′ ⊇ M` the set of `σ ∈ G_K` with
-  `σ|_M = τ` and `σ|_(M′) ∈ Gal(M′/K)^u` is closed, and it is nonempty because `τ` lifts to
-  `Gal(M′/K)^u` and every element of `Gal(M′/K)` lifts to `G_K`
+  the local-field structures of the two levels and the valuative structure of `M′` over `M` given
+  by Tau Ceti's `AlgHom.valuativeExtension` along the inclusion (Milne, *Class Field Theory*, I,
+  Proposition 4.4, p. 46). Given `τ ∈ Gal(M/K)^u`, for each finite level `M′ ⊇ M` the set of
+  `σ ∈ G_K` with `σ|_M = τ` and `σ|_(M′) ∈ Gal(M′/K)^u` is closed, and it is nonempty because `τ`
+  lifts to `Gal(M′/K)^u` and every element of `Gal(M′/K)` lifts to `G_K`
   (`AlgEquiv.restrictNormalHom_surjective`). Finitely many of these sets contain the one of the
   compositum of their levels, so compactness of `G_K` gives an element in all of them; it lies in
   `G_K^u`, because every finite level lies in a level containing `M`, and restricts to `τ`.
 
 *Needs:* Tau Ceti's `LocalFieldsRamification.upperRamificationGroup`,
 `LocalFieldsRamification.map_restrictNormalHom_upperRamificationGroup`, the local-field structure
-on finite intermediate fields and the compactness of `G_K`; Mathlib's
-`FiniteGaloisIntermediateField`, `AlgEquiv.restrictNormalHom`,
+on finite intermediate fields, `AlgHom.valuativeExtension`
+(`TauCeti/NumberTheory/LocalField/AlgebraicExtension/Basic.lean`) applied to the inclusion
+`M → M′` for the valuative structure of `M′` over `M` that Herbrand's theorem takes, and the
+compactness of `G_K`; Mathlib's `FiniteGaloisIntermediateField`, `AlgEquiv.restrictNormalHom`,
 `AlgEquiv.restrictNormalHom_surjective` and `InfiniteGalois.restrictNormalHom_continuous`.
 
 **Checks.**
@@ -1430,10 +1434,8 @@ uniformizer maps to an arithmetic Frobenius on the maximal unramified subextensi
 form follows (`closure_map_artinMap_unitFiltration`): for every `n ≥ 0`, the closure of
 `artinMap(U_K^(n))` in `G_K^ab` is the image of the absolute upper ramification group `G_K^n`
 defined above under the quotient map
-`Field.absoluteGaloisGroup K → Field.absoluteGaloisGroupAbelianization K`. `Suggested.lean` takes
-`G_K^n` as an argument together with its defining description, the set of `σ` whose restriction to
-every finite Galois `M/K` lies in `Gal(M/K)^n`, with the local-field structure of the finite levels
-installed as local instances. (Jean-Pierre
+`Field.absoluteGaloisGroup K → Field.absoluteGaloisGroupAbelianization K`, `G_K^n` being
+`localAbsoluteUpperRamificationGroup K n`. (Jean-Pierre
 Serre, [Local Fields](#source-serre-local-fields), XV §2, Theorem 2 and Corollary 3 to Theorem 1.)
 
 **Filtered norms.** Two norm statements for a finite Galois extension `E/F` of nonarchimedean
@@ -1534,6 +1536,7 @@ Layers 4–6; `LocalFieldsRamification` (with Tau Ceti's maximal unramified exte
 arithmetic Frobenius lifts and `Gal(K^ur/K) ≅ Ẑ`, and, for unit-filtration reciprocity, the
 declarations listed under *Needs*); Tau Ceti's `galoisSubgroup`, `galoisSubgroupEquiv`, `zHat`,
 `inertiaSubgroup`, the local-field structure on finite intermediate fields,
+`AlgHom.valuativeExtension`,
 `LocalFieldsRamification.map_restrictNormalHom_upperRamificationGroup` and the compactness of
 `G_K`; for the cyclotomic normalization, Tau Ceti's explicit cyclotomic
 symbols and Layer 5's `algebraMap_vle_algebraMap_iff_of_finite_padic`.
@@ -1701,9 +1704,9 @@ Layers 5–8; Tau Ceti's unramified-extension API (`inertiaSubgroup` and the exa
 ## Layer 10: global carriers, the Brauer sequence, and the sum of local invariants
 
 Use the idele and idele-class carriers from `GlobalNumberFields` through Tau Ceti's
-Global/Formation.lean: `ideleFormation` and `globalFormation` are reducible aliases of its
-formations for a fixed separable closure of the number field `K`. Their finite-layer coefficient
-comparisons identify the action with the placewise arithmetic Galois action on ideles and its
+Global/Formation.lean: `ideleFormation` and `globalFormation` are Tau Ceti's formations for a
+fixed separable closure of the number field `K`. Their finite-layer coefficient comparisons
+identify the action with the placewise arithmetic Galois action on ideles and its
 quotient action on idele classes. The formation of the multiplicative groups `Lˣ` themselves is the
 field formation of Layer 6, Tau Ceti's `unitsFormation K`. Tau Ceti implements the
 layer, under the names below.
@@ -1827,9 +1830,9 @@ local Brauer groups, and `ideleSumLocalInv` is the sum of `ideleLocalInvAt` and
 obstruction to lifting a class lies in `H³(Gal(L/K), Lˣ)`: the connecting map is
 `classToMultiplicativeH3`, into the third cohomology of `unitsFormation K`, and
 `range_ideleToClassH2` is the exactness statement. The maps `ideleToClassH2` and
-`classToMultiplicativeH3` are reducible aliases of Tau Ceti's arithmetic quotient and connecting
-maps, and `range_ideleToClassH2` and `surjective_ideleToClassH2_of_isCyclic` are Tau Ceti's
-proofs in `TauCeti/NumberTheory/ClassFieldTheory/Global/LiftingObstruction.lean`.
+`classToMultiplicativeH3` are Tau Ceti's arithmetic quotient and connecting maps, and
+`range_ideleToClassH2` and `surjective_ideleToClassH2_of_isCyclic` are Tau Ceti's proofs in
+`TauCeti/NumberTheory/ClassFieldTheory/Global/LiftingObstruction.lean`.
 `H¹`-vanishing does not make the obstruction vanish. For `L = ℚ(√13, √17)` every decomposition
 group has order at most two — the decomposition groups at unramified primes are cyclic, `13` splits
 in `ℚ(√17)` and `17` splits in `ℚ(√13)`, and the field is totally real — so
@@ -2309,9 +2312,9 @@ Layers 5, 10, 11 and 13.
   `map_unitFiltration_normResidue` with its absolute form, and the conductor consequence
   `conductorExponent_eq_sInf_upperRamificationGroup`.
 - `RamificationOfCompleteDiscretelyValuedFields` §4a.1 consumes Layer 7's absolute upper
-  ramification groups of a nonarchimedean local field: it proves that its filtration relative to a
-  valuation subring, over every complete discretely valued field with perfect residue field,
-  agrees with them on such a field.
+  ramification groups `localAbsoluteUpperRamificationGroup` of a nonarchimedean local field: it
+  proves that its filtration relative to a valuation subring, over every complete discretely
+  valued field with perfect residue field, agrees with them on such a field.
 - `ArithmeticGaloisRepresentations` consumes Layer 7's absolute `artinMap` and character conductor
   `characterConductorExp`, and `FiniteFlatGroupsAndIntegralPadicHodgeTheory` consumes the
   cyclotomic normalization `cyclotomicCharacter_artinMap` of Layer 7.
