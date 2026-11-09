@@ -61,8 +61,10 @@ states against the pinned Mathlib and Tau Ceti, on their own carriers, the headl
 Lean form the roadmap fixes and that are open at the Tau Ceti pin, with the one definition they
 need, `localAbsoluteUpperRamificationGroup`. A headline that Tau Ceti proves at the pin is consumed
 under Tau Ceti's name and not restated. Besides the open targets, the file keeps under this
-roadmap's names the Tau Ceti declarations that the Lean files of `LocalGaloisGroups`,
-`GlobalQuadraticForms` and `IntegralLattices` use through this module. Every headline item of the
+roadmap's names the Tau Ceti declarations that the Lean files of `LocalGaloisGroups` and
+`GlobalQuadraticForms` use through this module, and the few that other roadmaps cite under this
+roadmap's name: `restrictAbsolute`, `kummerClass` with `kummerClass_eq_kummerCocycleClass`, and
+`ringClassField`, `ringClassArtinMap` and `gal_ringClassField_equiv_pic`. Every headline item of the
 README's *Scope and ownership* is statable at the pins; the inventory below says where each is
 stated. `sorry` marks an open target, never a definition: every definition, abbreviation and
 instance below has a body. Every alias of a Tau Ceti theorem is a closed proof except two:
@@ -114,8 +116,7 @@ name not declared below is Tau Ceti's, in `TauCeti.ClassFieldTheory` unless qual
    cyclotomic normalization `cyclotomicCharacter_artinMap`; the open targets
    `map_unitFiltration_normResidue` and `closure_map_artinMap_unitFiltration`, the second on the
    absolute upper ramification groups
-   `localAbsoluteUpperRamificationGroup`, and the corollary
-   `conductorExponent_eq_sInf_upperRamificationGroup` of Tau Ceti's
+   `localAbsoluteUpperRamificationGroup`; the conductor criterion is Tau Ceti's
    `conductorExponent_le_iff_upperRamificationGroup_eq_bot`, with the character form
    `conductorExponent_fixedField_ker`.
 7. Norm limitation: Tau Ceti's `ClassFormation.normSubgroup_maximalAbelianLayer`.
@@ -288,17 +289,11 @@ section KummerClass
 attribute [local instance] TopRep.distribMulAction
 
 /-- **The Kummer class of `a ∈ Fˣ` in `H¹(G_F, μ_n)`**: Tau Ceti's `kummerClass` where `n` is
-invertible in `F` (`kummerClass_eq`), the transport of the Kummer map `TauCeti.kummerMap`. Where
-`n` is not invertible there is no Kummer sequence and the value is `0`. -/
+invertible in `F`, the transport of the Kummer map `TauCeti.kummerMap`. Where `n` is not invertible
+there is no Kummer sequence and the value is `0`. -/
 noncomputable def kummerClass (n : ℕ) (F : Type) [Field F] (a : Fˣ) : H n F 1 (muNRep n F) := by
   classical
   exact if hn : IsUnit (n : F) then TauCeti.ClassFieldTheory.kummerClass F hn a else 0
-
-/-- **The defining equation of `kummerClass`** for `n` invertible in `F`. -/
-theorem kummerClass_eq {n : ℕ} {F : Type} [Field F] (hn : IsUnit (n : F)) (a : Fˣ) :
-    kummerClass n F a = TauCeti.ClassFieldTheory.kummerClass F hn a := by
-  unfold kummerClass
-  exact dite_eq_left_of_eq_true (eq_true hn)
 
 /-- **The Kummer class on cocycles**: for an `n`-th root `α ∈ Fˢ` of `a`, the class of `a` is the
 transported class of the Kummer cocycle `g ↦ g α / α` (Tau Ceti's
@@ -308,7 +303,7 @@ theorem kummerClass_eq_kummerCocycleClass {n : ℕ} {F : Type} [Field F] (hn : I
     (hα : α ^ n = Units.map (algebraMap F (SeparableClosure F)).toMonoidHom a) :
     kummerClass n F a =
       TauCeti.ClassFieldTheory.muNRepH1Equiv n F (TauCeti.kummerCocycleClass hα) := by
-  rw [kummerClass_eq hn]
+  rw [kummerClass, dite_eq_left_of_eq_true (eq_true hn)]
   exact TauCeti.ClassFieldTheory.kummerClass_eq_muNRepH1Equiv_kummerCocycleClass F hn hα
 
 /-- Mixed-characteristic Kummer equivalence, for every `n ≠ 0` including `n = p`: Tau Ceti's
@@ -514,22 +509,6 @@ theorem map_unitFiltration_normResidue [Algebra K L] [ValuativeExtension K L]
         ⟨(n : ℝ), le_trans (by norm_num : (-1 : ℝ) ≤ 0) (Nat.cast_nonneg n)⟩).map
           Abelianization.of :=
   sorry
-
-/-- **The conductor exponent is read off the upper numbering**: for a finite abelian `L/K` it is
-the least depth `n` with `Gal(L/K)^n = 1`. A corollary of Tau Ceti's
-`conductorExponent_le_iff_upperRamificationGroup_eq_bot`. -/
-theorem conductorExponent_eq_sInf_upperRamificationGroup [Algebra K L]
-    [ValuativeExtension K L] [Module.Finite K L] [IsAbelianGalois K L] :
-    TauCeti.ClassFieldTheory.conductorExponent K L =
-      sInf {n : ℕ | TauCeti.LocalFieldsRamification.upperRamificationGroup K L
-      ⟨(n : ℝ), le_trans (by norm_num : (-1 : ℝ) ≤ 0) (Nat.cast_nonneg n)⟩ = ⊥} := by
-  have h (n : ℕ) :=
-    TauCeti.ClassFieldTheory.conductorExponent_le_iff_upperRamificationGroup_eq_bot K L (n := n)
-  have hmem : TauCeti.ClassFieldTheory.conductorExponent K L ∈
-      {n : ℕ | TauCeti.LocalFieldsRamification.upperRamificationGroup K L
-        ⟨(n : ℝ), le_trans (by norm_num : (-1 : ℝ) ≤ 0) (Nat.cast_nonneg n)⟩ = ⊥} :=
-    (h _).1 le_rfl
-  exact le_antisymm ((h _).2 (Nat.sInf_mem ⟨_, hmem⟩)) (Nat.sInf_le hmem)
 
 section AbsoluteUpper
 
